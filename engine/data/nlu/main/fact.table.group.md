@@ -1,0 +1,74 @@
+## intent:fact.table.group
+- [customer](dim:CustomerName) wise [sales](fact:SalesAmount) on [table](graph:table) [for](date_condition:equal_to) last month
+- [target](fact:TargetAmount) for each [employee](dim:Name) on [bar](graph:bar) chart
+- [quantity of Sales](fact:SalesQty) in each [region](dim:CustomerRegion)
+- [quantity of Sales](fact:SalesQty) [greater than](fact_condition:greater_than) 500 in each [region](dim:CustomerRegion) 
+- [quantity of Sales](fact:SalesQty) [smaller than](fact_condition:lesser_than) 500 in each [region](dim:CustomerRegion) 
+
+
+- [month](dim:Month) wise [sales](fact:SalesAmount) [for](date_condition:equal_to) this month
+- [line](graph:line) for [year](dim:year) wise [sales quantity](fact:SalesQty) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
+- [average](agg:mean) of [sales](fact:SalesAmount) by each [customers](dim:CustomerName)
+- [total](agg:sum) [target](fact:TargetAmount) by each [customer type](dim:CustomerType) on [pie](graph:pie)
+- [quarter](dim:Quarter) wise [avg](agg:mean) [sales](fact:SalesAmount) on [line](graph:line)
+- [quarterly](dim:Quarter) [Sales](fact:SalesAmount) [from](date_condition:greater_than) 2006 [to](date_condition:lesser_than) 2012
+
+- [monthly](dim:Month) [revenue](fact:SalesAmount) on [bar](graph:bar) [for](date_condition:equal_to) last 6 months
+- [product](dim:ProductDesc) wise [maximum](agg:max) [sales](fact:SalesAmount) on [table](graph:table)
+- [product group](dim:ProdGroup) wise this month [sales](fact:SalesAmount) on [pie](graph:pie)
+- [prod group](dim:ProdGroup) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
+- [prodgroup](dim:ProdGroup) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
+- [proddesc](dim:ProductDesc) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
+- [prod](dim:ProductDesc) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
+- [month year](dim:MonthYear) wise [topmost](agg:max) [sales](fact:SalesAmount) on [line](graph:line)
+- [monthyear](dim:MonthYear) wise [topmost](agg:max) [sales](fact:SalesAmount) on [line](graph:line)
+- [qtr](dim:Quarter) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [qtryear](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [qtr year](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [quarter year](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [yearly](dim:Year) [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [sum](agg:sum) of [sales](fact:SalesAmount) by [region](dim:CustomerRegion) on [line](graph:line)
+- [daily](dim:CalendarDate) [sales](fact:SalesAmount) on [table](graph:table) [for](date_condition:equal_to) last month
+- [regional](dim:CustomerRegion) [sales](fact:SalesAmount) on [donut](graph:donut)
+- [sales](fact:SalesAmount) for each [quarter year](dim:QuarterYear) on [line](graph:line) [for](date_condition:equal_to) year 2017
+- [sales](fact:SalesAmount) for each [quarter year](dim:QuarterYear) for each [region](dim:CustomerRegion) on [line](graph:line)
+- [customertypewise](dim:CustomerType) [regionwise](dim:CustomerRegion) [monthly](dim:Month) [sales](fact:SalesAmount) on [table](graph:table)
+- [sales](fact:SalesAmount) for each [emp](dim:Name) [for](date_condition:equal_to) last 3 month
+- [sales](fact:SalesAmount) [greater than](fact_condition:greater_than) 1200 for [customer](dim:CustomerName)  
+- [sales](fact:SalesAmount) [equal to](fact_condition:equal_to) two hundred for [customer](dim:CustomerName)  
+- [sales](fact:SalesAmount) for [customer](dim:CustomerName) in [north](CustomerRegion:North)
+- [sales](fact:SalesAmount) for each [employee](dim:Name) in [bfsi](CustomerType:BFSI)
+- [monthly](dim:Month) [sales](fact:SalesAmount) for [emp050](Name:Emp050) on [line](graph:line)
+- [sales](fact:SalesAmount) by [products](dim:ProductDesc) [for](date_condition:equal_to) last month
+- [sales](fact:SalesAmount) for each [client](dim:CustomerName) [from](date_condition:greater_than) last year [to](date_condition:lesser_than) this year
+- [sales](fact:SalesAmount) for each [client](dim:CustomerName) by [emp050](Name:Emp050) in [north](CustomerRegion:North) region
+- [month-year](dim:MonthYear) wise [sales](fact:SalesAmount)
+- [sales](fact:SalesAmount) [greater than equal to](fact_condition:greater_than_equal) five hundred for each [year month](dim:MonthYear)
+- [month year](dim:MonthYear) wise [sales](fact:SalesAmount) [from](date_condition:greater_than) year 2010 [to](date_condition:lesser_than) year 2012
+
+- [best](selection:top) [customer](adject:CustomerName)
+- [best](selection:top) 3 [customer](adject:CustomerName)
+- [best](selection:top) [customer](adject:CustomerName) having [sales](fact:SalesAmount) [greater than](fact_condition:greater_than) 50000
+
+
+- [product](adject:ProductDesc) is [best](selection:top) [sold](fact:SalesAmount)
+- [product](adject:ProductDesc) is [best](selection:top) [sold](fact:SalesAmount) [for](date_condition:equal_to) last month
+- [supreme](selection:top) [employee](adject:Name)
+- [worst](selection:bottom) [customer](adject:CustomerName)
+- [prodGroup](adject:ProdGroup) is [worst](selection:bottom) [sold](fact:SalesAmount)
+- [best](selection:top) [customer type](adject:CustomerType)
+- [prime](selection:top) [region](adject:CustomerRegion)
+- [top](selection:top) [employee](adject:Name) [for](date_condition:equal_to) year 2018
+- [bottom](selection:bottom) [customer](adject:CustomerName)
+- [best](selection:top) [month year](adject:MonthYear) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
+- [region](dim:CustomerRegion) wise [best](selection:top) [employee](adject:Name) on [table](graph:table)
+- [worst](selection:bottom) [customers](adject:CustomerName) in each [customer type](dim:CustomerType)
+- [top](selection:top) 10 [employees](adject:Name)
+- [worst](selection:bottom) 5 [products](adject:ProductDesc) [sold](fact:SalesAmount) [in](date_condition:equal_to) year 2010
+- [top](selection:top) 10 [products](adject:ProductDesc) [sold](fact:SalesAmount) to each [customer type](dim:CustomerType)
+- [top](selection:top) [customer types](adject:CustomerType) in each [month](dim:Month)
+- [top](selection:top) 5 [customers](adject:CustomerName) in [north](CustomerRegion:North) region [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
+- [worst](selection:bottom) 5 [clients](adject:CustomerName) in [south](CustomerRegion:South) region on [pie](graph:pie) chart
+- [top](selection:top) 10 [products](adject:ProductDesc) in [govt](CustomerType:Govt) sector [in](date_condition:equal_to) last year
+- [top](selection:top) 10 [products](adject:ProductDesc) sold by [emp050](Name:Emp050)
+- [top](selection:top) [employee](adject:Name) in [bfsi](CustomerType:BFSI) sector

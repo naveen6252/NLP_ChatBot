@@ -1,0 +1,917 @@
+{#@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/_ChatBotLayout.cshtml";
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+}#}
+{% extends "layout/ChatbotLayout.html" %}
+{% block content %}
+
+    <form id="theform">
+        <div class="mainContentBox marginT20px">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="whiteBg">
+
+                                <div class="formSection">
+                                    <div class="col-sm-12">
+                                        <h3>Create User</h3>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Name</p>
+                                                <span>
+                                                <input type="text" id="name" title="Name is Required"
+                                                       data-toggle="tooltip" class="form-control"/>
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>User Name</p>
+                                                <span>
+                                                <input type="text" id="userName" title="User Name is Required"
+                                                       data-toggle="tooltip" onchange="checkUserName()"
+                                                       class="form-control"/>
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Password</p>
+                                                <span>
+                                                <input type="password" id="password" title="Password is Required"
+                                                       data-toggle="tooltip" class="form-control"/>
+                                            </span>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p>Confirm Password</p>
+                                                <span>
+                                                <input type="password" id="confirmPassword"
+                                                       title="Confirm Password is Required" data-toggle="tooltip"
+                                                       class="form-control"/>
+                                            </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 userRoleRowDiv" style="display:none;">
+                                                <p>User Role</p>
+                                                <span><input type="text" id="userRole" title="User Role is Required"
+                                                             data-toggle="tooltip" onchange="checkUserName()"
+                                                             class="form-control"/></span>
+                                            </div>
+
+                                            <div class="col-sm-6 selectUserRoleRowDiv">
+                                                <p>Select from Existing User Roles</p>
+                                                <span>
+                                                <select id="existingUserRoles" onchange="selectExistingUserRoles()"
+                                                        title="Select a option" data-toggle="tooltip"
+                                                        class="form-control myselect">
+                                                    <option value="Select Option"
+                                                            selected="selected">Select Option</option>
+                                                </select>
+                                            </span>
+
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p>Create New User Role</p>
+                                                <span>
+                                                <img src="{{ url_for('static', filename='img/user_role.png') }}"
+                                                     onclick="CreateUserRole()" alt="Create User Role"
+                                                     id="imgCreateUserRole" title="Create User Role"
+                                                     style="width:35px;height:35px;cursor:pointer;"/>
+                                            </span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row createUserRoleDiv" id="createUserRoleDiv" style="display:none;">
+                                            <div class="col-sm-4">
+
+                                            <span>
+                                                <select id="myselect" title="Select a option" data-toggle="tooltip"
+                                                        class="form-control myselect">
+                                                    <option value="Select Option"
+                                                            selected="selected">Select Option</option>
+                                                </select>
+                                            </span>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                            <span>
+                                                <select id="myselect2" title="Select a option" data-toggle="tooltip"
+                                                        class="form-control myselect2">
+                                                    <option value="Select Option"
+                                                            selected="selected">Select Option</option>
+                                                </select>
+                                            </span>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <span id="txtOperator"><input type="text" id="txtInput"
+                                                                              title="This field is required"
+                                                                              data-toggle="tooltip"
+                                                                              class="form-control txtInput"/></span>
+                                                <span id="selectOperator">
+                                                <select id="myselect3" title="Select a option" data-toggle="tooltip"
+                                                        multiple="multiple" class="myselect3 form-control"></select>
+                                            </span>
+                                                <span id="calenderOperator"><input type="text" title="Select a date"
+                                                                                   data-toggle="tooltip"
+                                                                                   id="calenderInput"
+                                                                                   class="form-control calenderInput"/></span>
+
+                                            </div>
+                                            <div class="col-sm-1">
+                                            <span>
+                                                <img src="{{ url_for('static', filename='img/add_roles.jpg') }}"
+                                                     style="width:15px;height:15px;cursor:pointer;" id="addRoles"
+                                                     class="addRoles"/>
+                                                <img src="{{ url_for('static', filename='img/remove_roles.png') }}"
+                                                     style="width:15px;height:15px;cursor:pointer;" id="removeRoles"
+                                                     class="removeRoles"/>
+                                            </span>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="clonedItem" class="clonedItem">
+                                        </div>
+
+                                        <div class="row">
+                                        <span class="col-sm-12">
+                                            <span><input type="button" value="Register" id="btnSubmitForm"
+                                                         class="btn btn-defaults"/></span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <!-- MultiSelect CSS & JS library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css"
+          rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
+    <script type="text/javascript">
+        var clicks = 0;
+        var userData;
+        $(document).ready(function () {
+            $('input[type=text]').addClass('form-control');
+            $("#calenderInput").datepicker({
+                //dateFormat: "dd M yy",
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
+                //minDate: new Date(2000, 3, 1),
+                //maxDate: new Date(2015, 2, 31)
+                //yearRange: '2015:2016',
+            });
+
+            $('#myselect3').multiselect({
+                maxHeight: 180,
+                enableFiltering: true,
+                includeSelectAllOption: true,
+                buttonWidth: '125%'
+            });
+
+            // TODO Need to change this ajax to get role instead to of get users
+            $.ajax({
+                type: "GET",
+                url: "/api/get_users",
+                headers: {
+                    "x-access-token": sessionStorage.getItem('accessToken')
+                },
+                success: function (response) {
+                    userData = response;
+                    $('#existingUserRoles option[value!="Select Option"]').remove();
+                    $.each(response, function (index, value) {
+                        $('#existingUserRoles').append($('<option>').text(value.role).attr('value', value.role));
+                    });
+                }
+            });
+
+
+            //$("#theform").validate({
+            //    rules: {
+            //        name: { required: true },
+            //        userName: { required: true },
+            //        password: { required: true },
+            //        confirmPassword: { required: true },
+            //        userRole: { required: true }
+            //    },
+            //    //messages: {
+            //    //    example5: "Just check the box<h5 class='text-danger'>You aren't going to read the EULA</h5>"
+            //    //},
+            //    tooltip_options: {
+            //        name: { trigger: 'focus' },
+            //        userName: { trigger: 'focus' },
+            //        password: { trigger: 'focus' },
+            //        confirmPassword: { trigger: 'focus' },
+            //        userRole: { trigger: 'focus' }
+            //    },
+            //});
+
+
+        });
+
+        //$('.calenderInput').click(function () {
+        //    $(this).closest("#createUserRoleDiv").find("input.calenderInput").datepicker();
+        //});
+
+        //$(".calenderInput").each(function () {
+        //    $(this).datepicker();
+        //});
+
+        function selectExistingUserRoles() {
+            if (userData != undefined) {
+                var that = $(this);
+                //$("#imgCreateUserRole").prop("onclick", false);
+                //$("#imgCreateUserRole").css('cursor', 'not-allowed');
+                //$(this).closest("#createUserRoleDiv").find('#myselect2 option[value!="Select Option"]').remove();
+                var myselect = $("#existingUserRoles").val();
+                var as = $(userData).filter(function (i, n) {
+                    return n.role === myselect
+                });
+                console.log(userData);
+                console.log(as);
+                //var items = '';
+                //items += "<option value='' selected=selected>" + "Select Option" + "</option>";
+                $('.dynamicUserRoleDiv').remove();
+                $.each(as, function (index, value) {
+                    $.each(value.access_json, function (i, v) {
+
+                        $("<div class='row dynamicUserRoleDiv'>").append($("<div class='col-sm-4 dynamicUserRoleColName'>")
+                            .append("<label>").text(v.col_name)
+                        ).append($("<div class='col-sm-4 dynamicUserRoleOperator'>")
+                            .append("<label>").text(v.operator_choice)
+                        ).append($("<div class='col-sm-4 dynamicUserRoleValue'>")
+                            .append("<label>").text(v.value)
+                        ).insertBefore('.clonedItem');
+
+                        //$(this).closest("#createUserRoleDiv").find("#myselect2").append($('<option>').text(i).attr('value', v));
+                        //items += "<option value='" + v + "'>" + i + "</option>";
+
+                    });
+                    //$(that).closest("#createUserRoleDiv").find("#myselect2").html(items);
+                });
+
+
+            }
+        }
+
+        // This function is hitting api endpoint for checking if user exists
+        function checkUserName() {
+
+            if (userData != undefined) {
+                var userName = $("#userName").val();
+                var userRole = $("#userRole").val();
+                $.each(userData, function (index, value) {
+
+                    if (userName == value.username) {
+                        $("#userName").attr('title', 'User Name already exists')
+                            .tooltip('fixTitle')
+                            .tooltip('show');
+                        //alert("User Name already exists");
+                        $('#userName').css('border-color', 'red');
+                        $("#userName").focus();
+                        return false;
+                    } else {
+                        $('#userName').css('border-color', '');
+                    }
+                    if (userRole == value.role) {
+                        $("#userRole").attr('title', 'User Role already exists')
+                            .tooltip('fixTitle')
+                            .tooltip('show');
+                        //alert("User Name already exists");
+                        $('#userRole').css('border-color', 'red');
+                        $("#userRole").focus();
+                        return false;
+                    } else {
+                        $('#userRole').css('border-color', '');
+                    }
+
+                });
+            } else {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/api/get_users",
+                    headers: {
+                        "x-access-token": sessionStorage.getItem('accessToken')
+                    },
+                    success: function (response) {
+                        userData = response;
+                        var userName = $("#userName").val();
+                        var userRole = $("#userRole").val();
+                        $.each(response, function (index, value) {
+
+                            if (userName == value.username) {
+                                $("#userName").attr('title', 'User Name already exists')
+                                    .tooltip('fixTitle')
+                                    .tooltip('show');
+                                //alert("User Name already exists");
+                                $('#userName').css('border-color', 'red');
+                                $("#userName").focus();
+                                return false;
+                            } else {
+                                $('#userName').css('border-color', '');
+                            }
+                            if (userRole == value.role) {
+                                $("#userRole").attr('title', 'User Role already exists')
+                                    .tooltip('fixTitle')
+                                    .tooltip('show');
+                                //alert("User Name already exists");
+                                $('#userRole').css('border-color', 'red');
+                                $("#userRole").focus();
+                                return false;
+                            } else {
+                                $('#userRole').css('border-color', '');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        $('#btnSubmitForm').click(function () {
+            if (clicks == 0) {
+                //var name = document.getElementById('name');
+                //name.setCustomValidity('');
+                var name = $("#name").val();
+                var username = $("#userName").val();
+                var password = $("#password").val();
+                var confirmPassword = $("#confirmPassword").val();
+                //var userRole = $("#userRole").val();
+                var existingUserRoles = $("#existingUserRoles").val();
+
+
+                //if (name.value.trim() === '') {
+                //    name.setCustomValidity('name is required');
+                //    return false;
+                //}
+                if (name.trim() === '') {
+                    //alert('Name is required');
+                    //$("#name").focus();
+                    //return false;
+                    $("#name").tooltip('toggle');
+                    $("#name").focus();
+                } else if (username.trim() === '') {
+                    //alert('User Name is required');
+                    //$("#userName").focus();
+                    //return false;
+                    $("#userName").tooltip('toggle');
+                    $("#userName").focus();
+                } else if ($('#userName').css("border-color") == "rgb(255, 0, 0)") {
+                    $("#userName").attr('title', 'User Name already exists')
+                        .tooltip('fixTitle')
+                        .tooltip('show');
+                    $("#userName").focus();
+                } else if (password.trim() === '') {
+                    //alert('Password is required');
+                    //$("#password").focus();
+                    //return false;
+                    $("#password").tooltip('toggle');
+                    $("#password").focus();
+                } else if (confirmPassword.trim() === '') {
+                    //alert('Confirm Password is required');
+                    //$("#confirmPassword").focus();
+                    //return false;
+                    $("#confirmPassword").tooltip('toggle');
+                    $("#confirmPassword").focus();
+                } else if (password.trim() !== confirmPassword.trim()) {
+                    $("#confirmPassword").attr('title', 'Password and Confirm Password should match')
+                        .tooltip('fixTitle')
+                        .tooltip('show');
+                    //alert('Password and Confirm Password should match');
+                    $("#confirmPassword").focus();
+                    //return false;
+                }
+                //  else if (userRole.trim() === '') {
+                //      //alert('User Role is required');
+                //      //$("#userRole").focus();
+                //      //return false;
+                //      $("#userRole").tooltip('toggle');
+                //      $("#userRole").focus();
+                //  }
+                //  else if ($('#userRole').css("border-color") == "rgb(255, 0, 0)") {
+                //      $("#userRole").attr('title', 'User Role already exists')
+                //.tooltip('fixTitle')
+                //.tooltip('show');
+                //      $("#userRole").focus();
+                //  }
+
+
+                else if (existingUserRoles.trim() === 'Select Option') {
+                    //alert('Confirm Password is required');
+                    //$("#confirmPassword").focus();
+                    //return false;
+                    $("#existingUserRoles").tooltip('toggle');
+                    $("#existingUserRoles").focus();
+                } else {
+
+                    var aarr = [];
+                    $(".dynamicUserRoleDiv").each(function () {
+                        var myselect = $(this).find(".dynamicUserRoleColName").text();
+                        var myselect2 = $(this).find(".dynamicUserRoleOperator").text();
+                        var myselect3 = $(this).find(".dynamicUserRoleValue").text();
+
+                        //if (myselect2Val == "textbox") {
+                        //    var myselect3 = $(this).find('#txtInput').val();
+                        //}
+                        //else if (myselect2Val == "calendar") {
+                        //    var myselect3 = $(this).find('.calenderInput').val();
+                        //}
+                        //else if (myselect2Val == "option") {
+                        //    var myselect3 = $(this).find('.myselect3').val();
+                        //}
+                        var aarr1 = {
+                            col_name: myselect,
+                            operator_choice: myselect2,
+                            value: myselect3
+                        }
+                        aarr.push(aarr1);
+                    });
+
+                    var arr = {
+                        username: username,
+                        name: name,
+                        role: existingUserRoles,
+                        password: password,
+                        access_json: aarr
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/create_user",
+                        dataType: 'json',
+                        data: JSON.stringify(arr),
+                        contentType: 'application/json;charset=UTF-8',
+                        headers: {
+                            "x-access-token": sessionStorage.getItem('accessToken')
+                        },
+                        success: function (res) {
+                            alert("User Created Successfully");
+                            console.log(res);
+                            window.location.href = "{{ url_for('CreateUser') }}";
+                        },
+                        error: function (err) {
+                            alert("error");
+                            console.log(err);
+                            window.location.href = "{{ url_for('CreateUser') }}";
+                        }
+                    });
+
+
+                    //var arr = {
+                    //    username: username,
+                    //    name: name,
+                    //    role: userRole,
+                    //    password: password,
+                    //    access_json: []
+                    //}
+
+
+                }
+            }
+        });
+
+        $(":input").bind("keyup", function (e) {
+            if (e.which == 13) {
+                ValidateInput();
+            }
+        });
+
+        function ValidateInput() {
+            var username = $("#Username").val();
+            var password = $("#Password").val();
+            if (username.trim() === '') {
+                alert('User Name is required');
+                $("#Username").focus();
+                return false;
+            } else if (password.trim() === '') {
+                alert('Password is required');
+                $("#Password").focus();
+                return false;
+            }
+
+            {#else {
+                $.ajax({
+                    type: "GET",
+                    url: "http://10.0.0.14:5000/login",
+                    dataType: 'json',
+                    headers: {
+                        "Authorization": "Basic " + btoa(username + ":" + password)
+                    },
+                    success: function (data) {
+                        sessionStorage.setItem('accessToken', data.token);
+                        $.getJSON("@Url.Action("SetSession", "Home")", { username: username, role: data.role }, function (Json) {
+                            if (Json == "True") {
+                                window.location.href = "{{ url_for('home') }}";
+                            }
+                            else {
+                                sessionStorage.removeItem('accessToken');
+                                window.location.href = "{{ url_for('logout') }}";
+                            }
+                        });
+                    },
+                    error: function (errorLog) {
+                        if (errorLog.responseText == "Could not Find User!") {
+                            alert("Username or password is not correct");
+                        }
+                        else {
+                            alert("Oops something went wrong!");
+                            window.location.href = "{{ url_for('logout') }}";
+                        }
+                    }
+
+                });
+            }#}
+        }
+
+        // This function is hitting api multiple times for each click
+        function CreateUserRole() {
+
+            clicks += 1;
+
+            $.ajax({
+                type: "GET",
+                url: "/api/get_rls_filters",
+                headers: {
+                    "x-access-token": sessionStorage.getItem('accessToken')
+                },
+                success: function (response) {
+                    console.log(response);
+                    $('#existingUserRoles').prop('disabled', true);
+
+                    $('.userRoleRowDiv').show();
+                    $('.selectUserRoleRowDiv').hide();
+                    $('.dynamicUserRoleDiv').remove();
+                    $('#createUserRoleDiv').show();
+                    $('#selectOperator').hide();
+                    $('#txtOperator').hide();
+                    $('#calenderOperator').hide();
+                    $('#myselect option[value!="Select Option"]').remove();
+                    $.each(response, function (index, value) {
+                        $('#myselect').append($('<option>').text(value.col_name).attr('value', value.col_name));
+                    });
+
+                    //$('#myselect').change(function () {
+                    //    $('#myselect2 option[value!="Select Option"]').remove();
+                    //    var myselect = $('#myselect').val();
+                    //    var as = $(response).filter(function (i, n) { return n.col_name === myselect });
+                    //    $.each(as, function (index, value) {
+                    //        $.each(value.operator_choice, function (i, v) {
+                    //            $('#myselect2').append($('<option>').text(i).attr('value', v));
+                    //        });
+                    //    });
+                    //});
+
+                    $('#myselect').change(function () {
+                        var that = $(this);
+                        //$(this).closest("#createUserRoleDiv").find('#myselect2 option[value!="Select Option"]').remove();
+                        var myselect = $(this).closest("#createUserRoleDiv").find("#myselect").val();
+                        var as = $(response).filter(function (i, n) {
+                            return n.col_name === myselect
+                        });
+                        var items = '';
+                        items += "<option value='' selected=selected>" + "Select Option" + "</option>";
+                        $.each(as, function (index, value) {
+                            $.each(value.operator_choice, function (i, v) {
+                                //$(this).closest("#createUserRoleDiv").find("#myselect2").append($('<option>').text(i).attr('value', v));
+                                items += "<option value='" + v + "'>" + i + "</option>";
+
+                            });
+                            $(that).closest("#createUserRoleDiv").find("#myselect2").html(items);
+                        });
+                    });
+
+
+                    $('#myselect2').change(function () {
+                        var that = $(this);
+
+                        var myselect = $(this).closest("#createUserRoleDiv").find("#myselect").val();
+                        //var myselect = $('#myselect').val();
+                        var myselect2 = $(this).closest("#createUserRoleDiv").find("#myselect2").val();
+                        //var myselect2 = $('#myselect2').val();
+                        if (myselect2 == "textbox") {
+                            $(that).closest("#createUserRoleDiv").find("#selectOperator").hide();
+                            $(that).closest("#createUserRoleDiv").find("#txtOperator").show();
+                            $(that).closest("#createUserRoleDiv").find("#calenderOperator").hide();
+                            //$('#selectOperator').hide();
+                            //$('#txtOperator').show();
+                            //$('#calenderOperator').hide();
+                        } else if (myselect2 == "calendar") {
+                            $(that).closest("#createUserRoleDiv").find("#selectOperator").hide();
+                            $(that).closest("#createUserRoleDiv").find("#txtOperator").hide();
+                            $(that).closest("#createUserRoleDiv").find("#calenderOperator").show();
+                            //$('#selectOperator').hide();
+                            //$('#txtOperator').hide();
+                            //$('#calenderOperator').show();
+                        } else if (myselect2 == "option") {
+                            //$('#myselect3 option[value!="Select Option"]').remove();
+                            $(this).closest("#createUserRoleDiv").find("#selectOperator").show();
+                            $(this).closest("#createUserRoleDiv").find("#txtOperator").hide();
+                            $(this).closest("#createUserRoleDiv").find("#calenderOperator").hide();
+                            //$(this).closest("#createUserRoleDiv").find('#myselect3 option').remove();
+                            //$('#selectOperator').show();
+                            //$('#txtOperator').hide();
+                            //$('#calenderOperator').hide();
+                            var as = $(response).filter(function (i, n) {
+                                return n.col_name === myselect
+                            });
+                            var items = '';
+                            $.each(as, function (index, value) {
+                                $.each(value.value_choice, function (i, v) {
+
+                                    items += "<option value='" + v + "'>" + v + "</option>";
+
+                                });
+                                $(that).closest("#createUserRoleDiv").find(".myselect3").html(items);
+                                $(that).closest("#createUserRoleDiv").find(".myselect3").multiselect('rebuild');
+                                //$('#myselect3').append($('<option>').text(v).attr('value', i));
+
+                                //items += "<option value='" + v + "'>" + v + "</option>";
+
+                                //});
+
+                                // $('.myselect3').html(items);
+                                // $('.myselect3').multiselect('rebuild');
+
+                                //$('#myselect3').multiselect('rebuild');
+                            });
+                        }
+                    });
+
+                    $('.addRoles').click(function () {
+                        //$('input.calenderInput').datepicker("destroy");
+                        $('select.myselect3').multiselect("destroy");
+                        $(this).closest(".createUserRoleDiv").clone(true).appendTo('#clonedItem');
+                        //$('input.calenderInput').datepicker();
+
+                        $('#clonedItem').find('select.myselect3').multiselect({
+                            maxHeight: 180,
+                            enableFiltering: true,
+                            includeSelectAllOption: true,
+                            buttonWidth: '125%'
+                        });
+
+                        $('#myselect3').multiselect({
+                            maxHeight: 180,
+                            enableFiltering: true,
+                            includeSelectAllOption: true,
+                            buttonWidth: '125%'
+                        });
+
+                        $('#myselect3').multiselect("rebuild");
+
+                        $('#clonedItem').find('select.myselect3').multiselect("rebuild");
+
+                        $('#clonedItem').find('.calenderInput').each(function () {
+                            $(this).removeAttr('id').removeClass('hasDatepicker');
+                            $(this).datepicker({
+                                dateFormat: "yy-mm-dd",
+                                changeMonth: true,
+                                changeYear: true
+                            });
+                        });
+
+                        //$('#clonedItem').find('.myselect3').each(function () {
+                        //    $(this).removeAttr('id').removeClass('multiselect');
+                        //    $(this).multiselect({
+                        //        enableFiltering: true,
+                        //        includeSelectAllOption: true
+                        //    });
+                        //});
+
+                        $(".clonedItem .removeRoles").show();
+                    });
+
+                    $('.removeRoles').click(function () {
+                        $(this).closest(".createUserRoleDiv").remove();
+                        if ($(".createUserRoleDiv").length == 0) {
+                            $("#imgCreateUserRole").prop("onclick", false);
+                            $("#imgCreateUserRole").css('cursor', 'not-allowed');
+                        }
+                        //$(this).closest("#clonedItem .createUserRoleDiv").remove();
+                    });
+
+                    $('#btnSubmitForm').click(function () {
+
+                        var name = $("#name").val();
+                        var username = $("#userName").val();
+                        var password = $("#password").val();
+                        var confirmPassword = $("#confirmPassword").val();
+                        var userRole = $("#userRole").val();
+                        if (name.trim() === '') {
+                            //alert('Name is required');
+                            //$("#name").focus();
+                            //return false;
+                            $("#name").tooltip('toggle');
+                            $("#name").focus();
+                            return false;
+                        } else if (username.trim() === '') {
+                            //alert('User Name is required');
+                            //$("#userName").focus();
+                            $("#userName").tooltip('toggle');
+                            $("#userName").focus();
+                            return false;
+                        } else if ($('#userName').css("border-color") == "rgb(255, 0, 0)") {
+                            $("#userName").attr('title', 'User Name already exists')
+                                .tooltip('fixTitle')
+                                .tooltip('show');
+                            $("#userName").focus();
+                        } else if (password.trim() === '') {
+                            //alert('Password is required');
+                            //$("#password").focus();
+                            $("#password").tooltip('toggle');
+                            $("#password").focus();
+                            return false;
+                        } else if (confirmPassword.trim() === '') {
+                            //alert('Confirm Password is required');
+                            //$("#confirmPassword").focus();
+                            $("#confirmPassword").tooltip('toggle');
+                            $("#confirmPassword").focus();
+                            return false;
+                        } else if (userRole.trim() === '') {
+                            //alert('User Role is required');
+                            //$("#userRole").focus();
+                            $("#userRole").tooltip('toggle');
+                            $("#userRole").focus();
+                            return false;
+                        } else if ($('#userRole').css("border-color") == "rgb(255, 0, 0)") {
+                            $("#userRole").attr('title', 'User Role already exists')
+                                .tooltip('fixTitle')
+                                .tooltip('show');
+                            $("#userRole").focus();
+                        } else if (password.trim() !== confirmPassword.trim()) {
+                            $("#confirmPassword").attr('title', 'Password and Confirm Password should match')
+                                .tooltip('fixTitle')
+                                .tooltip('show');
+                            //alert('Password and Confirm Password should match');
+                            $("#confirmPassword").focus();
+                            return false;
+                        } else if (1 == 1) {
+                            var rv = true;
+                            var flag = 0;
+                            var createUserRoleDivLen = $(".createUserRoleDiv").length;
+                            if (createUserRoleDivLen == 0) {
+                                CreateUser();
+                            }
+
+                            $(".createUserRoleDiv").each(function () {
+                                flag += 1;
+                                var myselect = $(this).find(".myselect").val();
+                                var myselect2Val = $(this).find('.myselect2').val();
+                                var myselect2 = $(this).find('.myselect2 option:selected').text();
+
+                                if (myselect.trim() == "Select Option") {
+                                    $(this).find(".myselect").attr('title', 'Please select a option')
+                                        .tooltip('fixTitle')
+                                        .tooltip('show');
+                                    //alert('Please select a option');
+                                    $(this).find(".myselect").focus();
+                                    return rv = false;
+                                } else if (myselect2Val.trim() == "") {
+                                    $(this).find(".myselect2").attr('title', 'Please select a option')
+                                        .tooltip('fixTitle')
+                                        .tooltip('show');
+                                    //alert('Please select a option');
+                                    $(this).find(".myselect2").focus();
+                                    return rv = false;
+                                }
+
+                                if (myselect2Val == "textbox") {
+                                    var myselect3 = $(this).find('.txtInput').val();
+                                    if (myselect3.trim() == "") {
+                                        //alert('Please fill this field');
+                                        $(this).find(".txtInput").attr('title', 'Please fill this field')
+                                            .tooltip('fixTitle')
+                                            .tooltip('show');
+                                        $(this).find(".txtInput").focus();
+                                        return rv = false;
+                                    } else if (createUserRoleDivLen == flag) {
+                                        CreateUser();
+                                    }
+                                } else if (myselect2Val == "calendar") {
+                                    var myselect3 = $(this).find('.calenderInput').val();
+                                    if (myselect3.trim() == "") {
+                                        //alert('Please fill this field');
+                                        $(this).find(".calenderInput").attr('title', 'Please choose a date')
+                                            .tooltip('fixTitle')
+                                            .tooltip('show');
+                                        $(this).find(".calenderInput").focus();
+                                        return rv = false;
+                                    } else if (createUserRoleDivLen == flag) {
+                                        CreateUser();
+                                    }
+                                } else if (myselect2Val == "option") {
+                                    var myselect3 = $(this).find('.myselect3').val();
+                                    if (myselect3 == null) {
+                                        //alert('Please select a option');
+                                        $(this).find(".myselect3").attr('title', 'Please select a option')
+                                            .tooltip('fixTitle')
+                                            .tooltip('show');
+                                        $(this).find(".myselect3").focus();
+                                        return rv = false;
+                                    } else if (createUserRoleDivLen == flag) {
+                                        CreateUser();
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    function CreateUser() {
+                        var name = $("#name").val();
+                        var username = $("#userName").val();
+                        var password = $("#password").val();
+                        var userRole = $("#userRole").val();
+                        var aarr = [];
+                        var createUserRoleDivLen = $(".createUserRoleDiv").length;
+                        if (createUserRoleDivLen == 0) {
+                            var arr = {
+                                username: username,
+                                name: name,
+                                role: userRole,
+                                password: password,
+                                access_json: []
+                            }
+                        } else {
+                            $(".createUserRoleDiv").each(function () {
+                                var myselect = $(this).find("#myselect").val();
+                                var myselect2Val = $(this).find('#myselect2').val();
+                                var myselect2 = $(this).find('#myselect2 option:selected').text();
+
+                                if (myselect2Val == "textbox") {
+                                    var myselect3 = $(this).find('#txtInput').val();
+                                } else if (myselect2Val == "calendar") {
+                                    var myselect3 = $(this).find('.calenderInput').val();
+                                } else if (myselect2Val == "option") {
+                                    var myselect3 = $(this).find('.myselect3').val();
+                                }
+                                var aarr1 = {
+                                    col_name: myselect,
+                                    operator_choice: myselect2,
+                                    value: myselect3
+                                }
+                                aarr.push(aarr1);
+                            });
+
+                            var arr = {
+                                username: username,
+                                name: name,
+                                role: userRole,
+                                password: password,
+                                access_json: aarr
+                            }
+                        }
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/api/create_user",
+                            dataType: 'json',
+                            data: JSON.stringify(arr),
+                            contentType: 'application/json;charset=UTF-8',
+                            headers: {
+                                "x-access-token": sessionStorage.getItem('accessToken')
+                            },
+                            success: function (res) {
+                                alert("User Created Successfully");
+                                console.log(res);
+                                window.location.href = "{{ url_for('CreateUser') }}";
+                            },
+                            error: function (err) {
+                                alert("error");
+                                console.log(err);
+                                window.location.href = "{{ url_for('CreateUser') }}";
+                            }
+                        });
+                    }
+
+
+                },
+                error: function (errorLog) {
+                    alert("err");
+
+                }
+
+            });
+
+        }
+    </script>
+
+
+{% endblock content %}

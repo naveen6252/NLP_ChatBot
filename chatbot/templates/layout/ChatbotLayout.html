@@ -1,0 +1,131 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <title>Sales ChatBot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+    <link type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='css/GR_style.css') }}" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+    <link type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='css/bootstrap-multiselect.css') }}" rel="stylesheet"/>
+    <script type="application/javascript">
+        sessionStorage.setItem("accessToken", "{{token}}");
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/canvasjs.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/gauge.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-multiselect.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
+</head>
+
+<body class="grayBackGr h-100" >
+{% if username %}
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="logo">
+                    <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
+                                                                             src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                             class="logo"/></a>
+                    <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
+                                                                            src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                            class="logo"/></a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="navContainer">
+                    <div class="providedLinks">
+                        <ul>
+                            <li class="userProfile">
+                                <a href="#" class="btn colorBtn">{{ username }}<i
+                                        class="glyphicon glyphicon-menu-down"></i></a>
+
+                                <ul class="sub-menu">
+                                    {% if role=='admin' %}
+                                        <li><a href="{{ url_for('CreateUser') }}"><i
+                                                class="glyphicon glyphicon-user"></i> Create
+                                            User</a></li>
+                                        <li><a href="{{ url_for('view_user') }}"><i
+                                                class="glyphicon glyphicon-user"></i> View
+                                            User</a></li>
+                                    {% endif %}
+                                    <li><a href="{{ url_for('logout') }}"><i class="glyphicon glyphicon-log-out"></i>
+                                        Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- } -->
+{% else %}
+
+    <!-- else
+    { -->
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
+                                                                         src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                         class="logo"/></a>
+                <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
+                                                                        src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                        class="logo"/></a>
+            </div>
+            <div class="col-sm-9">
+                <div class="navContainer">
+                    <div class="providedLinks">
+                        <ul>
+                            <li><a href="{{ url_for('login') }}" class="loginBtn">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- } -->
+{% endif %}
+{% block content %}{% endblock %}
+<!-- @RenderBody() -->
+<footer class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
+                                                                     src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                     class="logo"/></a>
+            <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
+                                                                    src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                    class="logo"/></a>
+        </div>
+        <div class="col-sm-9">
+            <div class="navContainer">
+                <div class="providedLinks">
+                    <ul>
+                        <li style="font-family:Roboto,serif;font-weight:400;">© Copyright 2019. All Rights Reserved |
+                            Polestar
+                            Solutions India Pvt. Ltd.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

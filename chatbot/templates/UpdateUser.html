@@ -1,0 +1,255 @@
+{#@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/_ChatBotLayout.cshtml";
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+}#}
+{% extends "layout/ChatbotLayout.html" %}
+{% block content %}
+
+    <form id="theform">
+        <div class="mainContentBox marginT20px">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="whiteBg">
+
+                                <div class="formSection">
+                                    <div class="col-sm-12">
+                                        <h3>Update User</h3>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Name</p>
+                                                <span>
+                                                <input type="text" id="name" title="Name is Required"
+                                                       data-toggle="tooltip" class="form-control"
+                                                       value="{{ user_details.name }}"/>
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>User Name</p>
+                                                <span>
+                                                <input type="text" id="userName" class="form-control"
+                                                       value="{{ user_details.username }}" disabled="disabled"/>
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Password</p>
+                                                <span>
+                                                <input type="password" id="password" title="Password is Required"
+                                                       data-toggle="tooltip" class="form-control"/>
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>Confirm Password</p>
+                                                <span>
+                                                <input type="password" id="confirmPassword"
+                                                       title="Confirm Password is Required" data-toggle="tooltip"
+                                                       class="form-control"/>
+                                            </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="existing_role">
+                                            <div id="role" class="col-sm-6">
+                                                <p>User Role</p>
+                                                <span>
+                                                <input type="text" id="userRole" class="form-control"
+                                                       value="{{ user_details.role }}" disabled="disabled"/>
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>Update user role</p>
+                                                <span>
+                                                <img src="{{ url_for('static', filename='img/update_role.svg') }}"
+                                                     onclick="UpdateUserRole()" alt="Update User Role"
+                                                     id="imgUpdateUserRole" title="Update User Role"
+                                                     style="width:35px;height:35px;cursor:pointer;"/>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="update_user_role" style="display:none;">
+                                            <div class="col-sm-6 selectUserRoleRowDiv">
+                                                <p>Select from Existing User Roles</p>
+                                                <span>
+                                                <select id="existingUserRoles" onchange="selectExistingUserRoles(this)"
+                                                        title="Select a option" data-toggle="tooltip"
+                                                        class="form-control myselect">
+                                                    <option value="Select Option"
+                                                            selected="selected">Select Option</option>
+                                                    {% for role in user_roles %}
+                                                        <option value="{{ role.role }}">{{ role.role }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </span>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p>Create New User Role</p>
+                                                <span>
+                                                <img src="{{ url_for('static', filename='img/user_role.png') }}"
+                                                     onclick="CreateUserRole()" alt="Create User Role"
+                                                     id="imgCreateUserRole" title="Create User Role"
+                                                     style="width:35px;height:35px;cursor:pointer;"/>
+                                            </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="selectedRLSView"
+                                             style="border: 2px solid #9999; border-radius: 5px;">
+
+                                        </div>
+                                        <div class="row createUserRoleDiv" id="createUserRoleDiv" style="display:none;">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p>Role Name</p>
+                                                    <span>
+                                                <input type="text" id="newRole" class="form-control"/>
+                                            </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+
+                                        <span>
+                                            <select id="col_name" title="Select Column Name" data-toggle="tooltip"
+                                                    class="form-control myselect" onchange="getOperatorChoice(this)">
+                                                <option value="Select Option"
+                                                        selected="selected">Select Column Name</option>
+                                                {% for rls in rls_filters %}
+                                                    <option value="{{ rls.col_name }}">
+                                                    {{ rls.col_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </span>
+                                                </div>
+                                                <div class="col-sm-4">
+                                        <span>
+                                            <select id="operator_choice" title="Select an Operator" data-toggle="tooltip"
+                                                    class="form-control myselect2">
+                                                <option value="Select Option"
+                                                        selected="selected">Select Operator</option>
+                                            </select>
+                                        </span>
+                                                </div>
+
+                                                <div class="col-sm-3">
+
+
+                                                </div>
+                                                <div class="col-sm-1 col-sm-offset-11">
+                                        <span>
+                                            <img src="{{ url_for('static', filename='img/add_roles.jpg') }}"
+                                                 style="width:15px;height:15px;cursor:pointer;" id="addRoles"
+                                                 class="addRoles"/>
+                                            <img src="{{ url_for('static', filename='img/remove_roles.png') }}"
+                                                 style="width:15px;height:15px;cursor:pointer;" id="removeRoles"
+                                                 class="removeRoles"/>
+                                        </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                        <span class="col-sm-12">
+                                            <span><input type="button" value="Register" id="btnSubmitForm"
+                                                         class="btn btn-defaults"/></span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- MultiSelect CSS & JS library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css"
+          rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
+    <script type="text/javascript">
+        var isExistingRole = true;
+        var userData = [];
+
+        function UpdateUserRole() {
+            $('#existing_role').hide();
+            $('#update_user_role').show();
+        }
+
+        $(document).ready(function () {
+            $("#calenderInput").datepicker({
+                //dateFormat: "dd M yy",
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
+                //minDate: new Date(2000, 3, 1),
+                //maxDate: new Date(2015, 2, 31)
+                //yearRange: '2015:2016',
+            });
+
+            $('#myselect3').multiselect({
+                maxHeight: 180,
+                enableFiltering: true,
+                includeSelectAllOption: true,
+                buttonWidth: '125%'
+            });
+        });
+
+        function selectExistingUserRoles(role) {
+            var selected_role = role.value;
+            var access_json = "NULL";
+            {% for role in user_roles %}
+                if (selected_role === "{{ role.role }}") {
+                    access_json = {{ role.access_json|safe }};
+                }
+            {% endfor %}
+            if (access_json === "NULL") {
+                alert('Access Json not Found! for role ' + selected_role)
+            } else {
+                var rlsView = "";
+                for (var i = 0; i < access_json.length; ++i) {
+                    rlsView += "<div class='row'><div class='col-sm-4'>" + access_json[i].col_name + "</div>";
+                    rlsView += "<div class='col-sm-4'>" + access_json[i].operator_choice + "</div>";
+                    rlsView += "<div class='col-sm-4'>" + access_json[i].value.toString() + "</div></div>";
+                }
+                $("#selectedRLSView").html(rlsView);
+            }
+        }
+
+        function getOperatorChoice(col_name) {
+            selected_column = col_name.value;
+            operator_choice = "NULL";
+            {% for rls in rls_filters %}
+                if(selected_column == "{{ rls.col_name }}"){
+                    operator_choice = {{ rls.operator_choice|safe }};
+                }
+            {% endfor %}
+
+        }
+
+        function CreateUserRole() {
+            isExistingRole = false;
+            $('#selectedRLSView').hide();
+            $('#update_user_role').hide();
+            $('#createUserRoleDiv').show();
+        }
+
+
+    </script>
+
+
+{% endblock content %}
