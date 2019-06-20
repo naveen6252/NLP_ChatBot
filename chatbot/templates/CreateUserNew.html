@@ -151,7 +151,6 @@
     </form>
 
     <script type="text/javascript">
-        var selected_column = "";
         var filter_id = 0;
         var filter_ids = [];
         var isExistingRole = false;
@@ -206,7 +205,6 @@
         }
 
         function onSelectColumnName(col_name, id) {
-            rls_json_data[id]['col_name'] = col_name.value;
             var all_filters = {{ rls_filters|safe }};
             var operator_choice = {};
 
@@ -224,8 +222,9 @@
         }
 
         function onSelectOperator(operator, id) {
+            var selected_column = $("#column_name" + id).val();
             if (operator.value === 'textbox') {
-                row = "<input type='text' title='value is required' data-toggle=\"tooltip\" id='value_choice' class='form-control'/>"
+                row = "<input type='text' title='value is required' data-toggle='tooltip' id='value_choice" + id + "' class='form-control'/><span id='value_choiceError" + id + "' class='help-block'></span>";
                 $("#valueContainer" + id).show().html(row);
             } else if (operator.value === 'option') {
 
@@ -237,26 +236,31 @@
                         value_choice = all_filters[i].value_choice;
                     }
                 }
-                var option = '<span><select id="valueChoice" title=\'value is required\' data-toggle=\"tooltip\"  class="chosen-select form-controls"  style="width: 100%;" multiple>';
+                var option = '<select id="value_choice' + id + '" multiple="multiple">';
 
                 (value_choice).forEach(function (key) {
                     option += '<option value="' + key + '">' + key + '</option>';
                 });
 
-                option += "</select></span>";
+                option += "</select><span id='value_choiceError" + id + "' class='help-block'></span>";
 
-                $("#valueContainer" + id).show().html(option);
+                $("#valueContainer" + id).html(option).show();
+                $('#value_choice' + id).multiselect({
+                    buttonWidth: '160px',
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select an Option',
+                    enableClickableOptGroups: true
+                });
 
             } else if (operator.value === 'calendar') {
                 var today = new Date();
-                row = "<input type='date' title='value is required' data-toggle=\"tooltip\" id='date_choice' class='form-control' min=\"2000-01-01\" max=\"2999-12-31\" value='" + today + "'/>"
+                row = "<input type='date' title='value is required' data-toggle='tooltip' id='value_choice" + id + "' class='form-control' min='2000-01-01' max='2999-12-31' value='" + today + "'/><span id='value_choiceError" + id + "' class='help-block'></span>";
                 $("#valueContainer" + id).show().html(row);
-
             }
         }
 
         function remove_role(selected_filter) {
-            filter_ids.splice(selected_filter, 1);
+            filter_ids.splice(filter_ids.indexOf(selected_filter), 1);
             $("#roleFilter" + selected_filter).remove();
         }
 
@@ -265,27 +269,25 @@
             filter_ids.push(filter_id);
             var filter_html = '<div class="row container-fluid" id="roleFilter' + filter_id + '">\n' +
                 '    <div class="col-sm-4">\n' +
-                '        <span>\n' +
-                '            <select id="column_name' + filter_id + '" title="Select a option" data-toggle="tooltip" class="form-control" onchange="onSelectColumnName(this,'+filter_id+')">\n' +
+                '            <select id="column_name' + filter_id + '" title="Select a option" data-toggle="tooltip" class="form-control" onchange="onSelectColumnName(this,' + filter_id + ')">\n' +
                 '                <option hidden disabled selected value>Select Column Name</option>\n' +
                 '                {% for filters in rls_filters %}\n'+
                     '                <option value="{{ filters.col_name }}">{{ filters.col_name }}</option>\n'+
                     '                {% endfor %}\n' +
                 '            </select>\n' +
-                '        </span>\n' +
+                '<span id="column_nameError' + filter_id + '" class="help-block"></span>\n' +
                 '    </div>\n' +
                 '\n' +
                 '    <div class="col-sm-3">\n' +
-                '        <span>\n' +
-                '            <select id="operator_choice' + filter_id + '" title="Select a option" data-toggle="tooltip" class="form-control" style="display: none" onchange="onSelectOperator(this,'+filter_id+')">\n' +
+                '            <select id="operator_choice' + filter_id + '" title="Select a option" data-toggle="tooltip" class="form-control" style="display: none" onchange="onSelectOperator(this,' + filter_id + ')">\n' +
                 '            </select>\n' +
-                '        </span>\n' +
+                '<span id="operator_choiceError' + filter_id + '" class="help-block"></span>\n' +
                 '    </div>\n' +
                 '    <div class="col-sm-4" id="valueContainer' + filter_id + '" style="display: none;">\n' +
                 '    </div>\n' +
                 '    <div class="col-sm-1"  onclick="remove_role(' + filter_id + ')">\n' +
                 '        <span>\n' +
-                '            <img src=' + "'{{ url_for("static", filename="img/remove_roles.png") }}'" + ' style="width:15px;height:15px;cursor:pointer;" id="removeRoles" class="removeRoles" />\n' +
+                '            <img src=' + "'{{ url_for("static", filename="img/remove_roles.png") }}'" + ' style="width:15px;height:15px;cursor:pointer;"/>\n' +
                 '        </span>\n' +
                 '    </div>\n' +
                 '</div>';
@@ -308,7 +310,14 @@
             $("#isExistingOrNewRoleError").html("");
             $("#newUserRoleDiv").removeClass("has-error");
             $("#newUserRoleError").html('');
-
+            for (var i = 0; i < filter_ids.length; ++i) {
+                $("#column_name" + filter_ids[i]).removeClass("has-error");
+                $("#operator_choice" + filter_ids[i]).removeClass("has-error");
+                $("#value_choice" + filter_ids[i]).removeClass("has-error");
+                $("#column_nameError" + filter_ids[i]).html('');
+                $("#operator_choiceError" + filter_ids[i]).html('');
+                $("#value_choiceError" + filter_ids[i]).html('');
+            }
             var name = $("#name").val();
             var username = $("#userName").val();
             var password = $("#password").val();
@@ -378,14 +387,37 @@
                     $("#newUserRoleError").html('Enter Role Name');
                     return false;
                 }
+                // check if role name exists
                 for (var i = 0; i < allRoles.length; ++i) {
-                if (newRoleName === allRoles[i].role) {
-                    $("#newUserRoleDiv").addClass("has-error");
-                    $("#newUserRoleError").html('UserName Already Exists!');
-                    $("#newUserRole").focus();
-                    return false;
+                    if (newRoleName === allRoles[i].role) {
+                        $("#newUserRoleDiv").addClass("has-error");
+                        $("#newUserRoleError").html('UserName Already Exists!');
+                        $("#newUserRole").focus();
+                        return false;
+                    }
                 }
-            }
+                var rls_json = [];
+                // get data from all filters
+                for (var i = 0; i < filter_ids.length; ++i) {
+                    var colName = $("#column_name" + filter_ids[i]).val();
+                    var operatorChoice = $("#operator_choice" + filter_ids[i] + " option:selected").text();
+                    var valueChoice = $("#value_choice" + filter_ids[i]).val()
+                    if (!colName) {
+                        $("#column_name" + filter_ids[i]).addClass("has-error");
+                        $("#column_nameError" + filter_ids[i]).html('Select Column Name!');
+                        $("#column_name" + filter_ids[i]).focus();
+                    }
+                    if (!operatorChoice) {
+                        $("#operator_choice" + filter_ids[i]).addClass("has-error");
+                        $("#operator_choiceError" + filter_ids[i]).html('Select Column Name!');
+                        $("#operator_choice" + filter_ids[i]).focus();
+                    }
+                    if (!valueChoice) {
+                        $("#value_choice" + filter_ids[i]).addClass("has-error");
+                        $("#value_choiceError" + filter_ids[i]).html('Select Column Name!');
+                        $("#value_choice" + filter_ids[i]).focus();
+                    }
+                }
             }
         }
     </script>
