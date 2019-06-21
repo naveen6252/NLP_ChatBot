@@ -10,23 +10,23 @@
 
                                 <div class="formSection">
                                     <div class="col-sm-12">
-                                        <h3>Create User</h3>
+                                        <h3>Update User</h3>
 
                                         <div class="row">
                                             <div class="col-sm-6" id="nameDiv">
                                                 <p>Name</p>
                                                 <span>
                                                     <input type="text" id="name" title="Name is Required"
-                                                           data-toggle="tooltip" class="form-control"/>
+                                                           data-toggle="tooltip" class="form-control"
+                                                           value="{{ user_details.name }}"/>
                                                 </span>
                                                 <span id="nameError" class="help-block"></span>
                                             </div>
                                             <div class="col-sm-6" id="userNameDiv">
                                                 <p>User Name</p>
                                                 <span>
-                                                    <input type="text" id="userName" title="User Name is Required"
-                                                           data-toggle="tooltip"
-                                                           class="form-control"/>
+                                                    <input type="text" id="userName" class="form-control"
+                                                           value="{{ user_details.username }}" disabled="disabled"/>
                                                 </span>
                                                 <span id="userNameError" class="help-block"></span>
                                             </div>
@@ -51,7 +51,26 @@
                                             </div>
                                         </div>
 
-                                        <div class="row" id="isExistingOrNewRoleDiv">
+                                        <div class="row" id="existing_role">
+                                            <div id="role" class="col-sm-6">
+                                                <p>User Role</p>
+                                                <span>
+                                                <input type="text" id="userRole" class="form-control"
+                                                       value="{{ user_details.role }}" disabled="disabled"/>
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>Update user role</p>
+                                                <span>
+                                                <img src="{{ url_for('static', filename='img/update_role.svg') }}"
+                                                     onclick="UpdateUserRole()" alt="Update User Role"
+                                                     id="imgUpdateUserRole" title="Update User Role"
+                                                     style="width:35px;height:35px;cursor:pointer;"/>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" id="isExistingOrNewRoleDiv" style="display: none;">
                                             <div class="col-sm-6">
                                                 <label class="radio-inline form-group">
                                                     <input type="radio" id="existing_role" name="user_role"
@@ -134,10 +153,16 @@
     <script type="text/javascript">
         var filter_id = 0;
         var filter_ids = [];
+        var isUpdateRole = false;
         var isExistingRole = false;
         var isNewRole = false;
         var rls_json_data = {};
 
+        function UpdateUserRole() {
+            $('#existing_role').hide();
+            $('isExistingOrNewRoleDiv').show();
+            isUpdateRole = true;
+        }
 
         function existing_role1() {
             $("#createNewUerRoleDiv").hide();

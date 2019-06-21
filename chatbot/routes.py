@@ -138,7 +138,7 @@ def test():
 	return render_template("test.html")
 
 
-@app.route('/ViewUser', methods=["GET", "POST"])
+@app.route('/view_user', methods=["GET", "POST"])
 def view_user():
 	if 'username' in session:
 		username = session['username']
@@ -367,7 +367,7 @@ def create_user(current_user):
 		if existing_role:
 			user_role = user_roles.query.filter_by(role=role).first()
 			if not user_role:
-				return jsonify({'message': 'Role does not exist! Contact admin for Registration.'}), 401
+				return jsonify({'message': 'Role does not exist! Create Role First!'}), 401
 
 		new_user = chatbot_users(
 			username=username, name=name, password_hash=password_hash, role=role)
