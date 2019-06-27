@@ -49,7 +49,19 @@
 - [product group5](ProdGroup:PG5) [sales](fact:SalesAmount)
 - [pg5](ProdGroup:PG5) [sales](fact:SalesAmount)
 - [sale](fact:SalesAmount) of [product 1](ProductDesc:P1)
-- [sale](fact:SalesAmount) of [p1](ProductDesc:P1)
+- [sale](fact:SalesAmount) of [P1](ProductDesc:P1)
+- [sale](fact:SalesAmount) of [P2](ProductDesc:P2)
+- [sale](fact:SalesAmount) of [P3](ProductDesc:P3)
+- [sale](fact:SalesAmount) of [P4](ProductDesc:P4)
+- [sale](fact:SalesAmount) of [P5](ProductDesc:P5)
+- [sale](fact:SalesAmount) of [P6](ProductDesc:P6)
+- [sale](fact:SalesAmount) of [P7](ProductDesc:P7)
+- [sale](fact:SalesAmount) of [P8](ProductDesc:P8)
+- [sales](fact:SalesAmount) for [PG1](ProdGroup:PG1)
+- [sales](fact:SalesAmount) for [PG2](ProdGroup:PG2)
+- [sales](fact:SalesAmount) for [PG3](ProdGroup:PG3)
+- [sales](fact:SalesAmount) for [PG4](ProdGroup:PG4)
+
 - [prod1](ProductDesc:P1) [sale](fact:SalesAmount) [from](date_condition:greater_than) 2016 [to](date_condition:lesser_than) 2018
 - [sale](fact:SalesAmount) of [product 2](ProductDesc:P2)
 - [sale](fact:SalesAmount) of [prod2](ProductDesc:P2)
@@ -65,7 +77,7 @@
 - [product 60](ProductDesc:P60) [sales](fact:SalesAmount) [on](date_condition:equal_to) last week
 - [sales](fact:SalesAmount) of [p60](ProductDesc:P60)
 - [sales](fact:SalesAmount) by [emp50](Name:Emp050) in [bfsi](CustomerType:BFSI) [north](CustomerRegion:North)
-- [revenue](fact:SalesAmount) [for](date_condition:equal_to) [north](CustomerRegion:North) region
+- [revenue](fact:SalesAmount) [for](date_condition:equal_to) today in [north](CustomerRegion:North) region
 
 - [total](agg:sum) [sales](fact:SalesAmount) [for](date_condition:equal_to) last month
 - [total](agg:sum) [sales](fact:SalesAmount) [from](date_condition:greater_than) march 2018 [to](date_condition:lesser_than) december 2018
@@ -75,7 +87,9 @@
 - [total](agg:sum) [sales](fact:SalesAmount) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
 
 - [quantity of sales](fact:SalesQty) [for](date_condition:equal_to) this week
+- [quantity of sales](fact:SalesQty) [for](date_condition:equal_to) this year
 - [sales qty](fact:SalesQty) [for](date_condition:equal_to) last year
+- [sales qty](fact:SalesQty) [for](date_condition:equal_to) this year
 - [sales qty](fact:SalesQty) [from](date_condition:greater_than) last year [to](date_condition:lesser_than) this year
 
 - [sales qty](fact:SalesQty) [since](date_condition:lesser_than) last year
@@ -83,7 +97,7 @@
 
 - [target amount](fact:TargetAmount)
 - [target quantity](fact:TargetQty)
-- [target qty](fact:TargetQty)
+- [target qty](fact:TargetQty) for this year
 - [quantity of target](fact:TargetQty)
 - [average](agg:mean) [sales](fact:SalesAmount) [for](date_condition:equal_to) yesterday
 - [average](agg:mean) [sales](fact:SalesAmount) [for](date_condition:equal_to) last year
@@ -98,7 +112,7 @@
 - [maximum](agg:max) [sales](fact:SalesAmount) [between](date_condition:greater_than) jaunary [and](date_condition:lesser_than) august
 - [peak](agg:max) [sales](fact:SalesAmount) [in](date_condition:equal_to) this month
 - [least](agg:min) [sales](fact:SalesAmount) [in](date_condition:equal_to) this week
-- [total number of](agg:count) [sales](fact:SalesAmount) [for](date_condition:equal_to) last month
+- [total number of](agg:count) [sales](fact:SalesAmount) [for](date_condition:equal_to) this month
 - [avg](agg:mean) [sales](fact:SalesAmount) [between](date_condition:greater_than) 2015 [and](date_condition:lesser_than) 2018
 - [max](agg:max) [qty of sales](fact:SalesQty)
 - [Sales](fact:SalesAmount) [for](date_condition:equal_to) last month
@@ -107,3 +121,6 @@
 
 - [sum](agg:sum), [average](agg:mean), [number](agg:count) of [sales](fact:SalesAmount) and [target](fact:TargetAmount) [sum](agg:sum), [min](agg:min), [max](agg:max)
 - [sales](fact:SalesAmount) [after](date_condition:greater_than) last month and [until](date_condition:lesser_than) today for [north](CustomerRegion:North) region and [bfsi](CustomerType:BFSI) customer types
+- last quarter [sales](fact:SalesAmount) for [P1](ProductDesc:P1) in [north](CustomerRegion:North)
+- this year [sales](fact:SalesAmount)
+- 

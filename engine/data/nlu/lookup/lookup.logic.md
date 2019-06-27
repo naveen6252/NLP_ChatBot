@@ -5,4 +5,5 @@
 - MOM
 - QOQ
 - YOY
-- TargetAcv
+- Target-Achievement
+- Contribution

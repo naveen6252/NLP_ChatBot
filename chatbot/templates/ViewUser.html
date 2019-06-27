@@ -24,9 +24,10 @@
 
                     for (var i = 0; i < userData.length; i++) {
                         row += "<tr>";
-                        if (userData[i].username != 'admin') {
-                            row += "<td><button class='btn btn-info' onclick=\"UpdateUser('" + userData[i].username + "')\">Update</button><button class='btn btn-danger' onclick=\"DeleteUser('" + userData[i].username + "')\">Delete</button>" +
-                                "</td>";
+                        if (userData[i].username != '{{ username }}') {
+                            row += "<td><button class='btn btn-info' onclick=\"UpdateUser('" +
+                                userData[i].username + "')\" title='Update'><i class='glyphicon glyphicon-cog'></i></button><button class='btn btn-danger' onclick=\"DeleteUser('" +
+                                userData[i].username + "')\" title='Delete'><i class='glyphicon glyphicon-trash'></i></button></td>";
                         }
                         // will contain icons for update and delete row
                         else {
@@ -47,10 +48,14 @@
 
         function UpdateUser(username) {
 
-            window.location.href = '/UpdateUser/' + username;
+            window.location.href = '/update user/' + username;
         }
 
         function DeleteUser(username) {
+            var r = confirm("Are you sure want to delete user "+username);
+            if (r === false) {
+                return;
+            }
 
             $.ajax({
                 type: "GET",

@@ -28,6 +28,8 @@ def safe_groupby(df, groupings, agg):
 
 
 def apply_condition(df, col_name, condition, condition_value):
+	if col_name == 'CalendarDate' and type(condition_value) == str:
+		condition_value = datetime.strptime(condition_value, "%Y-%m-%d")
 	if condition == 'greater_than':
 		return df[df[col_name] > condition_value]
 	elif condition == 'lesser_than':
@@ -39,7 +41,7 @@ def apply_condition(df, col_name, condition, condition_value):
 	elif condition == 'lesser_than_equal':
 		return df[df[col_name] <= condition_value]
 	elif condition == 'in':
-		return df[df[col_name].isin(condition_value)]
+		return df[df[col_name].str.lower().isin([x.lower() for x in condition_value])]
 	else:
 		raise NotImplementedError("Condition is not defined in the code!")
 
@@ -64,13 +66,13 @@ def get_date_text(date_condition):
 	for date in date_condition:
 		text += date_text.get(date['conditions']) + datetime.strftime(date['CalendarDate'], '%Y-%m-%d') + ' & '
 	text = text[:-3]
-	return text.title()
+	return text
 
 
 # function to filters dimension apply when no business logic
 def apply_dim_filters(df, dim_filters):
 	for k, v in dim_filters.items():
-		df = df[df[k].isin(v)]
+		df = df[df[k].str.lower().isin([x.lower() for x in v])]
 	return df
 
 
@@ -99,19 +101,19 @@ def apply_business_logic(df, logic, entities):
 		default_graph = 'line'
 	elif logic == 'MTD':
 		table = business_instance.mtd(df)
-		default_graph = 'line'
+		default_graph = 'pie'
 	elif logic == 'QTD':
 		table = business_instance.qtd(df)
-		default_graph = 'line'
+		default_graph = 'pie'
 	elif logic == 'YTD':
 		table = business_instance.ytd(df)
-		default_graph = 'line'
+		default_graph = 'table'
 	elif logic == 'Target-Achievement':
 		table = business_instance.target_achievement(df)
-		default_graph = 'line'
+		default_graph = 'table'
 	elif logic == 'Contribution':
 		table = business_instance.contribution(df)
-		default_graph = 'line'
+		default_graph = 'table'
 	else:
 		raise NotImplementedError("Business Logic {0} not defined".format(logic))
 

@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 from custom_exceptions import NoFactError, NoFactInOperand
-from settings import dim_filter_columns
 from chatbot import duckling
 from datetime import datetime
+from chatbot.models import dimensions
 
 
 # Function to fill aggregation in fact_condition
@@ -161,7 +161,13 @@ def get_fact_condition_formatted(entities):
 # Function for fixing date returned by duckling for text last month to last 1 month
 def fix_date_duckling(text, val):
 	text_array = text.split()
-	if len(text_array) == 2 and text_array[0].lower() in ('last', 'next'):
+	if len(text_array) == 2 and text_array[0].lower() in ('this', 'current'):
+		val_from = duckling.parse_time(" ".join(text_array))[0]['value']['value']
+		text_array[0] = 'next'
+		val_to = duckling.parse_time(" ".join(text_array))[0]['value']['value']
+		val_dict = {"to": val_to, "from": val_from}
+		val = val_dict
+	elif len(text_array) == 2 and text_array[0].lower() in ('last', 'next'):
 		text_array.insert(1, "1")
 		text = " ".join(text_array)
 		val = duckling.parse_time(text)[0]['value']['value']
@@ -214,7 +220,9 @@ def get_date_condition_formatted(entities):
 				val = entities[i]['value'] if i < len(entities) else 'NULL'
 			if ent == 'date_condition':
 				date_condition['date_condition'] = val
-
+			else:
+				# default date condition when date condition not found
+				date_condition['date_condition'] = 'equal_to'
 			if type(date) == dict:
 				# When any condition is None then make lesser_than_equal instead of lesser_than
 				if date_condition['date_condition'] in ('lesser_than', 'greater_than'):
@@ -292,7 +300,7 @@ def format_entities(entities):
 		val = entities[i]['value']
 		if ent in ('dim', 'graph', 'logic', 'adject'):
 			formatted_entity[ent].append(val)
-		elif ent in dim_filter_columns:
+		elif ent in dimensions:
 			if ent in formatted_entity['dim_filters'].keys():
 				formatted_entity['dim_filters'][ent].append(val)
 			else:

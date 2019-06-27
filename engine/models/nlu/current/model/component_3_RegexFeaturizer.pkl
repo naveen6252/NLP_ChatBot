@@ -33,7 +33,7 @@
     },
     {
         "name": "logic",
-        "pattern": "(?i)(\\bMTD\\b|\\bQTD\\b|\\bYTD\\b|\\bMOM\\b|\\bQOQ\\b|\\bYOY\\b|\\bTargetAcv\\b)"
+        "pattern": "(?i)(\\bMTD\\b|\\bQTD\\b|\\bYTD\\b|\\bMOM\\b|\\bQOQ\\b|\\bYOY\\b|\\bTarget\\-Achievement\\b|\\bContribution\\b)"
     },
     {
         "name": "Name",

@@ -1,3 +1,5 @@
+import os
+import json
 import datetime
 import random
 from functools import wraps
@@ -7,12 +9,12 @@ from flask import request, jsonify, make_response, redirect, render_template, ur
 	flash, session, send_from_directory
 from sklearn.preprocessing import normalize
 from werkzeug.security import generate_password_hash, check_password_hash
-from chatbot import app, bot, data_loader, helper_methods as helpers
+from chatbot import app, bot, data_loader
 from chatbot.logregform import LoginForm
 from chatbot.models import db, chatbot_users, chatbot_logs, error_message, user_roles, \
 	RLS_COLUMNS_FILTER_CHOICE
 from custom_exceptions import *
-import os
+from settings import NLU_DATA_PATH
 
 
 # Solution for favicon.ico used as icon on tabs in browser
@@ -44,6 +46,7 @@ def login():
 			session['username'] = form.username.data
 			session['role'] = role
 			session['token'] = token.decode('UTF-8')
+			# session.permanent = True
 			return redirect(url_for('home'))
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
@@ -71,8 +74,8 @@ def home():
 
 
 # create wt-forms for new users and also a disabled access json form that will be invisible
-@app.route('/CreateUser', methods=["GET", "POST"])
-def CreateUser():
+@app.route('/create user', methods=["GET", "POST"])
+def create_user():
 	if 'username' in session:
 		username = session['username']
 		current_role = session['role']
@@ -96,13 +99,13 @@ def CreateUser():
 		for user in users:
 			user_output.append({'username': user.username, 'role': user.role})
 
-		return render_template('CreateUserNew.html', username=username, role=current_role, token=token,
+		return render_template('CreateUser.html', username=username, role=current_role, token=token,
 							   existing_roles=role_output, rls_filters=RLS_COLUMNS_FILTER_CHOICE, users=user_output)
 	return redirect(url_for('login'))
 
 
-@app.route('/UpdateUser/<user_to_update>', methods=["GET", "POST"])
-def UpdateUser(user_to_update):
+@app.route('/update user/<user_to_update>', methods=["GET", "POST"])
+def update_user(user_to_update):
 	if 'username' in session:
 		username = session['username']
 		role = session['role']
@@ -112,11 +115,6 @@ def UpdateUser(user_to_update):
 
 		user_to_update = chatbot_users.query.filter_by(username=user_to_update).first()
 		role_to_update = user_roles.query.filter_by(role=user_to_update.role).first()
-		roles_data = user_roles.query.all()
-		role_output = []
-		for roles in roles_data:
-			output = {'role': roles.role, 'access_json': eval(roles.access_json)}
-			role_output.append(output)
 
 		if user_to_update.username == username:
 			return render_template("notAuthorized.html")
@@ -127,18 +125,26 @@ def UpdateUser(user_to_update):
 
 		user_details = {'username': user_to_update.username, 'name': user_to_update.name, 'role': user_to_update.role,
 						'access_json': role_to_update.access_json}
-		return render_template('UpdateUser.html', username=username, role=role, token=token, user_details=user_details,
-							   user_roles=role_output, rls_filters=RLS_COLUMNS_FILTER_CHOICE)
+		users = chatbot_users.query.all()
+		user_output = []
+		for user in users:
+			user_output.append({'username': user.username, 'role': user.role})
+
+		roles = user_roles.query.all()
+		role_output = []
+		for roles in roles:
+			role_data = {'role': roles.role, 'access_json': eval(
+				roles.access_json)}
+			role_output.append(role_data)
+
+		return render_template('UpdateUser.html', username=username, role=role, token=token,
+							   user_details=user_details,
+							   existing_roles=role_output, rls_filters=RLS_COLUMNS_FILTER_CHOICE, users=user_output)
 
 	return redirect(url_for('login'))
 
 
-@app.route('/test', methods=["GET", "POST"])
-def test():
-	return render_template("test.html")
-
-
-@app.route('/view_user', methods=["GET", "POST"])
+@app.route('/view user', methods=["GET", "POST"])
 def view_user():
 	if 'username' in session:
 		username = session['username']
@@ -151,9 +157,78 @@ def view_user():
 	return redirect(url_for('login'))
 
 
+@app.route('/Interactive Learning', methods=["GET"])
+def interactive_learning():
+	if 'username' in session:
+		username = session['username']
+		role = session['role']
+		token = session['token']
+		if role != 'admin':
+			return render_template("notAuthorized.html")
+
+		with open(NLU_DATA_PATH) as json_file:
+			data = json.load(json_file)
+
+		nlu_data = data.get('rasa_nlu_data')
+		intents = nlu_data.get('common_examples')
+		synonyms = nlu_data.get('entity_synonyms')
+		lookups = nlu_data.get('lookup_tables')
+
+		intent_dict = {}
+
+		for example in intents:
+			if example['intent'] not in intent_dict.keys():
+				intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
+			else:
+				intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
+
+		return render_template('interactiveLearning.html', username=username, role=role, token=token,
+							   intents=intent_dict, synonyms=synonyms, lookups=lookups)
+
+	return redirect(url_for('login'))
+
+
+@app.route('/Train NLU', methods=["GET"])
+def train_nlu():
+	if 'username' not in session:
+		return redirect(url_for('login'))
+
+	username = session['username']
+	role = session['role']
+	token = session['token']
+	if role != 'admin':
+		return render_template("notAuthorized.html")
+
+	with open(NLU_DATA_PATH) as json_file:
+		data = json.load(json_file)
+
+	nlu_data = data.get('rasa_nlu_data')
+	intents = nlu_data.get('common_examples')
+	synonyms = nlu_data.get('entity_synonyms')
+	lookups = nlu_data.get('lookup_tables')
+
+	intent_dict = {}
+
+	for example in intents:
+		if example['intent'] not in intent_dict.keys():
+			intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
+		else:
+			intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
+
+	intents_per_page = 10
+	total_pages = int(len(intent_dict.keys()) / intents_per_page)
+
+
+	return render_template('trainNLU.html', username=username, role=role, token=token,
+						   intents=intent_dict, synonyms=synonyms, lookups=lookups, intents_per_page=intents_per_page,
+						   total_pages=total_pages)
+
+
 # =================================================================
 
 def token_required(f):
+	# noinspection PyArgumentList
+	# noinspection PyBroadException
 	@wraps(f)
 	def decorated(*args, **kwargs):
 		token = None
@@ -164,7 +239,6 @@ def token_required(f):
 		if not token:
 			return jsonify({'message': 'Token is missing'}), 401
 
-		# noinspection PyBroadException
 		try:
 			data = jwt.decode(token, app.config['SECRET_KEY'])
 			current_user = chatbot_users.query.filter_by(username=data['username']).first()
@@ -180,7 +254,7 @@ def token_required(f):
 # ========================================
 @app.route('/api/DeleteUser/<username>', methods=["GET", "POST"])
 @token_required
-def delete_user(current_user, username):
+def api_delete_user(current_user, username):
 	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
 	current_user_role = chatbot_users.query.filter_by(username=current_user.username).first()
 	if current_user_role.role != 'admin':
@@ -196,7 +270,7 @@ def delete_user(current_user, username):
 
 @app.route('/api/UpdateUser', methods=['POST'])
 @token_required
-def update_user(current_user):
+def api_update_user(current_user):
 	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
 	# current_user_role = chatbot_users.query.filter_by(username=current_user.username).first()
 
@@ -246,7 +320,7 @@ def update_user(current_user):
 
 # ========================================
 @app.route('/api/login')
-def apilogin():
+def api_login():
 	auth = request.authorization
 	if not auth or not auth.username or not auth.password:
 		return make_response('Enter Username and Password!', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
@@ -273,7 +347,7 @@ def apilogin():
 
 @app.route('/api/get_users', methods=['GET', 'POST'])
 @token_required
-def get_users(current_user):
+def api_get_users(current_user):
 	if current_user.role != 'admin':
 		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
 	if request.method == 'GET':
@@ -301,7 +375,7 @@ def get_users(current_user):
 
 @app.route('/api/get_roles', methods=['GET', 'POST'])
 @token_required
-def get_roles(current_user):
+def api_get_roles(current_user):
 	if current_user.role != 'admin':
 		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
 	if request.method == 'GET':
@@ -329,7 +403,7 @@ def get_roles(current_user):
 
 @app.route('/api/get_rls_filters', methods=['GET'])
 @token_required
-def get_rls_filters(current_user):
+def api_get_rls_filters(current_user):
 	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
 	if current_user.role != 'admin':
 		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
@@ -342,7 +416,7 @@ def get_rls_filters(current_user):
 
 @app.route('/api/create_user', methods=['POST'])
 @token_required
-def create_user(current_user):
+def api_create_user(current_user):
 	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
 	if current_user.role != 'admin':
 		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
@@ -392,7 +466,7 @@ def create_user(current_user):
 
 @app.route('/api/get_popular_queries')
 @token_required
-def get_popular_queries(current_user):
+def api_get_popular_queries(current_user):
 	number = request.args.get('queries')
 	if not number:
 		return jsonify({'message': 'Bad Request! \'queries\' not specified'}), 400
@@ -419,14 +493,17 @@ def get_popular_queries(current_user):
 	logs_df.columns = ['user_query', 'frequency', 'create_time']
 	logs_df['recency'] = -(logs_df['create_time'].max() - logs_df['create_time']).dt.total_seconds()
 
+	norm = normalize(logs_df[['recency', 'frequency']], axis=0)
+
+	logs_df['score'] = norm[:, 0] + norm[:, 1]
+	logs_df = logs_df.sort_values('score', ascending=False).iloc[0: number]
+
 	# Get new response based on the recency of the query
 	logs_df['query_response'] = logs_df.apply(
 		lambda x: get_query_response(x.user_query, current_user, logging=False)[0], axis=1)
 
-	norm = normalize(logs_df[['recency', 'frequency']], axis=0)
-	logs_df['score'] = norm[:, 0] + norm[:, 1]
-	logs_df = logs_df[['user_query', 'query_response', 'score']].sort_values(
-		'score', ascending=False).iloc[0: number]
+	logs_df = logs_df[['user_query', 'query_response', 'score']]
+
 	response = logs_df.to_dict('records')
 
 	return jsonify(response)
@@ -525,7 +602,7 @@ def get_query_response(user_query, current_user, logging=True):
 # noinspection PyBroadException
 @app.route('/api/resolve_query')
 @token_required
-def resolve_query(current_user):
+def api_resolve_query(current_user):
 	user_query = request.args.get('message')
 	if not user_query:
 		return jsonify({'message': 'could not find message in request!'}), 400

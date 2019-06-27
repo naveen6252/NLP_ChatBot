@@ -1,7 +1,8 @@
 import os
 import pandas as pd
-from settings import dim_filter_columns, DATA_PATH, COL_MAPPING, TABLE_MAPPING
+from settings import DATA_PATH, COL_MAPPING, TABLE_MAPPING
 from chatbot.helper_methods import apply_condition
+from chatbot.models import dimensions
 
 
 def get_columns_from_rls(rls_json):
@@ -18,7 +19,7 @@ def get_columns_from_entities(raw_entities):
 		# entity time for duckling pipeline
 		elif entity['entity'] == 'time':
 			columns.append('CalendarDate')
-		elif entity['entity'] in dim_filter_columns:
+		elif entity['entity'] in dimensions:
 			columns.append(entity['entity'])
 		# Load extra Columns  for Business logic
 		elif entity['entity'] == 'logic':

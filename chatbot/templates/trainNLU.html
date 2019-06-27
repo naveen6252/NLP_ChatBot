@@ -1,0 +1,148 @@
+{% extends "layout/ChatbotLayout.html" %}
+{% block content %}
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page-active {
+            display: block;
+        }
+
+        #intentTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        #intentTable th, #intentTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #intentTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #intentTable tr.header, #intentTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <h2><i class="glyphicon glyphicon-comment"></i>Intents</h2>
+    <div class="form-group has-feedback row">
+        <input type="text" class="form-control" id="intentSearch" onkeyup="searchIntents()"
+               placeholder="Search for intent.." title="Type in an intent name"/>
+        <i class="glyphicon glyphicon-search form-control-feedback"></i>
+    </div>
+    <div class="container">
+
+        <div class="jumbotron page" id="page1">
+            <div class="container">
+
+            </div>
+        </div>
+        <div class="jumbotron page" id="page2">
+
+        </div>
+
+        <ul id="pagination-demo" class="pagination-lg pull-right"></ul>
+    </div>
+
+    <div class="container">
+
+
+        <div class="row">
+            <table id="intentTable">
+                <tr class="header">
+                    <th style="width:100%;">Name</th>
+                </tr>
+                {% for intent, examples in intents.items() %}
+                    <tr>
+                        <td>
+                            {{ intent }}
+                            <div id="{{ intent }}Div" style="display: none">
+                                <div class="col-xs-offset-3 col-xs-6">
+                                    {% for example in examples %}
+                                        <div id="example{{ loop.index }}Div">
+                                            {{ example.text }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script>
+        function searchIntents() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("intentSearch");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("intentTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        $('#pagination-demo').twbsPagination({
+            totalPages: 5,
+            // the current page that show on start
+            startPage: 1,
+
+            // maximum visible pages
+            visiblePages: 5,
+
+            initiateStartPageClick: true,
+
+            // template for pagination links
+            href: false,
+
+            // variable name in href template for page number
+            hrefVariable: '{{number}}',
+
+            // Text labels
+            first: 'First',
+            prev: 'Previous',
+            next: 'Next',
+            last: 'Last',
+
+            // carousel-style pagination
+            loop: false,
+
+            // callback function
+            onPageClick: function (event, page) {
+                $('.page-active').removeClass('page-active');
+                $('#page' + page).addClass('page-active');
+            },
+
+// pagination Classes
+            paginationClass: 'pagination',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first',
+            pageClass: 'page',
+            activeClass: 'active',
+            disabledClass: 'disabled'
+
+        });
+    </script>
+
+{% endblock content %}

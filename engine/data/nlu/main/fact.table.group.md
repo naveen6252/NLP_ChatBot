@@ -15,17 +15,17 @@
 
 - [monthly](dim:Month) [revenue](fact:SalesAmount) on [bar](graph:bar) [for](date_condition:equal_to) last 6 months
 - [product](dim:ProductDesc) wise [maximum](agg:max) [sales](fact:SalesAmount) on [table](graph:table)
-- [product group](dim:ProdGroup) wise this month [sales](fact:SalesAmount) on [pie](graph:pie)
+- [product group](dim:ProdGroup) wise this month [sales](fact:SalesAmount) on [bar](graph:bar)
 - [prod group](dim:ProdGroup) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
-- [prodgroup](dim:ProdGroup) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
-- [proddesc](dim:ProductDesc) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
+- [prodgroup](dim:ProdGroup) wise [topmost](agg:max) [sales](fact:SalesAmount) on [bar](graph:bar)
+- [proddesc](dim:ProductDesc) wise [topmost](agg:max) [sales](fact:SalesAmount) on [bar](graph:bar)
 - [prod](dim:ProductDesc) wise [topmost](agg:max) [sales](fact:SalesAmount) on [pie](graph:pie)
 - [month year](dim:MonthYear) wise [topmost](agg:max) [sales](fact:SalesAmount) on [line](graph:line)
 - [monthyear](dim:MonthYear) wise [topmost](agg:max) [sales](fact:SalesAmount) on [line](graph:line)
 - [qtr](dim:Quarter) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
 - [qtryear](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
 - [qtr year](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
-- [quarter year](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
+- [quarter year](dim:QuarterYear) wise [sum](agg:sum) of [sales](fact:SalesAmount) on [table](graph:table)
 - [yearly](dim:Year) [sum](agg:sum) of [sales](fact:SalesAmount) on [line](graph:line)
 - [sum](agg:sum) of [sales](fact:SalesAmount) by [region](dim:CustomerRegion) on [line](graph:line)
 - [daily](dim:CalendarDate) [sales](fact:SalesAmount) on [table](graph:table) [for](date_condition:equal_to) last month
@@ -72,3 +72,4 @@
 - [top](selection:top) 10 [products](adject:ProductDesc) in [govt](CustomerType:Govt) sector [in](date_condition:equal_to) last year
 - [top](selection:top) 10 [products](adject:ProductDesc) sold by [emp050](Name:Emp050)
 - [top](selection:top) [employee](adject:Name) in [bfsi](CustomerType:BFSI) sector
+- [top](selection:top) 4 [products](adject:ProductDesc) in [north](CustomerRegion:North) in [donut](graph:donut)

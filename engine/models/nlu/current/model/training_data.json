@@ -1109,7 +1109,205 @@
             "entity": "ProductDesc"
           }
         ],
-        "text": "sale of p1"
+        "text": "sale of P1"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P2",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P2"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P3",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P3"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P4",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P4"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P5",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P5"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P6",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P6"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P7",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P7"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 8,
+            "end": 10,
+            "value": "P8",
+            "entity": "ProductDesc"
+          }
+        ],
+        "text": "sale of P8"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 10,
+            "end": 13,
+            "value": "PG1",
+            "entity": "ProdGroup"
+          }
+        ],
+        "text": "sales for PG1"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 10,
+            "end": 13,
+            "value": "PG2",
+            "entity": "ProdGroup"
+          }
+        ],
+        "text": "sales for PG2"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 10,
+            "end": 13,
+            "value": "PG3",
+            "entity": "ProdGroup"
+          }
+        ],
+        "text": "sales for PG3"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 10,
+            "end": 13,
+            "value": "PG4",
+            "entity": "ProdGroup"
+          }
+        ],
+        "text": "sales for PG4"
       },
       {
         "intent": "fact.kpi",
@@ -1439,13 +1637,13 @@
             "entity": "date_condition"
           },
           {
-            "start": 12,
-            "end": 17,
+            "start": 21,
+            "end": 26,
             "value": "North",
             "entity": "CustomerRegion"
           }
         ],
-        "text": "revenue for north region"
+        "text": "revenue for today in north region"
       },
       {
         "intent": "fact.kpi",
@@ -1572,6 +1770,24 @@
         "entities": [
           {
             "start": 0,
+            "end": 17,
+            "value": "SalesQty",
+            "entity": "fact"
+          },
+          {
+            "start": 18,
+            "end": 21,
+            "value": "equal_to",
+            "entity": "date_condition"
+          }
+        ],
+        "text": "quantity of sales for this year"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
             "end": 9,
             "value": "SalesQty",
             "entity": "fact"
@@ -1584,6 +1800,24 @@
           }
         ],
         "text": "sales qty for last year"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "SalesQty",
+            "entity": "fact"
+          },
+          {
+            "start": 10,
+            "end": 13,
+            "value": "equal_to",
+            "entity": "date_condition"
+          }
+        ],
+        "text": "sales qty for this year"
       },
       {
         "intent": "fact.kpi",
@@ -1661,7 +1895,7 @@
             "entity": "fact"
           }
         ],
-        "text": "target qty"
+        "text": "target qty for this year"
       },
       {
         "intent": "fact.kpi",
@@ -1961,7 +2195,7 @@
             "entity": "date_condition"
           }
         ],
-        "text": "total number of sales for last month"
+        "text": "total number of sales for this month"
       },
       {
         "intent": "fact.kpi",
@@ -2142,6 +2376,42 @@
           }
         ],
         "text": "sales after last month and until today for north region and bfsi customer types"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 13,
+            "end": 18,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 23,
+            "end": 25,
+            "value": "P1",
+            "entity": "ProductDesc"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "North",
+            "entity": "CustomerRegion"
+          }
+        ],
+        "text": "last quarter sales for P1 in north"
+      },
+      {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 10,
+            "end": 15,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this year sales"
       },
       {
         "intent": "fact.table.group",
@@ -2515,11 +2785,11 @@
           {
             "start": 39,
             "end": 42,
-            "value": "pie",
+            "value": "bar",
             "entity": "graph"
           }
         ],
-        "text": "product group wise this month sales on pie"
+        "text": "product group wise this month sales on bar"
       },
       {
         "intent": "fact.table.group",
@@ -2575,11 +2845,11 @@
           {
             "start": 32,
             "end": 35,
-            "value": "pie",
+            "value": "bar",
             "entity": "graph"
           }
         ],
-        "text": "prodgroup wise topmost sales on pie"
+        "text": "prodgroup wise topmost sales on bar"
       },
       {
         "intent": "fact.table.group",
@@ -2605,11 +2875,11 @@
           {
             "start": 31,
             "end": 34,
-            "value": "pie",
+            "value": "bar",
             "entity": "graph"
           }
         ],
-        "text": "proddesc wise topmost sales on pie"
+        "text": "proddesc wise topmost sales on bar"
       },
       {
         "intent": "fact.table.group",
@@ -2814,12 +3084,12 @@
           },
           {
             "start": 34,
-            "end": 38,
-            "value": "line",
+            "end": 39,
+            "value": "table",
             "entity": "graph"
           }
         ],
-        "text": "quarter year wise sum of sales on line"
+        "text": "quarter year wise sum of sales on table"
       },
       {
         "intent": "fact.table.group",
@@ -3926,6 +4196,36 @@
         "text": "top employee in bfsi sector"
       },
       {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "top",
+            "entity": "selection"
+          },
+          {
+            "start": 6,
+            "end": 14,
+            "value": "ProductDesc",
+            "entity": "adject"
+          },
+          {
+            "start": 18,
+            "end": 23,
+            "value": "North",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "donut",
+            "entity": "graph"
+          }
+        ],
+        "text": "top 4 products in north in donut"
+      },
+      {
         "intent": "fact.table.logic",
         "entities": [
           {
@@ -4445,7 +4745,7 @@
             "entity": "date_condition"
           }
         ],
-        "text": "y-t-d sales quantity in each region for this year"
+        "text": "y-t-d sales quantity in each region for"
       },
       {
         "intent": "fact.table.logic",
@@ -4907,7 +5207,7 @@
             "entity": "date_condition"
           }
         ],
-        "text": "year over year sales in each region for this year"
+        "text": "year over year sales in each region for"
       },
       {
         "intent": "fact.table.logic",
@@ -5460,6 +5760,30 @@
         "entities": [
           {
             "start": 0,
+            "end": 3,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 4,
+            "end": 9,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 13,
+            "end": 18,
+            "value": "table",
+            "entity": "graph"
+          }
+        ],
+        "text": "mom sales on table"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
             "end": 16,
             "value": "MOM",
             "entity": "logic"
@@ -5544,6 +5868,30 @@
           }
         ],
         "text": "quarter over quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 20,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 21,
+            "end": 26,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 30,
+            "end": 35,
+            "value": "table",
+            "entity": "graph"
+          }
+        ],
+        "text": "quarter over quarter sales on table"
       },
       {
         "intent": "fact.table.logic",
@@ -5652,6 +6000,30 @@
         "entities": [
           {
             "start": 0,
+            "end": 14,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 15,
+            "end": 20,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 24,
+            "end": 29,
+            "value": "table",
+            "entity": "graph"
+          }
+        ],
+        "text": "year over year sales on table"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
             "end": 3,
             "value": "YOY",
             "entity": "logic"
@@ -5693,7 +6065,7 @@
             "entity": "date_condition"
           }
         ],
-        "text": "year over year sales for customer 50 for this year"
+        "text": "year over year sales for customer 50 for"
       },
       {
         "intent": "fact.table.logic",
@@ -5808,6 +6180,600 @@
           }
         ],
         "text": "ytd"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "sum",
+            "entity": "agg"
+          },
+          {
+            "start": 6,
+            "end": 11,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 21,
+            "end": 24,
+            "value": "YTD",
+            "entity": "logic"
+          }
+        ],
+        "text": "total sales for last ytd"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "CustomerRegion",
+            "entity": "dim"
+          },
+          {
+            "start": 12,
+            "end": 15,
+            "value": "MTD",
+            "entity": "logic"
+          },
+          {
+            "start": 16,
+            "end": 21,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "region wise mtd sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 29,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 30,
+            "end": 35,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current year vs previous year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 25,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 26,
+            "end": 31,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current year vs last year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 22,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 23,
+            "end": 28,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev year vs this year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 25,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 26,
+            "end": 31,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev year vs current year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 13,
+            "end": 18,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "year on year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 13,
+            "end": 18,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "year-on-year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 24,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this month vs last month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 31,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 32,
+            "end": 37,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current month vs previous month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 27,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 28,
+            "end": 33,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current month vs last month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 28,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "previous month vs this month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 24,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev month vs this month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 27,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 28,
+            "end": 33,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev month vs current month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 24,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this month vs last month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 28,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this quarter vs last quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 35,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 36,
+            "end": 41,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current quarter vs previous quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 31,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 32,
+            "end": 37,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "current quarter vs last quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 32,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 33,
+            "end": 38,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "previous quarter vs this quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 28,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev quarter vs this quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 31,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 32,
+            "end": 37,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "prev quarter vs current quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 18,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "quarter on quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 18,
+            "value": "QOQ",
+            "entity": "logic"
+          },
+          {
+            "start": 19,
+            "end": 24,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "quarter-on-quarter sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 16,
+            "end": 22,
+            "value": "Emp050",
+            "entity": "Name"
+          },
+          {
+            "start": 26,
+            "end": 31,
+            "value": "North",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 32,
+            "end": 37,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "contribution of Emp050 in north sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 10,
+            "end": 25,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 37,
+            "end": 42,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this week contribution in this month sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 14,
+            "end": 19,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 23,
+            "end": 27,
+            "value": "BFSI",
+            "entity": "CustomerType"
+          },
+          {
+            "start": 31,
+            "end": 36,
+            "value": "North",
+            "entity": "CustomerRegion"
+          }
+        ],
+        "text": "percentage of sales of bfsi in north region"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 13,
+            "value": "CustomerType",
+            "entity": "dim"
+          },
+          {
+            "start": 19,
+            "end": 31,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 35,
+            "end": 40,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "customer type wise contribution in sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 6,
+            "end": 13,
+            "value": "Contribution",
+            "entity": "logic"
+          }
+        ],
+        "text": "sales percent of this month in this year"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 6,
+            "end": 7,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 11,
+            "end": 17,
+            "value": "Emp056",
+            "entity": "Name"
+          }
+        ],
+        "text": "sales % of emp056 in this month"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 10,
+            "end": 15,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 16,
+            "end": 18,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "this year sales vs last year sales"
       },
       {
         "intent": "agent.acquaintance",
@@ -13836,7 +14802,8 @@
           "MOM",
           "QOQ",
           "YOY",
-          "TargetAcv"
+          "Target-Achievement",
+          "Contribution"
         ]
       },
       {
@@ -14389,7 +15356,6 @@
         "value": "P1",
         "synonyms": [
           "product 1",
-          "p1",
           "prod1"
         ]
       },
@@ -14673,9 +15639,22 @@
           "month over month",
           "mom",
           "m-o-m",
+          "this month vs last month",
+          "current month vs previous month",
+          "current month vs last month",
+          "previous month vs this month",
+          "prev month vs this month",
+          "prev month vs current month",
           "month-over-month",
           "month/over/month",
-          "m/o/m"
+          "m/o/m",
+          "Month on month",
+          "last month vs current month",
+          "month on month",
+          "month-on-month",
+          "monthon month",
+          "monthonmonth",
+          "this month vs previous month"
         ]
       },
       {
@@ -14684,9 +15663,24 @@
           "quarter over quarter",
           "qoq",
           "q-o-q",
+          "this quarter vs last quarter",
+          "current quarter vs previous quarter",
+          "current quarter vs last quarter",
+          "previous quarter vs this quarter",
+          "prev quarter vs this quarter",
+          "prev quarter vs current quarter",
+          "quarter on quarter",
+          "quarter-on-quarter",
           "quarter-over-quarter",
           "quarter/over/quarter",
-          "q/o/q"
+          "q/o/q",
+          "qtr on qtr",
+          "qtr over qtr",
+          "qtr-o-qtr",
+          "qtr-on-qtr",
+          "qtroqtr",
+          "quarteron quarter",
+          "quarteronquarter"
         ]
       },
       {
@@ -14695,15 +15689,53 @@
           "year over year",
           "yoy",
           "y-o-y",
+          "current year vs previous year",
+          "current year vs last year",
+          "prev year vs this year",
+          "prev year vs current year",
+          "year on year",
+          "year-on-year",
           "year-over-year",
           "year/over/year",
-          "y/o/y"
+          "y/o/y",
+          "last year vs current year",
+          "last year vs this year",
+          "previous year vs current year",
+          "previous year vs this year",
+          "this year vs last year",
+          "this year vs previous year",
+          "year-on year",
+          "yearon year",
+          "yearonyear"
         ]
       },
       {
         "value": "Target-Achievement",
         "synonyms": [
           "target achieved"
+        ]
+      },
+      {
+        "value": "Contribution",
+        "synonyms": [
+          "contribution",
+          "contribution in",
+          "percentage",
+          "percent",
+          "%",
+          "vs",
+          "%age",
+          "Percent",
+          "Percentage",
+          "contribution of",
+          "donation",
+          "versus"
+        ]
+      },
+      {
+        "value": "Emp056",
+        "synonyms": [
+          "emp056"
         ]
       },
       {

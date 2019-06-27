@@ -6,6 +6,7 @@ from flask_cors import CORS
 from settings import NLU_MODEL_PATH
 from rasa_nlu.model import Interpreter
 from duckling import DucklingWrapper
+from datetime import timedelta
 
 duckling = DucklingWrapper()
 
@@ -16,14 +17,12 @@ app.debug = True
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % parse.quote_plus(con_str)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
+
 
 bcrypt = Bcrypt(app)
 CORS(app)
 db = SQLAlchemy(app)
 
-
 from chatbot import routes
-
-
