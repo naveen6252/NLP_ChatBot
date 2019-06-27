@@ -207,21 +207,18 @@ def train_nlu():
 	synonyms = nlu_data.get('entity_synonyms')
 	lookups = nlu_data.get('lookup_tables')
 
-	intent_dict = {}
+	# intent_dict = {}
 
-	for example in intents:
-		if example['intent'] not in intent_dict.keys():
-			intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
-		else:
-			intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
+	# for example in intents:
+	# 	if example['intent'] not in intent_dict.keys():
+	# 		intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
+	# 	else:
+	# 		intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
 
 	intents_per_page = 10
-	total_pages = int(len(intent_dict.keys()) / intents_per_page)
-
 
 	return render_template('trainNLU.html', username=username, role=role, token=token,
-						   intents=intent_dict, synonyms=synonyms, lookups=lookups, intents_per_page=intents_per_page,
-						   total_pages=total_pages)
+						   intents=intents, synonyms=synonyms, lookups=lookups, intents_per_page=intents_per_page)
 
 
 # =================================================================

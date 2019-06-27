@@ -33,54 +33,30 @@
             background-color: #f1f1f1;
         }
     </style>
-    <h2><i class="glyphicon glyphicon-comment"></i>Intents</h2>
-    <div class="form-group has-feedback row">
-        <input type="text" class="form-control" id="intentSearch" onkeyup="searchIntents()"
-               placeholder="Search for intent.." title="Type in an intent name"/>
-        <i class="glyphicon glyphicon-search form-control-feedback"></i>
-    </div>
+
     <div class="container">
+        <h2><i class="glyphicon glyphicon-comment"></i>Intents</h2>
+        <div class="form-group has-feedback row">
+            <input type="text" class="form-control" id="intentSearch" onkeyup="searchIntents()"
+                   placeholder="Search for intent.." title="Type in an intent name"/>
+            <i class="glyphicon glyphicon-search form-control-feedback"></i>
+        </div>
+        {% set pageID = [0] %}
+        <div class="jumbotron page" id="page{{ pageID[0] }}">
+            {% for intent in intents %}
+                {% if loop.index % intents_per_page == 1 %}
+                    </div>
+                    <div class="jumbotron page" id="page{{ pageID[0] }}">
+                    {% if pageID.append(pageID.pop() + 1) %}{% endif %}
+                {% endif %}
 
-        <div class="jumbotron page" id="page1">
-            <div class="container">
-
+                <h4>{{ intent.text }}</h4>
+            {% endfor %}
             </div>
-        </div>
-        <div class="jumbotron page" id="page2">
-
-        </div>
 
         <ul id="pagination-demo" class="pagination-lg pull-right"></ul>
     </div>
 
-    <div class="container">
-
-
-        <div class="row">
-            <table id="intentTable">
-                <tr class="header">
-                    <th style="width:100%;">Name</th>
-                </tr>
-                {% for intent, examples in intents.items() %}
-                    <tr>
-                        <td>
-                            {{ intent }}
-                            <div id="{{ intent }}Div" style="display: none">
-                                <div class="col-xs-offset-3 col-xs-6">
-                                    {% for example in examples %}
-                                        <div id="example{{ loop.index }}Div">
-                                            {{ example.text }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-
-                {% endfor %}
-            </table>
-        </div>
-    </div>
     <script>
         function searchIntents() {
             var input, filter, table, tr, td, i, txtValue;
@@ -102,9 +78,9 @@
         }
 
         $('#pagination-demo').twbsPagination({
-            totalPages: 5,
+            totalPages: 219,
             // the current page that show on start
-            startPage: 1,
+            startPage: 0,
 
             // maximum visible pages
             visiblePages: 5,
@@ -115,7 +91,7 @@
             href: false,
 
             // variable name in href template for page number
-            hrefVariable: '{{number}}',
+            hrefVariable: '#',
 
             // Text labels
             first: 'First',
@@ -132,7 +108,7 @@
                 $('#page' + page).addClass('page-active');
             },
 
-// pagination Classes
+            // pagination Classes
             paginationClass: 'pagination',
             nextClass: 'next',
             prevClass: 'prev',
