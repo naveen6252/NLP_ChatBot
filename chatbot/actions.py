@@ -4,6 +4,8 @@ import pandas as pd
 
 
 def action_fact_kpi(df, entities):
+	if entities['dim']:
+		return action_fact_table_group(df, entities)
 	entities['graph'] = 'text'
 	df = helpers.apply_date_condition(df, entities['date_condition'])
 	df = helpers.apply_dim_filters(df, entities['dim_filters'])
@@ -23,6 +25,8 @@ def action_fact_kpi(df, entities):
 
 
 def action_fact_table_group(df, entities):
+	if entities['logic']:
+		return fact_table_logic(df, entities)
 	if not entities['graph']:
 		entities['graph'] = ['table']
 	df = helpers.apply_date_condition(df, entities['date_condition'])

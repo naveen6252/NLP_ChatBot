@@ -2569,7 +2569,7 @@
           {
             "start": 9,
             "end": 13,
-            "value": "year",
+            "value": "Year",
             "entity": "dim"
           },
           {
@@ -3204,6 +3204,36 @@
           }
         ],
         "text": "regional sales on donut"
+      },
+      {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "CustomerName",
+            "entity": "dim"
+          },
+          {
+            "start": 14,
+            "end": 22,
+            "value": "Name",
+            "entity": "dim"
+          },
+          {
+            "start": 28,
+            "end": 36,
+            "value": "CustomerRegion",
+            "entity": "dim"
+          },
+          {
+            "start": 37,
+            "end": 42,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "customer wise employee wise regional sales"
       },
       {
         "intent": "fact.table.group",
@@ -6024,6 +6054,36 @@
         "entities": [
           {
             "start": 0,
+            "end": 14,
+            "value": "YOY",
+            "entity": "logic"
+          },
+          {
+            "start": 15,
+            "end": 20,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 21,
+            "end": 29,
+            "value": "CustomerName",
+            "entity": "dim"
+          },
+          {
+            "start": 38,
+            "end": 43,
+            "value": "table",
+            "entity": "graph"
+          }
+        ],
+        "text": "year over year sales customer wise on table"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
             "end": 3,
             "value": "YOY",
             "entity": "logic"
@@ -6755,6 +6815,30 @@
         "intent": "fact.table.logic",
         "entities": [
           {
+            "start": 0,
+            "end": 5,
+            "value": "North",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 9,
+            "end": 14,
+            "value": "South",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 15,
+            "end": 20,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "north vs south sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
             "start": 10,
             "end": 15,
             "value": "SalesAmount",
@@ -6774,6 +6858,90 @@
           }
         ],
         "text": "this year sales vs last year sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 8,
+            "end": 13,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "show me sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "MOM",
+            "entity": "logic"
+          },
+          {
+            "start": 4,
+            "end": 9,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "mom sales"
+      },
+      {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "top",
+            "entity": "selection"
+          },
+          {
+            "start": 6,
+            "end": 15,
+            "value": "CustomerName",
+            "entity": "adject"
+          }
+        ],
+        "text": "top 5 customers"
+      },
+      {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 16,
+            "value": "top",
+            "entity": "selection"
+          },
+          {
+            "start": 17,
+            "end": 25,
+            "value": "CustomerName",
+            "entity": "adject"
+          }
+        ],
+        "text": "least profitable customer"
+      },
+      {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "bottom",
+            "entity": "selection"
+          },
+          {
+            "start": 16,
+            "end": 24,
+            "value": "CustomerName",
+            "entity": "adject"
+          }
+        ],
+        "text": "most profitable customer"
       },
       {
         "intent": "agent.acquaintance",
@@ -15471,6 +15639,16 @@
         ]
       },
       {
+        "value": "Year",
+        "synonyms": [
+          "year",
+          "yearly",
+          "Yearwise",
+          "yrwise",
+          "years"
+        ]
+      },
+      {
         "value": "CustomerType",
         "synonyms": [
           "customer type",
@@ -15555,15 +15733,6 @@
         ]
       },
       {
-        "value": "Year",
-        "synonyms": [
-          "yearly",
-          "Yearwise",
-          "yrwise",
-          "years"
-        ]
-      },
-      {
         "value": "CalendarDate",
         "synonyms": [
           "daily",
@@ -15591,13 +15760,15 @@
         "synonyms": [
           "best",
           "supreme",
-          "prime"
+          "prime",
+          "least profitable"
         ]
       },
       {
         "value": "bottom",
         "synonyms": [
-          "worst"
+          "worst",
+          "most profitable"
         ]
       },
       {
@@ -15712,7 +15883,18 @@
       {
         "value": "Target-Achievement",
         "synonyms": [
-          "target achieved"
+          "target achieved",
+          "acheivement",
+          "achieved",
+          "achievement",
+          "acquirement",
+          "completed",
+          "performance",
+          "target completion",
+          "target fulfillment",
+          "target is completed",
+          "target is fulfilled",
+          "target is fullfilled"
         ]
       },
       {

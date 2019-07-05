@@ -1,5 +1,8 @@
-NLU_DATA_PATH = "E:\\Python\CHATBOT\\NLP Engine\\ChatBot\\engine\\nlu_data.json"
+MAIN_NLU_DATA_PATH = "E:\\Python\\CHATBOT\\NLP Engine\\ChatBot\\engine\data\\nlu\main\\nlu_data.md"
 NLU_MODEL_PATH = "E:\\Python\CHATBOT\\NLP Engine\\ChatBot\\engine\\models\\nlu\\current\\model"
+RASA_CONFIG_PATH = "E:\\Python\\CHATBOT\\NLP Engine\\ChatBot\\engine\\config.yml"
+RASA_NLU_DATA_PATH = "E:\\Python\\CHATBOT\\NLP Engine\\ChatBot\\engine\\data\\nlu"
+RASA_MODEL_SAVE_PATH = "E:\\Python\\CHATBOT\\NLP Engine\\ChatBot\\engine\\models\\nlu"
 DATA_PATH = "E:\\Python\\CHATBOT\\NLP Engine\\ChatBot\\data"
 COL_MAPPING = 'col_table_mapping.csv'
 TABLE_MAPPING = 'table_mapping.csv'

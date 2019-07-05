@@ -1,6 +1,7 @@
 from chatbot.actions import actions
 import pandas as pd
-from chatbot import entity_helpers as en_helpers, data_loader, interpreter
+from chatbot import entity_helpers as en_helpers, data_loader
+from chatbot.entity_helpers import get_nlu_parameters
 from chatbot.models import MONTH_NAMES
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
@@ -8,7 +9,7 @@ pd.set_option('display.max_columns', 10)
 
 
 def get_json_from_query(query, rls_access_string):
-	parameters = interpreter.parse(query)
+	parameters = get_nlu_parameters(query)
 	intent = parameters['intent']['name']
 	entities = parameters['entities']
 	entities = [{k: v for k, v in en.items() if k in ('entity', 'value', 'start', 'end', 'extractor',

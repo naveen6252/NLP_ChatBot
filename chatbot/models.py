@@ -1,15 +1,6 @@
-import json
 from chatbot import db
-from settings import NLU_DATA_PATH
 
-with open(NLU_DATA_PATH) as json_file:
-	data = json.load(json_file)
 
-lookup_tables = data.get('rasa_nlu_data').get('lookup_tables')
-dimensions = []
-for table in lookup_tables:
-	if table['name'] == 'dim':
-		dimensions = table['elements']
 
 MONTH_NAMES = {
 	1: {'FullMonthName': 'January', 'ShortMonthName': 'Jan', 'QtrName': 'Q1'},

@@ -1,9 +1,15 @@
 import pandas as pd
 import numpy as np
+import json
+from rasa_nlu import train
+from datetime import datetime
+from rasa_nlu.model import Interpreter
+from rasa_nlu import training_data
 from custom_exceptions import NoFactError, NoFactInOperand
 from chatbot import duckling
-from datetime import datetime
-from chatbot.models import dimensions
+from settings import NLU_MODEL_PATH, RASA_CONFIG_PATH, RASA_NLU_DATA_PATH, RASA_MODEL_SAVE_PATH
+
+interpreter = Interpreter.load(NLU_MODEL_PATH)
 
 
 # Function to fill aggregation in fact_condition
@@ -300,7 +306,7 @@ def format_entities(entities):
 		val = entities[i]['value']
 		if ent in ('dim', 'graph', 'logic', 'adject'):
 			formatted_entity[ent].append(val)
-		elif ent in dimensions:
+		elif ent in get_dimension_names():
 			if ent in formatted_entity['dim_filters'].keys():
 				formatted_entity['dim_filters'][ent].append(val)
 			else:
@@ -322,54 +328,89 @@ def format_entities(entities):
 	return formatted_entity
 
 
+def convert_text_md_format(text, entities):
+	replace_dict = {}
+	for entity in entities:
+		if entity['entity'] not in ['DATE', 'time', 'CARDINAL']:
+			start = entity['start']
+			end = entity['end']
+			value = entity['value']
+			ent = entity['entity']
+			prev = text[start:end]
+			val_ent = ent + ":" + value
+			new = "[" + prev + "]" + "(" + val_ent + ")"
+			replace_dict[prev] = new
+
+	for k, v in replace_dict.items():
+		text = text.replace(k, v)
+	return text
+
+
+def read_nlu_data(path):
+	td = training_data.load_data(path)
+	output = td.as_json(indent=2)
+
+	json_data = json.loads(output)
+
+	intents = []
+	for d in json_data['rasa_nlu_data']['common_examples']:
+		intents.append({'intent': d['intent'], 'text': convert_text_md_format(d['text'], d['entities'])})
+
+	intent_dict = {}
+	for example in intents:
+		if example['intent'] in intent_dict.keys():
+			intent_dict[example['intent']].append(example['text'])
+		else:
+			intent_dict[example['intent']] = [example['text']]
+
+	lookup_dict = {val['name']: val['elements'] for val in json_data['rasa_nlu_data']['lookup_tables']}
+	synonym_dict = {val['value']: val['synonyms'] for val in json_data['rasa_nlu_data']['entity_synonyms']}
+
+	return {'intent': intent_dict, 'lookup': lookup_dict, 'synonym': synonym_dict}
+
+
+def save_nlu_data(data, path, append=True):
+	write_mode = 'w'
+	if append:
+		write_mode = 'a'
+	nlu_text = ""
+	with open(path, write_mode) as nlu_data:
+		for intent, texts in data['intent'].items():
+			nlu_text += '\n## intent:' + intent + '\n'
+			for text in texts:
+				nlu_text += '- ' + text + '\n'
+
+		for intent, texts in data['lookup'].items():
+			nlu_text += '\n## lookup:' + intent + '\n'
+			for text in texts:
+				nlu_text += '- ' + text + '\n'
+
+		for intent, texts in data['synonym'].items():
+			nlu_text += '\n## synonym:' + intent + '\n'
+			for text in texts:
+				nlu_text += '- ' + text + '\n'
+
+		nlu_data.write(nlu_text)
+
+	train(RASA_CONFIG_PATH, RASA_NLU_DATA_PATH, RASA_MODEL_SAVE_PATH, 'current', 'model')
+	global interpreter
+	interpreter = Interpreter.load(NLU_MODEL_PATH)
+
+
+def get_nlu_parameters(text):
+	return interpreter.parse(text)
+
+
+def get_dimension_names():
+	return ['CustomerName', 'CustomerRegion', 'CustomerType', 'Name', 'ProdGroup', 'ProductDesc', 'CalendarDate',
+			'Month', 'Year', 'MonthYear', 'Quarter', 'QuarterYear']
+
+
 if __name__ == '__main__':
-	a = [
-		{'entity': 'DATE', 'value': 'last month', 'start': 18, 'confidence': None, 'end': 28,
-		 'extractor': 'SpacyEntityExtractor'},
-		{'start': 8, 'end': 13, 'value': 'SalesAmount', 'entity': 'fact', 'confidence': 0.9961891327557518,
-		 'extractor': 'CRFEntityExtractor', 'processors': ['EntitySynonymMapper']},
-		{'start': 14, 'end': 17, 'value': 'equal_to', 'entity': 'date_condition', 'confidence': 0.9919232241736908,
-		 'extractor': 'CRFEntityExtractor', 'processors': ['EntitySynonymMapper']},
-		{'start': 18, 'end': 28, 'text': 'last month', 'value': '2019-05-01T00:00:00.000-07:00', 'confidence': 1.0,
-		 'additional_info': {
-			 'values': [{'value': '2019-05-01T00:00:00.000-07:00', 'grain': 'month', 'type': 'value'}],
-			 'value': '2019-05-01T00:00:00.000-07:00', 'grain': 'month', 'type': 'value'},
-		 'entity': 'time',
-		 'extractor': 'DucklingHTTPExtractor'}
-	]
-
-	b = [
-		{'entity': 'DATE', 'value': 'last month', 'start': 20, 'confidence': None, 'end': 30,
-		 'extractor': 'SpacyEntityExtractor'},
-		{'start': 8, 'end': 13, 'value': 'SalesAmount', 'entity': 'fact', 'confidence': 0.9920408957694943,
-		 'extractor': 'CRFEntityExtractor', 'processors': ['EntitySynonymMapper']},
-		{'start': 14, 'end': 19, 'value': 'greater_than', 'entity': 'date_condition',
-		 'confidence': 0.9924836442452525, 'extractor': 'CRFEntityExtractor',
-		 'processors': ['EntitySynonymMapper']},
-		{'start': 14, 'end': 30, 'text': 'after last month',
-		 'value': {'to': None, 'from': '2019-05-01T00:00:00.000-07:00'}, 'confidence': 1.0,
-		 'additional_info': {
-			 'values': [
-				 {'from': {'value': '2019-05-01T00:00:00.000-07:00', 'grain': 'month'}, 'type': 'interval'}
-			 ], 'from': {'value': '2019-05-01T00:00:00.000-07:00', 'grain': 'month'},
-			 'type': 'interval'},
-		 'entity': 'time', 'extractor': 'DucklingHTTPExtractor'}]
-
-	c = [{'entity': 'DATE', 'value': 'last 1 month', 'start': 18, 'confidence': None, 'end': 30,
-		  'extractor': 'SpacyEntityExtractor'},
-		 {'start': 8, 'end': 13, 'value': 'SalesAmount', 'entity': 'fact', 'confidence': 0.9961891048907205,
-		  'extractor': 'CRFEntityExtractor', 'processors': ['EntitySynonymMapper']},
-		 {'start': 14, 'end': 17, 'value': 'equal_to', 'entity': 'date_condition', 'confidence': 0.9919223810305202,
-		  'extractor': 'CRFEntityExtractor', 'processors': ['EntitySynonymMapper']},
-		 {'start': 18, 'end': 30, 'text': 'last 1 month',
-		  'value': {'to': '2019-06-01T00:00:00.000-07:00', 'from': '2019-05-01T00:00:00.000-07:00'},
-		  'confidence': 1.0, 'additional_info': {'values': [
-			 {'to': {'value': '2019-06-01T00:00:00.000-07:00', 'grain': 'month'},
-			  'from': {'value': '2019-05-01T00:00:00.000-07:00', 'grain': 'month'}, 'type': 'interval'}],
-			 'to': {'value': '2019-06-01T00:00:00.000-07:00', 'grain': 'month'},
-			 'from': {'value': '2019-05-01T00:00:00.000-07:00',
-					  'grain': 'month'}, 'type': 'interval'}, 'entity': 'time',
-		  'extractor': 'DucklingHTTPExtractor'}]
-
-	fact_condition = get_date_condition_formatted(a)
-	print(fact_condition)
+	text = input("Enter Query /stop to stop\n->")
+	while text != '/stop':
+		parameters = interpreter.parse(text)
+		print(parameters)
+		formatted_parameters = convert_text_md_format(parameters['text'], parameters['entities'])
+		print(formatted_parameters)
+		text = input("Enter Query /stop to stop\n->")

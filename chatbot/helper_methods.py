@@ -93,27 +93,39 @@ def apply_business_logic(df, logic, entities):
 	if logic == 'MOM':
 		table = business_instance.mom_facts(df)
 		default_graph = 'line'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'QOQ':
 		table = business_instance.qoq_facts(df)
 		default_graph = 'line'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'YOY':
 		table = business_instance.yoy_fact(df)
 		default_graph = 'line'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'MTD':
 		table = business_instance.mtd(df)
 		default_graph = 'pie'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'QTD':
 		table = business_instance.qtd(df)
 		default_graph = 'pie'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'YTD':
 		table = business_instance.ytd(df)
 		default_graph = 'table'
+		if len(table) > 60:
+			default_graph = 'table'
 	elif logic == 'Target-Achievement':
 		table = business_instance.target_achievement(df)
 		default_graph = 'table'
 	elif logic == 'Contribution':
 		table = business_instance.contribution(df)
-		default_graph = 'table'
+		default_graph = 'pie'
 	else:
 		raise NotImplementedError("Business Logic {0} not defined".format(logic))
 

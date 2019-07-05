@@ -110,12 +110,36 @@ body {
     max-width: 75%;
 }
 
+
+[class*='close-'] {
+  color: #777;
+  font: 14px/100% arial, sans-serif;
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  top: 5px;
+}
+
+.close-classic:after {
+    content: 'X'; /* ANSI X letter */
+}
+
+
+.parameterMsg{
+    background: #eef8ff;
+    margin: 0 0 10px 0;
+    padding: 10px 5px 10px 5px;
+    border-radius: 2px;
+}
+
     .msg p {
         font-size: 13px;
         margin: 0 0 2px 0;
         color: #333;
         transition: all .2s ease;
     }
+
 
 
 .icon {
@@ -128,7 +152,6 @@ body {
 
 .input {
     padding-left: 45px;
-    height: 40px;
     width: 100%;
     background-color: #eef8ff;
     color: #111;
@@ -140,12 +163,10 @@ body {
 
 .inputDiv {
     position: fixed;
-    bottom: 60px;
+    bottom: 10px;
     left: 0px;
     right: 0px;
-    height: 40px;
     z-index: 99;
-    background: #eee;
     border: none;
     outline: none;
 }

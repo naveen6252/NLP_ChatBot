@@ -109,7 +109,7 @@ class BusinessLogic:
 		n_year = relativedelta.relativedelta(e_date, s_date).years
 
 		# if there is no date or same date then make yoy for last 3 years
-		if n_year < 1:
+		if n_year <= 1:
 			n_year = 3
 			e_date = datetime.now()
 			s_date = e_date - relativedelta.relativedelta(years=3)

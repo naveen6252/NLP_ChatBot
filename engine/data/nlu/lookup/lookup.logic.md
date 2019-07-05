@@ -1,9 +1,0 @@
-## lookup:logic
-- MTD
-- QTD
-- YTD
-- MOM
-- QOQ
-- YOY
-- Target-Achievement
-- Contribution

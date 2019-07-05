@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from settings import DATA_PATH, COL_MAPPING, TABLE_MAPPING
 from chatbot.helper_methods import apply_condition
-from chatbot.models import dimensions
+from chatbot.entity_helpers import get_dimension_names
 
 
 def get_columns_from_rls(rls_json):
@@ -19,7 +19,7 @@ def get_columns_from_entities(raw_entities):
 		# entity time for duckling pipeline
 		elif entity['entity'] == 'time':
 			columns.append('CalendarDate')
-		elif entity['entity'] in dimensions:
+		elif entity['entity'] in get_dimension_names():
 			columns.append(entity['entity'])
 		# Load extra Columns  for Business logic
 		elif entity['entity'] == 'logic':
@@ -56,6 +56,7 @@ def load_data(columns):
 		right_on = eval(table_mapping[(table_mapping['l_table'] == l_table) & (table_mapping['r_table'] == table)][
 							'r_columns'].iloc[0])
 		df = pd.merge(df, temp_df, left_on=left_on, right_on=right_on, how='left')
+	columns = [x for x in columns if x in df.columns]
 	df = df[columns]
 	return df
 

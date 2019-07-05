@@ -1,5 +1,4 @@
 import os
-import json
 import datetime
 import random
 from functools import wraps
@@ -9,12 +8,13 @@ from flask import request, jsonify, make_response, redirect, render_template, ur
 	flash, session, send_from_directory
 from sklearn.preprocessing import normalize
 from werkzeug.security import generate_password_hash, check_password_hash
+from chatbot.entity_helpers import convert_text_md_format, save_nlu_data, read_nlu_data, get_nlu_parameters
 from chatbot import app, bot, data_loader
 from chatbot.logregform import LoginForm
 from chatbot.models import db, chatbot_users, chatbot_logs, error_message, user_roles, \
 	RLS_COLUMNS_FILTER_CHOICE
 from custom_exceptions import *
-from settings import NLU_DATA_PATH
+from settings import MAIN_NLU_DATA_PATH
 
 
 # Solution for favicon.ico used as icon on tabs in browser
@@ -104,6 +104,19 @@ def create_user():
 	return redirect(url_for('login'))
 
 
+@app.route('/view logs', methods=["GET", "POST"])
+def view_logs():
+	if 'username' in session:
+		username = session['username']
+		role = session['role']
+		token = session['token']
+		if role != 'admin':
+			return render_template("notAuthorized.html")
+		return render_template('ViewLogs.html', username=username, role=role, token=token)
+
+	return redirect(url_for('login'))
+
+
 @app.route('/update user/<user_to_update>', methods=["GET", "POST"])
 def update_user(user_to_update):
 	if 'username' in session:
@@ -165,31 +178,13 @@ def interactive_learning():
 		token = session['token']
 		if role != 'admin':
 			return render_template("notAuthorized.html")
-
-		with open(NLU_DATA_PATH) as json_file:
-			data = json.load(json_file)
-
-		nlu_data = data.get('rasa_nlu_data')
-		intents = nlu_data.get('common_examples')
-		synonyms = nlu_data.get('entity_synonyms')
-		lookups = nlu_data.get('lookup_tables')
-
-		intent_dict = {}
-
-		for example in intents:
-			if example['intent'] not in intent_dict.keys():
-				intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
-			else:
-				intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
-
-		return render_template('interactiveLearning.html', username=username, role=role, token=token,
-							   intents=intent_dict, synonyms=synonyms, lookups=lookups)
+		return render_template('interactiveLearning.html', username=username, role=role, token=token)
 
 	return redirect(url_for('login'))
 
 
-@app.route('/Train NLU', methods=["GET"])
-def train_nlu():
+@app.route('/view NLU data', methods=["GET"])
+def view_nlu():
 	if 'username' not in session:
 		return redirect(url_for('login'))
 
@@ -198,27 +193,8 @@ def train_nlu():
 	token = session['token']
 	if role != 'admin':
 		return render_template("notAuthorized.html")
-
-	with open(NLU_DATA_PATH) as json_file:
-		data = json.load(json_file)
-
-	nlu_data = data.get('rasa_nlu_data')
-	intents = nlu_data.get('common_examples')
-	synonyms = nlu_data.get('entity_synonyms')
-	lookups = nlu_data.get('lookup_tables')
-
-	# intent_dict = {}
-
-	# for example in intents:
-	# 	if example['intent'] not in intent_dict.keys():
-	# 		intent_dict[example['intent']] = [{k: v for k, v in example.items() if k != 'intent'}]
-	# 	else:
-	# 		intent_dict[example['intent']].append({k: v for k, v in example.items() if k != 'intent'})
-
-	intents_per_page = 10
-
-	return render_template('trainNLU.html', username=username, role=role, token=token,
-						   intents=intents, synonyms=synonyms, lookups=lookups, intents_per_page=intents_per_page)
+	nlu_data = read_nlu_data(MAIN_NLU_DATA_PATH)
+	return render_template('viewNLU.html', username=username, role=role, token=token, nlu_data=nlu_data)
 
 
 # =================================================================
@@ -248,6 +224,60 @@ def token_required(f):
 	return decorated
 
 
+@app.route('/api/get entity parameters', methods=['GET'])
+@token_required
+def api_get_entity_parameters(current_user):
+	if current_user.role != 'admin':
+		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
+	user_query = request.args.get('message')
+	if not user_query:
+		return jsonify({'message': 'could not find message in request!'}), 400
+	parameters = get_nlu_parameters(user_query)
+	parameters = {'intent': parameters['intent']['name'],
+				  'text': convert_text_md_format(parameters['text'], parameters['entities'])}
+	return jsonify(parameters), 200
+
+
+@app.route('/api/save nlu data', methods=['GET', 'POST'])
+@token_required
+def api_save_nlu_data(current_user):
+	if current_user.role != 'admin':
+		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
+	if request.method == 'GET':
+		return "Post request allowed only here", 405
+	data = request.get_json()
+	if not data:
+		return jsonify({'message': 'could not find data in request!'}), 400
+
+	merged_data = {'intent': {}, 'lookup': {}, 'synonym': {}}
+
+	for intent_dict in data['common_examples']:
+		if intent_dict['intent'] in merged_data['intent'].keys():
+			merged_data['intent'][intent_dict['intent']].append(intent_dict['text'])
+		else:
+			merged_data['intent'][intent_dict['intent']] = [intent_dict['text']]
+
+	for lookup_dict in data['lookup_tables']:
+		if lookup_dict['name'] in merged_data['lookup'].keys():
+			merged_data['lookup'][lookup_dict['name']].append(lookup_dict['element'])
+		else:
+			merged_data['lookup'][lookup_dict['name']] = [lookup_dict['element']]
+
+	for synonym_dict in data['entity_synonyms']:
+		if synonym_dict['value'] in merged_data['synonym'].keys():
+			merged_data['synonym'][synonym_dict['value']].append(synonym_dict['synonym'])
+		else:
+			merged_data['synonym'][synonym_dict['value']] = [synonym_dict['synonym']]
+
+	try:
+		save_nlu_data(merged_data, MAIN_NLU_DATA_PATH, append=data['append'])
+
+	except Exception as e:
+		return jsonify({'message': 'Error ' + str(e)}), 500
+
+	return jsonify({'message': 'NLU Training Successful'}), 200
+
+
 # ========================================
 @app.route('/api/DeleteUser/<username>', methods=["GET", "POST"])
 @token_required
@@ -265,7 +295,7 @@ def api_delete_user(current_user, username):
 	return jsonify({'message': "User could not be deleted"})
 
 
-@app.route('/api/UpdateUser', methods=['POST'])
+@app.route('/api/UpdateUser', methods=['GET', 'POST'])
 @token_required
 def api_update_user(current_user):
 	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
@@ -398,6 +428,38 @@ def api_get_roles(current_user):
 		return jsonify(role_data)
 
 
+@app.route('/api/get_logs', methods=['GET', 'POST'])
+@token_required
+def api_get_logs(current_user):
+	if current_user.role != 'admin':
+		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
+	if request.method == 'GET':
+		logs = chatbot_logs.query.order_by(chatbot_logs.create_time.desc()).all()
+		log_output = []
+		for log in logs:
+			log_data = {'log_id': log.log_id, 'username': log.username, 'user_query': log.user_query,
+						'query_parameters': log.query_parameters, 'status': log.status,
+						'error_message': log.error_message}
+
+			log_output.append(log_data)
+		return jsonify(log_output)
+
+
+@app.route('/api/DeleteLog/<logId>', methods=["GET", "POST"])
+@token_required
+def api_delete_log(current_user, logId):
+	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
+	current_user_role = chatbot_users.query.filter_by(username=current_user.username).first()
+	if current_user_role.role != 'admin':
+		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
+
+	status = chatbot_logs.query.filter_by(log_id=logId).delete()
+	db.session.commit()
+	if status:
+		return jsonify({'message': 'Log deleted successfully.'})
+	return jsonify({'message': "Log could not be deleted"})
+
+
 @app.route('/api/get_rls_filters', methods=['GET'])
 @token_required
 def api_get_rls_filters(current_user):
@@ -414,7 +476,6 @@ def api_get_rls_filters(current_user):
 @app.route('/api/create_user', methods=['POST'])
 @token_required
 def api_create_user(current_user):
-	# current_user_role = user_roles.query.filter_by(username=current_user.username).first()
 	if current_user.role != 'admin':
 		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
 	data = request.get_json()

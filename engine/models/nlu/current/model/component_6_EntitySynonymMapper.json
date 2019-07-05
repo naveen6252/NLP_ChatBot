@@ -90,6 +90,7 @@
   "greater than": "greater_than",
   "smaller than": "lesser_than",
   "month": "Month",
+  "year": "Year",
   "sales quantity": "SalesQty",
   "customers": "CustomerName",
   "customer type": "CustomerType",
@@ -372,5 +373,18 @@
   "%age": "Contribution",
   "contribution of": "Contribution",
   "donation": "Contribution",
-  "versus": "Contribution"
+  "versus": "Contribution",
+  "acheivement": "Target-Achievement",
+  "achieved": "Target-Achievement",
+  "achievement": "Target-Achievement",
+  "acquirement": "Target-Achievement",
+  "completed": "Target-Achievement",
+  "performance": "Target-Achievement",
+  "target completion": "Target-Achievement",
+  "target fulfillment": "Target-Achievement",
+  "target is completed": "Target-Achievement",
+  "target is fulfilled": "Target-Achievement",
+  "target is fullfilled": "Target-Achievement",
+  "least profitable": "top",
+  "most profitable": "bottom"
 }

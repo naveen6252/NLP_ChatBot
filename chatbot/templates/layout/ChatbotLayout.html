@@ -53,7 +53,7 @@
                                     <li><a href="{{ url_for('home') }}"><i class="glyphicon glyphicon-comment"></i>
                                         ChatBot</a></li>
                                     {% if role=='admin' %}
-                                        <li><a href="{{ url_for('train_nlu') }}"><i
+                                        <li><a href="{{ url_for('interactive_learning') }}"><i
                                                 class="glyphicon glyphicon-education"></i> Train Bot</a></li>
                                         <li><a href="{{ url_for('create_user') }}"><i
                                                 class="glyphicon glyphicon-user"></i> Create
@@ -61,6 +61,9 @@
                                         <li><a href="{{ url_for('view_user') }}"><i
                                                 class="glyphicon glyphicon-user"></i> View
                                             User</a></li>
+                                        <li><a href="{{ url_for('view_logs') }}"><i
+                                                class="glyphicon glyphicon-list"></i> View
+                                            Logs</a></li>
                                     {% endif %}
                                     <li><a href="{{ url_for('logout') }}"><i class="glyphicon glyphicon-log-out"></i>
                                         Logout</a></li>
@@ -103,6 +106,7 @@
 {% endif %}
 {% block content %}{% endblock %}
 <!-- @RenderBody() -->
+<!--
 <footer class="container-fluid">
     <div class="row">
         <div class="col-sm-3">
@@ -127,5 +131,6 @@
         </div>
     </div>
 </footer>
+-->
 </body>
 </html>
