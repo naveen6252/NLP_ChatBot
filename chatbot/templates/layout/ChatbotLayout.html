@@ -55,11 +55,13 @@
                                     {% if role=='admin' %}
                                         <li><a href="{{ url_for('interactive_learning') }}"><i
                                                 class="glyphicon glyphicon-education"></i> Train Bot</a></li>
+                                        <li><a href="{{ url_for('view_nlu') }}"><i
+                                                class="glyphicon glyphicon-cog"></i> Add Training Data</a></li>
                                         <li><a href="{{ url_for('create_user') }}"><i
                                                 class="glyphicon glyphicon-user"></i> Create
                                             User</a></li>
                                         <li><a href="{{ url_for('view_user') }}"><i
-                                                class="glyphicon glyphicon-user"></i> View
+                                                class="glyphicon glyphicon-stats"></i> View
                                             User</a></li>
                                         <li><a href="{{ url_for('view_logs') }}"><i
                                                 class="glyphicon glyphicon-list"></i> View

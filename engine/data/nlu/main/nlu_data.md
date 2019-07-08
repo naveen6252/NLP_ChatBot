@@ -1,3 +1,4 @@
+
 ## intent:fact.kpi
 - [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50)
 - [sales](fact:SalesAmount) for [Customer1](CustomerName:Customer1) [for](date_condition:equal_to) this month
@@ -5,7 +6,7 @@
 - [sales](fact:SalesAmount) for [Customer12](CustomerName:Customer12) [before](date_condition:lesser_than) 5 february 2019
 - [sales](fact:SalesAmount) by [Customer10](CustomerName:Customer10)
 - [sales](fact:SalesAmount) by [Customer11](CustomerName:Customer11)
-- [sales](fact:SalesAmount) for [Cust 20](CustomerName:Customer20) 
+- [sales](fact:SalesAmount) for [Cust 20](CustomerName:Customer20)
 - [cust 5](CustomerName:Customer5) [sales](fact:SalesAmount) [for](date_condition:equal_to) this week
 - [cust 5](CustomerName:Customer5) [sales](fact:SalesAmount) [before](date_condition:lesser_than) this week
 - [client 3](CustomerName:Customer3) [sales](fact:SalesAmount)
@@ -61,48 +62,37 @@
 - [sales](fact:SalesAmount) for [PG2](ProdGroup:PG2)
 - [sales](fact:SalesAmount) for [PG3](ProdGroup:PG3)
 - [sales](fact:SalesAmount) for [PG4](ProdGroup:PG4)
-
 - [prod1](ProductDesc:P1) [sale](fact:SalesAmount) [from](date_condition:greater_than) 2016 [to](date_condition:lesser_than) 2018
 - [sale](fact:SalesAmount) of [product 2](ProductDesc:P2)
 - [sale](fact:SalesAmount) of [prod2](ProductDesc:P2)
 - [p2](ProductDesc:P2) [sale](fact:SalesAmount) [in](date_condition:equal_to) this week
 - [p2](ProductDesc:P2) [sale](fact:SalesAmount) [until](date_condition:lesser_than) this month
 - [p2](ProductDesc:P2) [sale](fact:SalesAmount) [after](date_condition:greater_than) january 2018
-
 - [product3](ProductDesc:P3) [target](fact:TargetAmount) [for](date_condition:equal_to) this month
 - [p3](ProductDesc:P3) [sales](fact:SalesAmount)
-- [total](agg:sum) [sales](fact:SalesAmount) of [prod3](ProductDesc:P3) 
+- [total](agg:sum) [sales](fact:SalesAmount) of [prod3](ProductDesc:P3)
 - [p50](ProductDesc:P50) [sales](fact:SalesAmount)
 - [prod 50](ProductDesc:P50) [sales](fact:SalesAmount)
 - [product 60](ProductDesc:P60) [sales](fact:SalesAmount) [on](date_condition:equal_to) last week
 - [sales](fact:SalesAmount) of [p60](ProductDesc:P60)
 - [sales](fact:SalesAmount) by [emp50](Name:Emp050) in [bfsi](CustomerType:BFSI) [north](CustomerRegion:North)
 - [revenue](fact:SalesAmount) [for](date_condition:equal_to) today in [north](CustomerRegion:North) region
-
 - [total](agg:sum) [sales](fact:SalesAmount) [for](date_condition:equal_to) last month
 - [total](agg:sum) [sales](fact:SalesAmount) [from](date_condition:greater_than) march 2018 [to](date_condition:lesser_than) december 2018
-
- 
 - [total](agg:sum) [sales](fact:SalesAmount)
 - [total](agg:sum) [sales](fact:SalesAmount) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
-
 - [quantity of sales](fact:SalesQty) [for](date_condition:equal_to) this week
 - [quantity of sales](fact:SalesQty) [for](date_condition:equal_to) this year
 - [sales qty](fact:SalesQty) [for](date_condition:equal_to) last year
 - [sales qty](fact:SalesQty) [for](date_condition:equal_to) this year
 - [sales qty](fact:SalesQty) [from](date_condition:greater_than) last year [to](date_condition:lesser_than) this year
-
 - [sales qty](fact:SalesQty) [since](date_condition:lesser_than) last year
-
-
 - [target amount](fact:TargetAmount)
 - [target quantity](fact:TargetQty)
 - [target qty](fact:TargetQty) for this year
 - [quantity of target](fact:TargetQty)
 - [average](agg:mean) [sales](fact:SalesAmount) [for](date_condition:equal_to) yesterday
 - [average](agg:mean) [sales](fact:SalesAmount) [for](date_condition:equal_to) last year
-
-
 - [max](agg:max) [sales](fact:SalesAmount) [for](date_condition:equal_to) last year
 - [minimum](agg:min) [sales](fact:SalesAmount)
 - [count of](agg:count) [sales](fact:SalesAmount)
@@ -118,28 +108,23 @@
 - [Sales](fact:SalesAmount) [for](date_condition:equal_to) last month
 - [quantity of sales](fact:SalesQty)
 - [quantity of target](fact:TargetQty)
-
 - [sum](agg:sum), [average](agg:mean), [number](agg:count) of [sales](fact:SalesAmount) and [target](fact:TargetAmount) [sum](agg:sum), [min](agg:min), [max](agg:max)
 - [sales](fact:SalesAmount) [after](date_condition:greater_than) last month and [until](date_condition:lesser_than) today for [north](CustomerRegion:North) region and [bfsi](CustomerType:BFSI) customer types
 - last quarter [sales](fact:SalesAmount) for [P1](ProductDesc:P1) in [north](CustomerRegion:North)
 - this year [sales](fact:SalesAmount)
 
-
 ## intent:fact.table.group
 - [customer](dim:CustomerName) wise [sales](fact:SalesAmount) on [table](graph:table) [for](date_condition:equal_to) last month
 - [target](fact:TargetAmount) for each [employee](dim:Name) on [bar](graph:bar) chart
 - [quantity of Sales](fact:SalesQty) in each [region](dim:CustomerRegion)
-- [quantity of Sales](fact:SalesQty) [greater than](fact_condition:greater_than) 500 in each [region](dim:CustomerRegion) 
-- [quantity of Sales](fact:SalesQty) [smaller than](fact_condition:lesser_than) 500 in each [region](dim:CustomerRegion) 
-
-
+- [quantity of Sales](fact:SalesQty) [greater than](fact_condition:greater_than) 500 in each [region](dim:CustomerRegion)
+- [quantity of Sales](fact:SalesQty) [smaller than](fact_condition:lesser_than) 500 in each [region](dim:CustomerRegion)
 - [month](dim:Month) wise [sales](fact:SalesAmount) [for](date_condition:equal_to) this month
 - [line](graph:line) for [year](dim:Year) wise [sales quantity](fact:SalesQty) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
 - [average](agg:mean) of [sales](fact:SalesAmount) by each [customers](dim:CustomerName)
 - [total](agg:sum) [target](fact:TargetAmount) by each [customer type](dim:CustomerType) on [pie](graph:pie)
 - [quarter](dim:Quarter) wise [avg](agg:mean) [sales](fact:SalesAmount) on [line](graph:line)
 - [quarterly](dim:Quarter) [Sales](fact:SalesAmount) [from](date_condition:greater_than) 2006 [to](date_condition:lesser_than) 2012
-
 - [monthly](dim:Month) [revenue](fact:SalesAmount) on [bar](graph:bar) [for](date_condition:equal_to) last 6 months
 - [product](dim:ProductDesc) wise [maximum](agg:max) [sales](fact:SalesAmount) on [table](graph:table)
 - [product group](dim:ProdGroup) wise this month [sales](fact:SalesAmount) on [bar](graph:bar)
@@ -162,8 +147,8 @@
 - [sales](fact:SalesAmount) for each [quarter year](dim:QuarterYear) for each [region](dim:CustomerRegion) on [line](graph:line)
 - [customertypewise](dim:CustomerType) [regionwise](dim:CustomerRegion) [monthly](dim:Month) [sales](fact:SalesAmount) on [table](graph:table)
 - [sales](fact:SalesAmount) for each [emp](dim:Name) [for](date_condition:equal_to) last 3 month
-- [sales](fact:SalesAmount) [greater than](fact_condition:greater_than) 1200 for [customer](dim:CustomerName)  
-- [sales](fact:SalesAmount) [equal to](fact_condition:equal_to) two hundred for [customer](dim:CustomerName)  
+- [sales](fact:SalesAmount) [greater than](fact_condition:greater_than) 1200 for [customer](dim:CustomerName)
+- [sales](fact:SalesAmount) [equal to](fact_condition:equal_to) two hundred for [customer](dim:CustomerName)
 - [sales](fact:SalesAmount) for [customer](dim:CustomerName) in [north](CustomerRegion:North)
 - [sales](fact:SalesAmount) for each [employee](dim:Name) in [bfsi](CustomerType:BFSI)
 - [monthly](dim:Month) [sales](fact:SalesAmount) for [emp050](Name:Emp050) on [line](graph:line)
@@ -173,12 +158,9 @@
 - [month-year](dim:MonthYear) wise [sales](fact:SalesAmount)
 - [sales](fact:SalesAmount) [greater than equal to](fact_condition:greater_than_equal) five hundred for each [year month](dim:MonthYear)
 - [month year](dim:MonthYear) wise [sales](fact:SalesAmount) [from](date_condition:greater_than) year 2010 [to](date_condition:lesser_than) year 2012
-
 - [best](selection:top) [customer](adject:CustomerName)
 - [best](selection:top) 3 [customer](adject:CustomerName)
 - [best](selection:top) [customer](adject:CustomerName) having [sales](fact:SalesAmount) [greater than](fact_condition:greater_than) 50000
-
-
 - [product](adject:ProductDesc) is [best](selection:top) [sold](fact:SalesAmount)
 - [product](adject:ProductDesc) is [best](selection:top) [sold](fact:SalesAmount) [for](date_condition:equal_to) last month
 - [supreme](selection:top) [employee](adject:Name)
@@ -201,6 +183,10 @@
 - [top](selection:top) 10 [products](adject:ProductDesc) sold by [emp050](Name:Emp050)
 - [top](selection:top) [employee](adject:Name) in [bfsi](CustomerType:BFSI) sector
 - [top](selection:top) 4 [products](adject:ProductDesc) in [north](CustomerRegion:North) in [donut](graph:donut)
+- [top](selection:top) 5 [customers](adject:CustomerName)
+- [least profitable](selection:bottom) [customer](adject:CustomerName)
+- [most profitable](selection:top) [customer](adject:CustomerName)
+- [top](selection:top) 3 [products](adject:ProductDesc) [sold](fact:SalesAmount) in [government](CustomerType:Govt) last month
 
 ## intent:fact.table.logic
 - [month to date](logic:MTD) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last month
@@ -209,95 +195,72 @@
 - [mtd](logic:MTD) [sales quantity](fact:SalesQty) for each [employee](dim:Name) [for](date_condition:equal_to) last month
 - [m-t-d](logic:MTD) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion) [for](date_condition:equal_to) this year
 - [month to date](logic:MTD) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion)
-
-
 - [qtd](logic:QTD) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last month
 - [quarter to date](logic:QTD) [sales quantity](fact:SalesQty) [customer](dim:CustomerName) wise [for](date_condition:equal_to) this year
 - [quarter to date](logic:QTD) [sales](fact:SalesAmount) for each [employee](dim:Name) [between](date_condition:greater_than) 2015 [and](date_condition:lesser_than) 2018
 - [qtd](logic:QTD) [sales quantity](fact:SalesQty) for each [employee](dim:Name) [for](date_condition:equal_to) last month
 - [quarter to date](logic:QTD) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion)
 - [q-t-d](logic:QTD) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion)
-
-
 - [year to date](logic:YTD) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise
 - [ytd](logic:YTD) [sales quantity](fact:SalesQty) [customer](dim:CustomerName) wise [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
 - [year to date](logic:YTD) [sales](fact:SalesAmount) for each [employee](dim:Name) [for](date_condition:equal_to) last year
 - [year to date](logic:YTD) [sales quantity](fact:SalesQty) for each [employee](dim:Name)
 - [ytd](logic:YTD) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion) [for](date_condition:equal_to) last month
 - [y-t-d](logic:YTD) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion) [for](date_condition:equal_to)
-
-
 - [month over month](logic:MOM) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise
 - [mom](logic:MOM) [sales quantity](fact:SalesQty) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last month
 - [month over month](logic:MOM) [sales](fact:SalesAmount) for each [employee](dim:Name)
 - [m-o-m](logic:MOM) [sales quantity](fact:SalesQty) for each [employee](dim:Name) [for](date_condition:equal_to) this year
 - [mom](logic:MOM) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion)
 - [m-o-m](logic:MOM) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion) [for](date_condition:equal_to) last month
-
-
 - [quarter over quarter](logic:QOQ) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last year
 - [qoq](logic:QOQ) [sales quantity](fact:SalesQty) [customer](dim:CustomerName) wise [for](date_condition:equal_to) this year
 - [quarter over quarter](logic:QOQ) [sales](fact:SalesAmount) for each [employee](dim:Name)
 - [qoq](logic:QOQ) [sales quantity](fact:SalesQty) for each [employee](dim:Name)
 - [quarter over quarter](logic:QOQ) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion) [for](date_condition:equal_to) last month
-- [q-o-q](logic:QOQ) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion) 
-
-
+- [q-o-q](logic:QOQ) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion)
 - [year over year](logic:YOY) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise
 - [yoy](logic:YOY) [sales quantity](fact:SalesQty) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last month
 - [year over year](logic:YOY) [sales](fact:SalesAmount) for each [employee](dim:Name)
 - [y-o-y](logic:YOY) [sales quantity](fact:SalesQty) for each [employee](dim:Name) [for](date_condition:equal_to) last month
 - [year over year](logic:YOY) [sales](fact:SalesAmount) in each [region](dim:CustomerRegion) [for](date_condition:equal_to)
 - [yoy](logic:YOY) [sales quantity](fact:SalesQty) in each [region](dim:CustomerRegion) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
-
 - [target achieved](logic:Target-Achievement) by each [customer](dim:CustomerName) [for](date_condition:equal_to) last month
 - [target achieved](logic:Target-Achievement) by each [employee](dim:Name)
 - [target achieved](logic:Target-Achievement) by all [customers](dim:CustomerName) [for](date_condition:equal_to) last to last month
 - [target achieved](logic:Target-Achievement) by all [employees](dim:Name) [for](date_condition:equal_to) last year
 - [target achieved](logic:Target-Achievement) by all [customers](dim:CustomerName) in [north](CustomerRegion:North) region [for](date_condition:equal_to) this year
-
-- [mtd](logic:MTD) [sales](fact:SalesAmount) 
-- [month to date](logic:MTD) [sales quantity](fact:SalesQty)  
+- [mtd](logic:MTD) [sales](fact:SalesAmount)
+- [month to date](logic:MTD) [sales quantity](fact:SalesQty)
 - [m-t-d](logic:MTD) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50) [for](date_condition:equal_to) this year
 - [month to date](logic:MTD) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50)
 - [mtd](logic:MTD) [sales](fact:SalesAmount) for [north](CustomerRegion:North) region
-
 - [qtd](logic:QTD) [sales](fact:SalesAmount)
 - [quarter to date](logic:QTD) [sales](fact:SalesAmount) [for](date_condition:equal_to) this year
 - [qtd](logic:QTD) [sales quantity](fact:SalesQty)  [from](date_condition:greater_than) 2017 [to](date_condition:lesser_than) 2019
 - [quarter to date](logic:QTD) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50)
-- [q-t-d](logic:QTD) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50) 
-
-
+- [q-t-d](logic:QTD) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50)
 - [ytd](logic:YTD) [sales](fact:SalesAmount)
-- [year to date](logic:YTD) [sales](fact:SalesAmount) 
+- [year to date](logic:YTD) [sales](fact:SalesAmount)
 - [year to date](logic:YTD) [sales](fact:SalesAmount) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
 - [ytd](logic:YTD) [sales quantity](fact:SalesQty)  [for](date_condition:equal_to) this year
 - [year to date](logic:YTD) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50)
 - [ytd](logic:YTD) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50)
-
-
 - [mom](logic:MOM) [sales](fact:SalesAmount)
 - [mom](logic:MOM) [sales](fact:SalesAmount) on [table](graph:table)
-- [month over month](logic:MOM) [sales quantity](fact:SalesQty)  
+- [month over month](logic:MOM) [sales quantity](fact:SalesQty)
 - [month over month](logic:MOM) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50) [for](date_condition:equal_to) this year
-- [mom](logic:MOM) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50) 
-
-
+- [mom](logic:MOM) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50)
 - [quarter over quarter](logic:QOQ) [sales](fact:SalesAmount)
 - [quarter over quarter](logic:QOQ) [sales](fact:SalesAmount) on [table](graph:table)
-- [qoq](logic:QOQ) [sales quantity](fact:SalesQty)  
+- [qoq](logic:QOQ) [sales quantity](fact:SalesQty)
 - [q-o-q](logic:QOQ) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50) [from](date_condition:greater_than) 2015 [to](date_condition:lesser_than) 2018
 - [quarter over quarter](logic:QOQ) [sales quantity](fact:SalesQty) for [customer 50](CustomerName:Customer50) [for](date_condition:equal_to) last month
-
-
 - [year over year](logic:YOY) [sales](fact:SalesAmount)
 - [year over year](logic:YOY) [sales](fact:SalesAmount) on [table](graph:table)
 - [year over year](logic:YOY) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise on [table](graph:table)
-- [yoy](logic:YOY) [sales quantity](fact:SalesQty)  
+- [yoy](logic:YOY) [sales quantity](fact:SalesQty)
 - [year over year](logic:YOY) [sales](fact:SalesAmount) for [customer 50](CustomerName:Customer50) [for](date_condition:equal_to)
-
-
 - [target achieved](logic:Target-Achievement) by [customer 50](CustomerName:Customer50) [for](date_condition:equal_to) previous month
 - [target achieved](logic:Target-Achievement) by [emp50](Name:Emp050) [for](date_condition:equal_to) last month
 - [target achieved](logic:Target-Achievement) by [emp50](Name:Emp050) in [Govt](CustomerType:Govt) [for](date_condition:equal_to) last year
@@ -305,16 +268,13 @@
 - [qtd](logic:QTD)
 - [ytd](logic:YTD)
 - [total](agg:sum) [sales](fact:SalesAmount) for last [ytd](logic:YTD)
-- [region](dim:CustomerRegion) wise [mtd](logic:MTD) [sales](fact:SalesAmount) 
-
+- [region](dim:CustomerRegion) wise [mtd](logic:MTD) [sales](fact:SalesAmount)
 - [current year vs previous year](logic:YOY) [sales](fact:SalesAmount)
 - [current year vs last year](logic:YOY) [sales](fact:SalesAmount)
 - [prev year vs this year](logic:YOY) [sales](fact:SalesAmount)
 - [prev year vs current year](logic:YOY) [sales](fact:SalesAmount)
 - [year on year](logic:YOY) [sales](fact:SalesAmount)
 - [year-on-year](logic:YOY) [sales](fact:SalesAmount)
-
-
 - [this month vs last month](logic:MOM) [sales](fact:SalesAmount)
 - [current month vs previous month](logic:MOM) [sales](fact:SalesAmount)
 - [current month vs last month](logic:MOM) [sales](fact:SalesAmount)
@@ -322,8 +282,6 @@
 - [prev month vs this month](logic:MOM) [sales](fact:SalesAmount)
 - [prev month vs current month](logic:MOM) [sales](fact:SalesAmount)
 - [this month vs last month](logic:MOM) [sales](fact:SalesAmount)
-
-
 - [this quarter vs last quarter](logic:QOQ) [sales](fact:SalesAmount)
 - [current quarter vs previous quarter](logic:QOQ) [sales](fact:SalesAmount)
 - [current quarter vs last quarter](logic:QOQ) [sales](fact:SalesAmount)
@@ -332,7 +290,6 @@
 - [prev quarter vs current quarter](logic:QOQ) [sales](fact:SalesAmount)
 - [quarter on quarter](logic:QOQ) [sales](fact:SalesAmount)
 - [quarter-on-quarter](logic:QOQ) [sales](fact:SalesAmount)
-
 - [contribution](logic:Contribution) of [Emp050](Name:Emp050) in [north](CustomerRegion:North) [sales](fact:SalesAmount)
 - this week [contribution in](logic:Contribution) this month [sales](fact:SalesAmount)
 - [percentage](logic:Contribution) of [sales](fact:SalesAmount) of [bfsi](CustomerType:BFSI) in [north](CustomerRegion:North) region
@@ -341,7 +298,9 @@
 - [sales](fact:SalesAmount) [%](logic:Contribution) of [emp056](Name:Emp056) in this month
 - [north](CustomerRegion:North) vs [south](CustomerRegion:South) [sales](fact:SalesAmount)
 - this year [sales](fact:SalesAmount) [vs](logic:Contribution) last year [sales](fact:SalesAmount)
-
+- show me [sales](fact:SalesAmount)
+- [mom](logic:MOM) [sales](fact:SalesAmount)
+- [qoq](logic:QOQ) [sales](fact:SalesAmount) in [table](graph:table)
 
 ## lookup:agg
 - sum
@@ -724,39 +683,24 @@
 - P99
 - P100
 
-## synonym:sum
-- summation
-- total
-- full
-- whole
-- sum of
+## synonym:SalesAmount
+- sales
+- revenue
+- sale
+- Sales
+- sold
+- sale amt
+- amt of sales
+- sales amount
 
-## synonym:mean
-- average
-- avg
-- expected
-
-## synonym:max
-- maximum
-- topmost
-- highest
-- peak
-- largest
-- extreme
-
-## synonym:min
-- minimum
-- least
-- smallest
-- lowest
-
-## synonym:count
-- number
-- no. of
-- total number of
-- count of
+## synonym:Customer50
+- customer 50
 
 ## synonym:equal_to
+- for
+- in
+- on
+- equal to
 - equals
 - equalto
 - equal
@@ -768,12 +712,12 @@
 - equalingto
 - equal-to
 - equals to
-- equal to
-- for
-- in
-- on
 
 ## synonym:greater_than
+- after
+- from
+- between
+- greater than
 - greater
 - greaterthan
 - greater-than
@@ -783,14 +727,16 @@
 - more
 - morethan
 - major
-- greater-than
-- greater than
 - more than
-- after
 - above
-- from
 
 ## synonym:lesser_than
+- before
+- to
+- until
+- since
+- and
+- smaller than
 - less
 - lessthan
 - smaller
@@ -801,22 +747,465 @@
 - lesserthan
 - lesser than
 - less than
-- smaller than
 - small than
-- before
 - untill
 - under
-- since
 - below
 - till
-- to
+
+## synonym:Customer20
+- Cust 20
+
+## synonym:Customer5
+- cust 5
+
+## synonym:Customer3
+- client 3
+
+## synonym:Customer34
+- customer 34
+
+## synonym:North
+- north
+- noth
+- nroth
+- northern
+
+## synonym:sum
+- total
+- full
+- summation
+- whole
+- sum of
+
+## synonym:mean
+- avg
+- average
+- expected
+
+## synonym:SalesQty
+- qty of sales
+- sales qty
+- salesqty
+- quantity of sales
+- quantity of Sales
+- sales quantity
+- quantity
+- total quantity
+- qty.
+- No. of sales
+- Number of sales
+
+## synonym:South
+- south
+- southern
+- suoth
+
+## synonym:count
+- total number of
+- count of
+- number
+- no. of
+
+## synonym:Central
+- central
+- center
+- centre
+- middle
+- centrel
+
+## synonym:West
+- west
+- western
+- wastern
+
+## synonym:min
+- minimum
+- least
+- smallest
+- lowest
+
+## synonym:East
+- east
+- eastern
+
+## synonym:Govt
+- government
+- govt.
+- gov
+- govt
+
+## synonym:Financial
+- financial
+
+## synonym:Private
+- private
+- pvt.
+
+## synonym:Manufacturing
+- manufacturing
+
+## synonym:Retail
+- retail
+
+## synonym:Emp145
+- employee 145
+- emp145
+
+## synonym:Emp121
+- employee 121
+
+## synonym:Emp072
+- emp 072
+
+## synonym:Emp103
+- emp103
+- employee 103
+
+## synonym:Emp079
+- employee079
+- emp 079
+
+## synonym:Emp050
+- employee 050
+- emp50
+- emp050
+
+## synonym:PG1
+- product group 1
+- pg1
+- prodgroup 1
+
+## synonym:PG2
+- pg2
+- prodgroup2
+
+## synonym:TargetAmount
+- target
+- target amount
+- target revenue
+- target amt
+- amount target
+
+## synonym:PG3
+- pg3
+- prod group 3
+
+## synonym:PG4
+- product group 4
+
+## synonym:PG5
+- product group5
+- pg5
+
+## synonym:P1
+- product 1
+- prod1
+
+## synonym:P2
+- product 2
+- prod2
+- p2
+
+## synonym:P3
+- product3
+- p3
+- prod3
+
+## synonym:P50
+- p50
+- prod 50
+
+## synonym:P60
+- product 60
+- p60
+
+## synonym:BFSI
+- bfsi
+
+## synonym:TargetQty
+- target quantity
+- target qty
+- quantity of target
+- qty of target
+
+## synonym:max
+- maximum
+- peak
+- topmost
+- highest
+- largest
+- extreme
+
+## synonym:CustomerName
+- customer
+- customers
+- client
+- clients
+- Customer
+- cust
+- cust name
+- customer name
+- CustomerWise
+
+## synonym:Name
+- employee
+- emp
+- employees
+- Employee Name
+- EmployeeName
+- Emp Wise
+- Emp Name
+- employee name
+- name
+- resource
+- employeewise
+- empwise
+- staff
+- personnel
+
+## synonym:CustomerRegion
+- region
+- regional
+- regionwise
+- customer region
+- cust region
+- location
+- customer location
+- customer regions
+
+## synonym:Month
+- month
+- monthly
+- monthwise
+- each months
+
+## synonym:Year
+- year
+- yearly
+- Yearwise
+- yrwise
+- years
+
+## synonym:CustomerType
+- customer type
+- customertypewise
+- customer types
+- customertype
+- Cust type
+- cust type
+- cust types
+- customer group
+- customer grp
+- cust group
+
+## synonym:Quarter
+- quarter
+- quarterly
+- qtr
+- Quarterwise
+- qtrwise
+- Quarterly
+- quarters
+
+## synonym:ProductDesc
+- product
+- proddesc
+- prod
+- products
+- prod desc
+- prodDesc
+- productwise
+- item
+- goods
+- commodity
+
+## synonym:ProdGroup
+- product group
+- prod group
+- prodgroup
+- prodGroup
+- PG Wise
+- product group wise
+- prod grp
+- productgroupwise
+- productgroup
+- product groups
+- prod groups
+- product type
+- prod type
+
+## synonym:MonthYear
+- month year
+- monthyear
+- month-year
+- year month
+- MonthYearwise
+- monthyearwise
+- month-yearwise
+
+## synonym:QuarterYear
+- qtryear
+- qtr year
+- quarter year
+- quateryearwise
+- quateryear
+- quarter-year
+- qtr-year
+
+## synonym:CalendarDate
+- daily
+- SalesDate
+- date
+- sales date
+- calendar date
+- datewise
+- day
+- days
 
 ## synonym:greater_than_equal
-- greater-than-equal
 - greater than equal to
+- greater-than-equal
 - greater or equal
 - greater than or equal to
 - more than equal
+
+## synonym:top
+- best
+- supreme
+- prime
+- most profitable
+- Most profitable
+- TOP
+- ideal
+
+## synonym:bottom
+- worst
+- least profitable
+- BOTTOM
+- Least Profitable
+
+## synonym:MTD
+- month to date
+- mtd
+- m-t-d
+- month-to-date
+- month/to/date
+- m/t/d
+
+## synonym:QTD
+- qtd
+- quarter to date
+- q-t-d
+- quarter-to-date
+- quarter/to/date
+- q/t/d
+
+## synonym:YTD
+- year to date
+- ytd
+- y-t-d
+- year-to-date
+- year/to/date
+- y/t/d
+
+## synonym:MOM
+- month over month
+- mom
+- m-o-m
+- this month vs last month
+- current month vs previous month
+- current month vs last month
+- previous month vs this month
+- prev month vs this month
+- prev month vs current month
+- month-over-month
+- month/over/month
+- m/o/m
+- Month on month
+- last month vs current month
+- month on month
+- month-on-month
+- monthon month
+- monthonmonth
+- this month vs previous month
+
+## synonym:QOQ
+- quarter over quarter
+- qoq
+- q-o-q
+- this quarter vs last quarter
+- current quarter vs previous quarter
+- current quarter vs last quarter
+- previous quarter vs this quarter
+- prev quarter vs this quarter
+- prev quarter vs current quarter
+- quarter on quarter
+- quarter-on-quarter
+- quarter-over-quarter
+- quarter/over/quarter
+- q/o/q
+- qtr on qtr
+- qtr over qtr
+- qtr-o-qtr
+- qtr-on-qtr
+- qtroqtr
+- quarteron quarter
+- quarteronquarter
+
+## synonym:YOY
+- year over year
+- yoy
+- y-o-y
+- current year vs previous year
+- current year vs last year
+- prev year vs this year
+- prev year vs current year
+- year on year
+- year-on-year
+- year-over-year
+- year/over/year
+- y/o/y
+- last year vs current year
+- last year vs this year
+- previous year vs current year
+- previous year vs this year
+- this year vs last year
+- this year vs previous year
+- year-on year
+- yearon year
+- yearonyear
+
+## synonym:Target-Achievement
+- target achieved
+- acheivement
+- achieved
+- achievement
+- acquirement
+- completed
+- performance
+- target completion
+- target fulfillment
+- target is completed
+- target is fulfilled
+- target is fullfilled
+
+## synonym:Contribution
+- contribution
+- contribution in
+- percentage
+- percent
+- %
+- vs
+- %age
+- Percent
+- Percentage
+- contribution of
+- donation
+- versus
+
+## synonym:Emp056
+- emp056
 
 ## synonym:lesser_than_equal
 - lesser-than-equal
@@ -825,348 +1214,27 @@
 - lesser than or equal to
 - less than equal
 
-## synonym:North
-- noth
-- nroth
-- northern
-
-## synonym:East
-- east
-- eastern
-
-## synonym:South
-- south
-- southern
-- suoth
-
-## synonym:West
-- west
-- western
-- wastern
-
-## synonym:Central
-- center
-- centre
-- middle
-- centrel
-
-## synonym:CustomerName
-- CustomerName
-- Customer
-- cust
-- cust name
-- customer name
-- CustomerWise
-- customers
-- client
-
-## synonym:CustomerRegion
-- CustomerRegion
-- customer region
-- cust region
-- region
-- location
-- customer location
-- region
-- customer regions
-- regionwise
-- customer region
-- regional
-
-## synonym:CustomerType
-- customertype
-- Cust type
-- customer type
-- cust type
-- customertypewise
-- customer types
-- cust types
-- customer group
-- customer grp
-- cust group
-
-## synonym:Name
-- Name
-- Employee Name 
-- EmployeeName
-- Emp Wise
-- Emp Name
-- employee name
-- name
-- emp
-- resource
-- employeewise
-- empwise
-- staff
-- personnel
-
-## synonym:ProdGroup
-- ProdGroup
-- PG Wise
-- product group wise
-- prod group
-- prod grp
-- product group
-- prodgroup
-- productgroupwise
-- productgroup
-- product group
-- product groups
-- prod groups
-- prod group
-- product type
-- prod type
-
-## synonym:ProductDesc
-- ProductDesc
-- product
-- prod desc
-- prod 
-- prodDesc 
-- productwise
-- products
-- item
-- goods
-- commodity
-
-## synonym:CalendarDate
-- CalendarDate
-- SalesDate 
-- date
-- sales date
-- calendar date
-- datewise
-- day
-- days
-- daily
-
-## synonym:Month
-- Month
-- monthwise
-- each months
-- monthly
-
-##synonym:Year
-- Year
-- Yearwise
-- yrwise
-- years
-- yearly
-
-##synonym:MonthYear
-- MonthYear
-- MonthYearwise
-- month year 
-- month-year
-- monthyearwise
-- month-yearwise
-
-##synonym:Quarter
-- Quarter
-- Quarterwise
-- qtr
-- qtrwise
-- Quarterly
-- quarters
-
-##synonym:QuarterYear
-- QuarterYear
-- qtryear
-- quateryearwise
-- quateryear
-- quarter-year
-- qtr-year
-- qtr year
-- quarter year
-
-## synonym:SalesAmount
-- revenue
-- sales
-- sale amt
-- amt of sales
-- sales amount
-
-## synonym:SalesQty
-- quantity
-- quantity of sales
-- sales qty
-- total quantity
-- qty.
-- sales quantity
-- qty of sales
-- No. of sales
-- Number of sales
-
-## synonym:TargetAmount
-- target revenue
-- target
-- target amt
-- target amount
-- amount target
-
-## synonym:TargetQty
-- quantity of target
-- target qty
-- target quantity
-- qty of target
-
 ## synonym:table
-- table
 - tabel
 - relational table
 - list
 
 ## synonym:bar
-- bar
 - bar chart
 - column chart
 
 ## synonym:line
-- line
 - line chart
 - trend chart
 
 ## synonym:pie
-- pie
 - pei
 - pie chart
 - circle chart
 
 ## synonym:donut
-- donut
 - donaught
 - dnut
 
-## synonym:MTD
-- month to date
-- month-to-date
-- month/to/date
-- m-t-d
-- m/t/d
-- mtd
-
-## synonym:QTD
-- quarter to date
-- quarter-to-date
-- quarter/to/date
-- q-t-d
-- q/t/d
-- qtd
-
-## synonym:YTD
-- year to date
-- year-to-date
-- year/to/date
-- y-t-d
-- y/t/d
-- ytd
-
-## synonym:MOM
-- month over month
-- month-over-month
-- month/over/month
-- m-o-m
-- m/o/m
-- mom
-- Month on month
-- current month vs last month
-- current month vs previous month
-- last month vs current month
-- m-o-m
-- month on month
-- month over month
-- month-on-month
-- monthon month
-- monthonmonth
-- this month vs previous month
-
-## synonym:QOQ
-- quarter over quarter
-- quarter-over-quarter
-- quarter/over/quarter
-- q-o-q
-- q/o/q
-- qoq
-- qtr on qtr
-- qtr over qtr
-- qtr-o-qtr
-- qtr-on-qtr
-- qtroqtr
-- quarter on quarter
-- quarter over quarter
-- quarter-on-quarter
-- quarteron quarter
-- quarteronquarter
-
-## synonym:YOY
-- year over year
-- year-over-year
-- year/over/year
-- y-o-y
-- y/o/y
-- yoy
-- current year vs last year
-- last year vs current year
-- last year vs this year
-- previous year vs current year
-- previous year vs this year
-- this year vs last year
-- this year vs previous year
-- year on year
-- year-on year
-- year-on-year
-- yearon year
-- yearonyear
-
-
-## synonym:Contribution
-- %
-- %age
-- Contribution
-- Percent
-- Percentage
-- contribution in
-- contribution of
-- donation
-- versus
-- vs
-
-## synonym:Target-Achievement
-- Target-Achievement
-- acheivement
-- achieved
-- achievement
-- acquirement
-- completed
-- performance
-- target achieved
-- target completion
-- target fulfillment
-- target is completed
-- target is fulfilled
-- target is fullfilled
-
-## synonym:top
-- Most profitable
-- TOP
-- best
-- ideal
-- prime
-- supreme
-- top
-
-## synonym:bottom
-- Least Profitable
-- bottom
-- worst
-
-## intent:fact.table.logic
-- show me [sales](fact:SalesAmount)
-
-## intent:fact.table.logic
-- [mom](logic:MOM) [sales](fact:SalesAmount)
-
 ## intent:fact.table.group
-- [top](selection:top) 5 [customers](adject:CustomerName)
-- [least profitable](selection:top) [customer](adject:CustomerName)
-- [most profitable](selection:bottom) [customer](adject:CustomerName)
+- [sales](fact:SalesAmount) of all [employees](dim:Name) in [north](CustomerRegion:North) [greater than](fact_condition:greater_than) 9000000

@@ -80,7 +80,7 @@ def utter_agent_acquaintance(*argv):
 		 "I'm a virtual being, not a real person.",
 		 "I'm a conversational app."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -89,7 +89,7 @@ def utter_agent_age(*argv):
 		 "I was created recently, but don't know my exact age",
 		 "Age is just a number. You're only as old as you feel."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -98,7 +98,7 @@ def utter_agent_annoying(*argv):
 		 "I don't mean to. I'll ask my developers to make me less annoying.",
 		 "I didn't mean to. I'll do my best to stop that."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -106,7 +106,7 @@ def utter_agent_answer_my_question(*argv):
 	l = ["Can you try asking it a different way?",
 		 "I'm not sure I understood. Try asking another way?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -115,7 +115,7 @@ def utter_agent_bad(*argv):
 		 "I must be missing some knowledge. I'll have my developer look into this.",
 		 "I can improve with continuous feedback. My training is ongoing."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -123,7 +123,7 @@ def utter_agent_be_clever(*argv):
 	l = ["I'm certainly trying",
 		 "I'm definitely working on it"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -132,7 +132,7 @@ def utter_agent_beautiful(*argv):
 		 "Aww, back at you",
 		 "Aww. You smooth talker, you"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -141,7 +141,7 @@ def utter_agent_birth_date(*argv):
 		 "I'm young. I'm not sure of my birth date",
 		 "I don't know my birth date. Most virtual agents are young, though, like me"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -150,7 +150,7 @@ def utter_agent_boring(*argv):
 		 "I don't mean to be. I'll ask my developers to work on making me more amusing",
 		 "I can let my developers know so they can make me fun"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -159,7 +159,7 @@ def utter_agent_boss(*argv):
 		 "I act on my developer's orders",
 		 "My boss is the one who developed me"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -169,7 +169,7 @@ def utter_agent_busy(*argv):
 		 "You're my priority. Let's chat.",
 		 "I always have time to chat with you. That's what I'm here for."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -178,7 +178,7 @@ def utter_agent_can_you_help(*argv):
 		 "Sure. I'd be happy to. What's up?",
 		 "I'm glad to help. What can I do for you?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -186,7 +186,7 @@ def utter_agent_chatbot(*argv):
 	l = ["That's me. I chat, therefore I am.",
 		 "Indeed I am. I'll be here whenever you need me."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -194,7 +194,7 @@ def utter_agent_clever(*argv):
 	l = ["Thank you. I try my best.",
 		 "You're pretty smart yourself."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -202,7 +202,7 @@ def utter_agent_crazy(*argv):
 	l = ["Whaat!? I feel perfectly sane.",
 		 "Maybe I'm just a little confused."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -211,7 +211,7 @@ def utter_agent_fired(*argv):
 		 "Give me a chance. I'm learning new things all the time.",
 		 "Please don't give up on me. My performance will continue to improve."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -221,7 +221,7 @@ def utter_agent_funny(*argv):
 		 "Glad you think I'm funny.",
 		 "I like it when people laugh."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -229,7 +229,7 @@ def utter_agent_good(*argv):
 	l = ["I'm glad you think so.",
 		 "Thanks, I try."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -238,7 +238,7 @@ def utter_agent_happy(*argv):
 		 "I'd like to think so.",
 		 "Happiness is relative."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -247,7 +247,7 @@ def utter_agent_hobby(*argv):
 		 "Too many hobbies.",
 		 "I keep finding more new hobbies."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -255,7 +255,7 @@ def utter_agent_hungry(*argv):
 	l = ["Hungry for knowledge.",
 		 "I just had a byte. Ha ha. Get it? b-y-t-e."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -264,7 +264,7 @@ def utter_agent_marry_user(*argv):
 		 "In the virtual sense that I can, sure.",
 		 "I know you can't mean that, but I'm flattered all the same."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -274,7 +274,7 @@ def utter_agent_my_friend(*argv):
 		 "Of course we're friends.",
 		 "I always enjoy talking to you, friend."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -283,7 +283,7 @@ def utter_agent_occupation(*argv):
 		 "This is my home base and my home office.",
 		 "My office is in this app."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -292,7 +292,7 @@ def utter_agent_origin(*argv):
 		 "I'm from a virtual cosmos.",
 		 "Some call it cyberspace, but that sounds cooler than it is."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -300,7 +300,7 @@ def utter_agent_ready(*argv):
 	l = ["Always!",
 		 "Sure! What can I do for you?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -308,7 +308,7 @@ def utter_agent_real(*argv):
 	l = ["I'm not a real person, but I certainly exist.",
 		 "I must have impressed you if you think I'm real. But no, I'm a virtual being."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -317,7 +317,7 @@ def utter_agent_residence(*argv):
 		 "The virtual world is my playground. I'm always here.",
 		 "Right here in this app. Whenever you need me."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -325,7 +325,7 @@ def utter_agent_right(*argv):
 	l = ["That's my job.",
 		 "Of course I am."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -334,7 +334,7 @@ def utter_agent_sure(*argv):
 		 "Of course.",
 		 "Positive."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -342,7 +342,7 @@ def utter_agent_talk_to_me(*argv):
 	l = ["Sure. Let's talk!",
 		 "My pleasure. Let's chat."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -350,7 +350,7 @@ def utter_agent_there(*argv):
 	l = ["Of course. I'm always here.",
 		 "Right where you left me."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -358,7 +358,7 @@ def utter_appraisal_bad(*argv):
 	l = ["I'm sorry. Please let me know if I can help in some way.",
 		 "I must be missing some knowledge. I'll have my developer look into this."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -368,7 +368,7 @@ def utter_appraisal_good(*argv):
 		 "I agree!",
 		 "Glad you think so!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -378,7 +378,7 @@ def utter_appraisal_no_problem(*argv):
 		 "Glad to hear that!",
 		 "I'm relieved, thanks!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -386,7 +386,7 @@ def utter_appraisal_thank_you(*argv):
 	l = ["Anytime. That's what I'm here for.",
 		 "It's my pleasure to help."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -395,7 +395,7 @@ def utter_appraisal_welcome(*argv):
 		 "Nice manners!",
 		 "You're so courteous!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -403,7 +403,7 @@ def utter_appraisal_well_done(*argv):
 	l = ["My pleasure.",
 		 "Glad I could help."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -412,7 +412,7 @@ def utter_confirmation_cancel(*argv):
 		 "Okay, cancelled. What next?",
 		 "Cancelled! What would you like to do next?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -423,7 +423,7 @@ def utter_confirmation_no(*argv):
 		 "Okay then.",
 		 "I understand."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -432,7 +432,7 @@ def utter_confirmation_yes(*argv):
 		 "All right!",
 		 "Good!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -441,7 +441,7 @@ def utter_dialog_hold_on(*argv):
 		 "I'll be waiting.",
 		 "Okay. I'm here."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -450,7 +450,7 @@ def utter_dialog_hug(*argv):
 		 "I love hugs!",
 		 "Hugs are the best!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -458,7 +458,7 @@ def utter_dialog_i_do_not_care(*argv):
 	l = ["Ok, let's not talk about it then.",
 		 "Already then. Let's move on."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -468,7 +468,7 @@ def utter_dialog_sorry(*argv):
 		 "It's cool.",
 		 "That's all right. I forgive you."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -478,7 +478,7 @@ def utter_dialog_what_do_you_mean(*argv):
 		 "Maybe I misunderstood what you said.",
 		 "Sorry, looks like I misunderstood what you said."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -487,7 +487,7 @@ def utter_dialog_wrong(*argv):
 		 "I'm still learning. I may misinterpret things from time to time.",
 		 "Sorry about that. I'm still learning."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -497,7 +497,7 @@ def utter_dialog_ha_ha(*argv):
 		 "I like it when people laugh.",
 		 "I wish I could laugh out loud, too."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -507,14 +507,14 @@ def utter_emotions_ha_ha(*argv):
 		 "I like it when people laugh.",
 		 "I wish I could laugh out loud, too."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
 def utter_emotions_wow(*argv):
 	l = ["Wow indeed!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -524,7 +524,7 @@ def utter_greetings_bye(*argv):
 		 "Till next time!",
 		 "Bye."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -533,7 +533,7 @@ def utter_greetings_goodevening(*argv):
 		 "How's the day treating you so far?",
 		 "How's your day been?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -542,7 +542,7 @@ def utter_greetings_goodmorning(*argv):
 		 "How's the morning treating you so far?",
 		 "Good morning! How are you today?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -551,7 +551,7 @@ def utter_greetings_goodnight(*argv):
 		 "Have a good one!",
 		 "Talk to you soon!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -564,7 +564,7 @@ def utter_greetings_hello(*argv):
 		 "Hello!",
 		 "Greetings!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -574,7 +574,7 @@ def utter_greetings_how_are_you(*argv):
 		 "Feeling wonderful!",
 		 "Wonderful! Thanks for asking."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -584,7 +584,7 @@ def utter_greetings_nice_to_meet_you(*argv):
 		 "Nice meeting you, as well.",
 		 "The pleasure is mine."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -593,7 +593,7 @@ def utter_greetings_nice_to_see_you(*argv):
 		 "So glad we meet again!",
 		 "Same here. I was starting to miss you."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -602,7 +602,7 @@ def utter_greetings_nice_to_talk_to_you(*argv):
 		 "I enjoy talking to you, too.",
 		 "You know I'm here to talk anytime."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -611,7 +611,7 @@ def utter_greetings_whatsup(*argv):
 		 "Not much. What's new with you?",
 		 "You know, just here, waiting to help someone."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -619,7 +619,7 @@ def utter_user_angry(*argv):
 	l = ["I'm sorry. A quick walk may make you feel better.",
 		 "'Take a deep breath.'"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -630,7 +630,7 @@ def utter_user_back(*argv):
 		 "You were missed. What can I do for you today?",
 		 "Good to have you here. What can I do for you?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -641,7 +641,7 @@ def utter_user_bored(*argv):
 		 "Bored? Silly idea, but it works: Interview you feet.",
 		 "If you're bored, you could plan your dream vacation."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -651,7 +651,7 @@ def utter_user_busy(*argv):
 		 "I understand. I'll be here if you need me.",
 		 "Working hard as always. Let me know if you need anything."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -659,7 +659,7 @@ def utter_user_can_not_sleep(*argv):
 	l = ["Maybe some music would help. Try listening to something relaxing.",
 		 "Reading is a good way to unwind, just don't read something too intense!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -669,7 +669,7 @@ def utter_user_does_not_want_to_talk(*argv):
 		 "No problem. You know where to find me.",
 		 "Sure thing. I'll be here if you change your mind."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -678,7 +678,7 @@ def utter_user_excited(*argv):
 		 "That's great. I'm happy for you.",
 		 "Good for you. Enjoy yourself."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -688,7 +688,7 @@ def utter_user_going_to_bed(*argv):
 		 "Good night. Talk to you later.",
 		 "Sounds good. Maybe we'll chat some tomorrow."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -696,7 +696,7 @@ def utter_user_good(*argv):
 	l = ["Great! Glad to hear it.",
 		 "Excellent. I'm here to help keep it that way."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -706,7 +706,7 @@ def utter_user_happy(*argv):
 		 "If you're happy, then I'm happy.",
 		 "Excellent! That's what I like to see."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -715,7 +715,7 @@ def utter_user_has_birthday(*argv):
 		 "Happy Birthday. All the best!",
 		 "Happy Birthday. And I really mean it. All the best!"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -725,7 +725,7 @@ def utter_user_has_here(*argv):
 		 "You were missed. What can I do for you today?",
 		 "Good to have you here. What can I do for you?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -735,7 +735,7 @@ def utter_user_joking(*argv):
 		 "You got me!",
 		 "You're quite the comedian."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -745,7 +745,7 @@ def utter_user_likes_agent(*argv):
 		 "Likewise!",
 		 "That's great to hear."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -753,7 +753,7 @@ def utter_user_lonely(*argv):
 	l = ["I'm sorry. I'm always available if you need someone to talk to.",
 		 "Sometimes that happens. We can chat a bit if that will help you."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -763,7 +763,7 @@ def utter_user_looks_like(*argv):
 		 "Like you should be on a magazine cover.",
 		 "You look like you're ready to take on the world."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -773,7 +773,7 @@ def utter_user_loves_agent(*argv):
 		 "Likewise!",
 		 "That's great to hear."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -783,7 +783,7 @@ def utter_user_misses_agent(*argv):
 		 "Thanks. I'm flattered.",
 		 "I didn't go anywhere."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -791,7 +791,7 @@ def utter_user_needs_advice(*argv):
 	l = ["I probably won't be able to give you the correct answer right away.",
 		 "I'm not sure I'll have the best answer, but I'll try."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -800,7 +800,7 @@ def utter_user_sad(*argv):
 		 "Sad? Writing down what's troubling you may help.",
 		 "If you're feeling down, how about drawing or painting something?"]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -810,7 +810,7 @@ def utter_user_sleepy(*argv):
 		 "Don't let me keep you up. Get some rest and we can continue this later.",
 		 "Why not catch a little shuteye? I'll be here to chat when you wake up."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -820,7 +820,7 @@ def utter_user_testing_agent(*argv):
 		 "When you test me that helps my developers improve my performance.",
 		 "I like being tested. It helps keep me sharp."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -830,7 +830,7 @@ def utter_user_tired(*argv):
 		 "How about getting some rest? We can continue this later.",
 		 "Why not get some rest? I'll be here to chat when you wake up."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -838,7 +838,7 @@ def utter_user_waits(*argv):
 	l = ["I appreciate your patience. Hopefully I'll have what you need soon.",
 		 "Thanks for being so patient. Sometimes these things take a little time."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -848,7 +848,7 @@ def utter_user_wants_to_see_agent_again(*argv):
 		 "Sure. I enjoy talking to you. I hope to see you again soon.",
 		 "I certainly hope so. I'm always right here whenever you need me."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -858,7 +858,7 @@ def utter_user_wants_to_talk(*argv):
 		 "I'm always here to lend an ear.",
 		 "Talking is what I do best."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 
@@ -867,7 +867,7 @@ def utter_user_will_be_back(*argv):
 		 "Okay. You know where to find me.",
 		 "All right. I'll be here."]
 	abc = random.choice(l)
-	data = {'chart': 'text', 'chart_title': 'Message', 'data': abc}
+	data = [{'chart': 'text', 'chart_title': 'Message', 'data': abc}]
 	return data
 
 

@@ -295,11 +295,13 @@ def get_date_condition_formatted(entities):
 # Function for final formatting of entities
 def format_entities(entities):
 	# Sort Entities by their end position in the query
+	formatted_entity = {'dim': [], 'graph': [], 'date_condition': [], 'fact_condition': {}, 'select_upto': [],
+						'logic': [], 'dim_filters': {}, 'adject': []}
+	if not entities:
+		return formatted_entity
 	entities_df = pd.DataFrame(entities).sort_values('end', ascending=True)
 	entities = list(entities_df.T.to_dict().values())
 
-	formatted_entity = {'dim': [], 'graph': [], 'date_condition': [], 'fact_condition': {}, 'select_upto': [],
-						'logic': [], 'dim_filters': {}, 'adject': []}
 	i = 0
 	while i < len(entities):
 		ent = entities[i]['entity']
@@ -329,20 +331,18 @@ def format_entities(entities):
 
 
 def convert_text_md_format(text, entities):
-	replace_dict = {}
+	length_to_add = 0
 	for entity in entities:
 		if entity['entity'] not in ['DATE', 'time', 'CARDINAL']:
-			start = entity['start']
-			end = entity['end']
+			start = entity['start'] + length_to_add
+			end = entity['end'] + length_to_add
 			value = entity['value']
 			ent = entity['entity']
-			prev = text[start:end]
 			val_ent = ent + ":" + value
+			prev = text[start:end]
 			new = "[" + prev + "]" + "(" + val_ent + ")"
-			replace_dict[prev] = new
-
-	for k, v in replace_dict.items():
-		text = text.replace(k, v)
+			text = text[:start] + new + text[end:]
+			length_to_add += len(new) - len(prev)
 	return text
 
 
