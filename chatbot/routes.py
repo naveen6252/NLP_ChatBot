@@ -14,7 +14,7 @@ from chatbot.logregform import LoginForm
 from chatbot.models import db, chatbot_users, chatbot_logs, error_message, user_roles, \
 	RLS_COLUMNS_FILTER_CHOICE
 from custom_exceptions import *
-from settings import MAIN_NLU_DATA_PATH
+from settings import MAIN_NLU_DATA_PATH, BRAND_LOGO_PATH
 
 
 # Solution for favicon.ico used as icon on tabs in browser
@@ -37,7 +37,7 @@ def login():
 		if not user:
 			flash('Login Unsuccessful. Username not found!', 'danger')
 
-		if check_password_hash(user.password_hash, form.password.data):
+		elif check_password_hash(user.password_hash, form.password.data):
 			token = jwt.encode({
 				'username': user.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)},
 				app.config['SECRET_KEY'])
@@ -58,7 +58,7 @@ def login():
 @app.route("/logout")
 def logout():
 	session.pop('username', None)
-	return redirect('/')
+	return redirect(url_for('home'))
 
 
 # Page containing all the existing packages of the user logged in !
@@ -68,7 +68,7 @@ def home():
 		username = session['username']
 		role = session['role']
 		token = session['token']
-		return render_template('index.html', username=username, role=role, token=token)
+		return render_template('index.html', username=username, role=role, token=token, title='ChatBot')
 
 	return redirect(url_for('login'))
 
@@ -100,6 +100,7 @@ def create_user():
 			user_output.append({'username': user.username, 'role': user.role})
 
 		return render_template('CreateUser.html', username=username, role=current_role, token=token,
+							   title='Create User',
 							   existing_roles=role_output, rls_filters=RLS_COLUMNS_FILTER_CHOICE, users=user_output)
 	return redirect(url_for('login'))
 
@@ -112,7 +113,7 @@ def view_logs():
 		token = session['token']
 		if role != 'admin':
 			return render_template("notAuthorized.html")
-		return render_template('ViewLogs.html', username=username, role=role, token=token)
+		return render_template('ViewLogs.html', username=username, role=role, token=token, title='Chat Logs')
 
 	return redirect(url_for('login'))
 
@@ -151,7 +152,7 @@ def update_user(user_to_update):
 			role_output.append(role_data)
 
 		return render_template('UpdateUser.html', username=username, role=role, token=token,
-							   user_details=user_details,
+							   user_details=user_details, title='Update User',
 							   existing_roles=role_output, rls_filters=RLS_COLUMNS_FILTER_CHOICE, users=user_output)
 
 	return redirect(url_for('login'))
@@ -165,7 +166,7 @@ def view_user():
 		token = session['token']
 		if role != 'admin':
 			return render_template("notAuthorized.html")
-		return render_template('ViewUser.html', username=username, role=role, token=token)
+		return render_template('ViewUser.html', username=username, role=role, token=token, title='Users')
 
 	return redirect(url_for('login'))
 
@@ -178,7 +179,10 @@ def interactive_learning():
 		token = session['token']
 		if role != 'admin':
 			return render_template("notAuthorized.html")
-		return render_template('interactiveLearning.html', username=username, role=role, token=token)
+		lookup_tables = read_nlu_data(MAIN_NLU_DATA_PATH)['lookup']
+		lookup_tables = {k: v for k, v in lookup_tables.items() if k not in ('CustomerName', 'Name', 'ProductDesc')}
+		return render_template('interactiveLearning.html', username=username, role=role, token=token,
+							   title='Reinforcement Learning', lookup=lookup_tables)
 
 	return redirect(url_for('login'))
 
@@ -194,7 +198,22 @@ def view_nlu():
 	if role != 'admin':
 		return render_template("notAuthorized.html")
 	nlu_data = read_nlu_data(MAIN_NLU_DATA_PATH)
-	return render_template('viewNLU.html', username=username, role=role, token=token, nlu_data=nlu_data)
+	return render_template('viewNLU.html', username=username, role=role, token=token, nlu_data=nlu_data,
+						   title='NLU Data')
+
+
+@app.route('/change theme', methods=["GET", "POST"])
+def change_theme():
+	if 'username' in session:
+		username = session['username']
+		role = session['role']
+		token = session['token']
+		if role != 'admin':
+			return render_template("notAuthorized.html")
+
+		return render_template('ChangeTheme.html', username=username, role=role, token=token, title='Change Theme')
+
+	return redirect(url_for('login'))
 
 
 # =================================================================
@@ -222,6 +241,37 @@ def token_required(f):
 		return f(current_user, *args, **kwargs)
 
 	return decorated
+
+
+def allowed_file(filename):
+	ALLOWED_EXTENSIONS = ('png', 'jpg', 'jpeg', 'gif')
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/api/update logo', methods=['POST'])
+@token_required
+def api_upload_logo(current_user):
+	if current_user.role != 'admin':
+		return jsonify({'message': 'Access Denied! You do not have permission to do that.'}), 401
+
+	if request.method == 'POST':
+		if 'file' not in request.files:
+			return jsonify({'message':
+								'<div class="alert alert-danger" role="alert">Error: <strong>File not found!</strong></div>'}), 400
+		file = request.files['file']
+
+		if file.filename == '':
+			return jsonify({'message':
+								'<div class="alert alert-danger" role="alert">Error: <strong>File not found!</strong></div>'}), 400
+
+		if not allowed_file(file.filename):
+			return jsonify({'message':
+								'<div class="alert alert-danger" role="alert">Error: <strong>File not supported!</strong></div>'}), 400
+
+		if file and allowed_file(file.filename):
+			file.save(BRAND_LOGO_PATH)
+			return jsonify(
+				{'message': '<div class="alert alert-success" role="alert"><p>Image uploaded successful</p></div>'})
 
 
 @app.route('/api/get entity parameters', methods=['GET'])

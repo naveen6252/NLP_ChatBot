@@ -30,8 +30,9 @@ ul {
 
 .logo {
     float: left;
-    max-width: 51px;
-    margin-top: 5px;
+    max-width: 50px;
+    max-height: 40px;
+    margin-top: 1px;
 }
 
 .forMobile {

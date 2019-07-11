@@ -187,6 +187,8 @@
 - [least profitable](selection:bottom) [customer](adject:CustomerName)
 - [most profitable](selection:top) [customer](adject:CustomerName)
 - [top](selection:top) 3 [products](adject:ProductDesc) [sold](fact:SalesAmount) in [government](CustomerType:Govt) last month
+- [sales](fact:SalesAmount) of all [employees](dim:Name) in [north](CustomerRegion:North) [greater than](fact_condition:greater_than) 9000000
+- [customer region](dim:CustomerRegion) wise [sales](fact:SalesAmount)
 
 ## intent:fact.table.logic
 - [month to date](logic:MTD) [sales](fact:SalesAmount) [customer](dim:CustomerName) wise [for](date_condition:equal_to) last month
@@ -692,6 +694,7 @@
 - sale amt
 - amt of sales
 - sales amount
+- REVENUE
 
 ## synonym:Customer50
 - customer 50
@@ -1235,6 +1238,3 @@
 ## synonym:donut
 - donaught
 - dnut
-
-## intent:fact.table.group
-- [sales](fact:SalesAmount) of all [employees](dim:Name) in [north](CustomerRegion:North) [greater than](fact_condition:greater_than) 9000000

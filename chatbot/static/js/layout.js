@@ -42,6 +42,9 @@ function drawBarChart() {
         'height': '120%',
         'legend': {
             'position': "none"
+        },
+        vAxis: {
+            format: 'short'
         }
     };
     var chart = new google.visualization.BarChart(document.getElementById("msg" + bot_message_id));
@@ -54,7 +57,11 @@ function drawTable() {
     };
     var options = {
         'title': chart_title,
-        'cssClassNames': cssClassNames
+        'cssClassNames': cssClassNames,
+        vAxis: {
+            format: 'short'
+        },
+        legend: 'none'
     };
     var chart = new google.visualization.Table(document.getElementById("msg" + bot_message_id));
     chart.draw(chart_data, options);
@@ -203,6 +210,7 @@ $(document).ready(function () {
     // Load google charts
     google.charts.load('current', {
         callback: get_initial_queries,
+        language: 'en_IN',
         packages: ['bar', 'corechart', 'table']
     });
 });

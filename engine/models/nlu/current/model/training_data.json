@@ -4340,6 +4340,54 @@
         "text": "top 3 products sold in government last month"
       },
       {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "SalesAmount",
+            "entity": "fact"
+          },
+          {
+            "start": 13,
+            "end": 22,
+            "value": "Name",
+            "entity": "dim"
+          },
+          {
+            "start": 26,
+            "end": 31,
+            "value": "North",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 32,
+            "end": 44,
+            "value": "greater_than",
+            "entity": "fact_condition"
+          }
+        ],
+        "text": "sales of all employees in north greater than 9000000"
+      },
+      {
+        "intent": "fact.table.group",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "CustomerRegion",
+            "entity": "dim"
+          },
+          {
+            "start": 21,
+            "end": 26,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "customer region wise sales"
+      },
+      {
         "intent": "fact.table.logic",
         "entities": [
           {
@@ -6996,36 +7044,6 @@
           }
         ],
         "text": "qoq sales in table"
-      },
-      {
-        "intent": "fact.table.group",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "SalesAmount",
-            "entity": "fact"
-          },
-          {
-            "start": 13,
-            "end": 22,
-            "value": "Name",
-            "entity": "dim"
-          },
-          {
-            "start": 26,
-            "end": 31,
-            "value": "North",
-            "entity": "CustomerRegion"
-          },
-          {
-            "start": 32,
-            "end": 44,
-            "value": "greater_than",
-            "entity": "fact_condition"
-          }
-        ],
-        "text": "sales of all employees in north greater than 9000000"
       },
       {
         "intent": "agent.acquaintance",
@@ -15291,7 +15309,8 @@
           "sold",
           "sale amt",
           "amt of sales",
-          "sales amount"
+          "sales amount",
+          "REVENUE"
         ]
       },
       {

@@ -1,7 +1,7 @@
 {% extends "layout/ChatbotLayout.html" %}
 {% block content %}
 
-    <div style="top:1%;">
+    <div style="margin-top: 100px">
         <div class="loader-container" id="init_loader">
             <?xml version="1.0" encoding="utf-8" ?>
             <svg class="loader" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" x="0" y="0"
@@ -21,7 +21,7 @@
     <div class="inputDiv">
         <div class="col-xs-8 col-xs-offset-2">
             <form id="target">
-                <input class="input" type="text" value="" placeholder="Enter message..." id="input_message"/>
+                <input class="input" type="text" value="" placeholder="Enter message..." autocomplete="off" id="input_message"/>
                 <span class="fa fa-comments  fa-2x icon"></span>
                 <input type="submit" hidden=hidden/>
             </form>

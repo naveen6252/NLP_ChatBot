@@ -29,7 +29,7 @@ def get_json_from_query(query, rls_access_string):
 
 		else:
 			# Round upto 2 places for all value in table
-			data['table'] = data['table'].round(3)
+			data['table'] = data['table'].round(2)
 
 			# Map Month Names
 			if 'Month' in data['table'].columns:

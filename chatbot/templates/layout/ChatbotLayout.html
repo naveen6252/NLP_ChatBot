@@ -23,24 +23,54 @@
 
     <script type="application/javascript">
         sessionStorage.setItem("accessToken", "{{token}}");
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > document.body.scrollHeight / 3 ||
+                document.documentElement.scrollTop > document.documentElement.scrollHeight / 3) {
+                document.getElementById("topButton").style.display = "block";
+                document.getElementById("bottomButton").style.display = "none";
+            } else {
+                document.getElementById("topButton").style.display = "none";
+                document.getElementById("bottomButton").style.display = "block";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        function bottomFunction() {
+            document.body.scrollTop = document.body.scrollHeight;
+            document.documentElement.scrollTop = document.documentElement.scrollHeight;
+        }
     </script>
 </head>
 
 <body class="grayBackGr h-100">
 {% if username %}
-    <header class="container-fluid">
+    <button class="btn btn-primary" onclick="topFunction()" id="topButton" title="Go to top"
+            style="position:fixed; bottom: 2%; right: 1%; display: none; z-index: 99;">
+        <i class="glyphicon glyphicon-menu-up"></i>
+    </button>
+    <button class="btn btn-primary" onclick="bottomFunction()" id="bottomButton" title="Go to bottom"
+            style="position:fixed; top: 50px; right: 1%; z-index: 99;">
+        <i class="glyphicon glyphicon-menu-down"></i>
+    </button>
+    <header class="container-fluid" style="position: fixed; width: 100%; top:0; height: 50px; z-index: 999;">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="logo">
-                    <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
-                                                                             src="{{ url_for('static', filename='img/polestar_logo.png') }}"
-                                                                             class="logo"/></a>
-                    <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
-                                                                            src="{{ url_for('static', filename='img/polestar_logo.png') }}"
-                                                                            class="logo"/></a>
+                    <img alt='Logo' src="{{ url_for('static', filename='img/logo.png') }}" class="logo"/>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+                <h3 class="align-middle text-center">{{ title }}</h3>
+            </div>
+            <div class="col-sm-4">
                 <div class="navContainer">
                     <div class="providedLinks">
                         <ul>
@@ -66,6 +96,8 @@
                                         <li><a href="{{ url_for('view_logs') }}"><i
                                                 class="glyphicon glyphicon-list"></i> View
                                             Logs</a></li>
+                                        <li><a href="{{ url_for('change_theme') }}"><i
+                                                class="glyphicon glyphicon-edit"></i> Change Brand Logo</a></li>
                                     {% endif %}
                                     <li><a href="{{ url_for('logout') }}"><i class="glyphicon glyphicon-log-out"></i>
                                         Logout</a></li>
@@ -78,6 +110,7 @@
         </div>
     </header>
 
+
     <!-- } -->
 {% else %}
 
@@ -86,11 +119,11 @@
     <header class="container-fluid">
         <div class="row">
             <div class="col-sm-3">
-                <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
-                                                                         src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Logo'
+                                                                         src="{{ url_for('static', filename='img/logo.png') }}"
                                                                          class="logo"/></a>
-                <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
-                                                                        src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                <a href="{{ url_for('login') }}" class="forMobile"><img alt='Logo'
+                                                                        src="{{ url_for('static', filename='img/logo.png') }}"
                                                                         class="logo"/></a>
             </div>
             <div class="col-sm-9">
@@ -113,10 +146,10 @@
     <div class="row">
         <div class="col-sm-3">
             <a href="{{ url_for('login') }}" class="forDesktop"><img alt='Polestar Logo'
-                                                                     src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                     src="{{ url_for('static', filename='img/logo.png') }}"
                                                                      class="logo"/></a>
             <a href="{{ url_for('login') }}" class="forMobile"><img alt='Polestar Logo'
-                                                                    src="{{ url_for('static', filename='img/polestar_logo.png') }}"
+                                                                    src="{{ url_for('static', filename='img/logo.png') }}"
                                                                     class="logo"/></a>
         </div>
         <div class="col-sm-9">

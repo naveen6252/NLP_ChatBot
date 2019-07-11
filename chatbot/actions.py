@@ -10,15 +10,12 @@ def action_fact_kpi(df, entities):
 	df = helpers.apply_date_condition(df, entities['date_condition'])
 	df = helpers.apply_dim_filters(df, entities['dim_filters'])
 	date_text = helpers.get_date_text(entities['date_condition'])
-	dim_filters_text = ""
-	for k, v in entities['dim_filters'].items():
-		dim_filters_text += "for " + ", ".join(v) + " " + k + " "
-	dim_filters_text = dim_filters_text[:-1]
+	dim_filters_text = helpers.get_dim_filter_text(entities['dim_filters'])
 	data = []
 	for k, v in entities['fact_condition']['aggregation'].items():
 		for agg in v:
 			val = df[k].agg(agg)
-			val = round(val, 2)
+			val = helpers.format_value_to_language(val)
 			text = "The {0} {1} {2} {3} is {4}.".format(agg + ' of', k, date_text, dim_filters_text, val)
 			data.append({'chart': entities['graph'], 'chart_title': 'Message', 'data': text})
 	return data
@@ -39,9 +36,16 @@ def action_fact_table_group(df, entities):
 	data = []
 	for graph in entities['graph']:
 		if not entities['select_upto']:
-			table_data = {'chart': graph, 'facts': facts, 'dimensions': entities['dim'] + entities['adject'],
+			if len(df) == 1 and len(df.columns) == 1 and graph == 'text':
+				df = "{0} {1} {2} is {3}".format(df.columns[0], helpers.get_date_text(entities['date_condition']),
+												 helpers.get_dim_filter_text(entities['dim_filters']),
+												 helpers.format_value_to_language(df.iloc[0, 0]))
+				table_data = {'chart': graph, 'chart_title': 'message', 'data': df}
+				data.append(table_data)
+			else:
+				table_data = {'chart': graph, 'facts': facts, 'dimensions': entities['dim'] + entities['adject'],
 						  'table': df}
-			data.append(table_data)
+				data.append(table_data)
 		else:
 			# Apply Selection
 			final_df = pd.DataFrame()
@@ -67,7 +71,7 @@ def fact_table_logic(df, entities):
 		for graph in entities['graph']:
 			table_data = {'chart': graph, 'facts': facts, 'dimensions': dim,
 						  'table': table}
-			if graph == 'text':
+			if type(table) == type(''):
 				table_data = {'chart': graph, 'chart_title': 'Message', 'data': table}
 			data.append(table_data)
 	return data

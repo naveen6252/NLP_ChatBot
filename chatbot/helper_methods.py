@@ -27,6 +27,18 @@ def safe_groupby(df, groupings, agg):
 	return tdf
 
 
+# function to format float values to million/billion
+def format_value_to_language(val):
+	if val > 1000000000:
+		return str(round(val / 1000000000, 1)) + 'B'
+	elif val > 1000000:
+		return str(round(val / 1000000, 1)) + 'M'
+	elif val > 1000:
+		return str(round(val / 1000, 1)) + 'K'
+	else:
+		return str(val)
+
+
 def apply_condition(df, col_name, condition, condition_value):
 	if col_name == 'CalendarDate' and type(condition_value) == str:
 		condition_value = datetime.strptime(condition_value, "%Y-%m-%d")
@@ -67,6 +79,15 @@ def get_date_text(date_condition):
 		text += date_text.get(date['conditions']) + datetime.strftime(date['CalendarDate'], '%Y-%m-%d') + ' & '
 	text = text[:-3]
 	return text
+
+
+# function to get text for dim filters
+def get_dim_filter_text(dim_filters):
+	dim_filters_text = ""
+	for k, v in dim_filters.items():
+		dim_filters_text += "for " + ", ".join(v) + " " + k + " "
+	dim_filters_text = dim_filters_text[:-1]
+	return dim_filters_text
 
 
 # function to filters dimension apply when no business logic
@@ -110,22 +131,44 @@ def apply_business_logic(df, logic, entities):
 		default_graph = 'pie'
 		if len(table) > 60:
 			default_graph = 'table'
+		if len(table) == 1 and len(table.columns) == 1:
+			facts = table.columns.tolist()
+			dim = list(table.index.names)
+			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+											format_value_to_language(table.iloc[0, 0]))
+			default_graph = 'text'
+			return table, default_graph, facts, dim
+
 	elif logic == 'QTD':
 		table = business_instance.qtd(df)
 		default_graph = 'pie'
 		if len(table) > 60:
 			default_graph = 'table'
+		if len(table) == 1 and len(table.columns) == 1:
+			facts = table.columns.tolist()
+			dim = list(table.index.names)
+			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+											format_value_to_language(table.iloc[0, 0]))
+			default_graph = 'text'
+			return table, default_graph, facts, dim
 	elif logic == 'YTD':
 		table = business_instance.ytd(df)
 		default_graph = 'table'
 		if len(table) > 60:
 			default_graph = 'table'
+		if len(table) == 1 and len(table.columns) == 1:
+			facts = table.columns.tolist()
+			dim = list(table.index.names)
+			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+											format_value_to_language(table.iloc[0, 0]))
+			default_graph = 'text'
+			return table, default_graph, facts, dim
 	elif logic == 'Target-Achievement':
 		table = business_instance.target_achievement(df)
 		default_graph = 'table'
 	elif logic == 'Contribution':
 		table = business_instance.contribution(df)
-		default_graph = 'pie'
+		default_graph = 'table'
 	else:
 		raise NotImplementedError("Business Logic {0} not defined".format(logic))
 

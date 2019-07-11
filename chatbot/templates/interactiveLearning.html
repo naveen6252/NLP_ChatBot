@@ -20,6 +20,27 @@
             background-color: #69a84f;
             color: white;
         }
+
+        #lookupTable {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #lookupTable td, #lookupTable th {
+            border: 1px solid #111;
+            padding: 8px;
+        }
+
+
+        #lookupTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #69a84f;
+            color: white;
+        }
+
     </style>
     <div class="loader-container" id="loader" style="display: none;">
         <?xml version="1.0" encoding="utf-8" ?>
@@ -30,9 +51,26 @@
             <path d="M156.7 100c0-14.9-5.8-28.5-15.2-38.6 -4.6-4.9-12.6-4.1-16.3 1.4l-0.4 0.6c-2.8 4.1-2.2 9.5 1.2 13.2 5.7 6.2 9.1 14.4 9.1 23.5 0 9-3.4 17.3-9.1 23.5 -3.3 3.7-3.9 9-1.2 13.2l0.4 0.6c3.7 5.6 11.7 6.3 16.3 1.4C150.9 128.5 156.7 114.9 156.7 100z"></path></svg>
     </div>
 
-    <div style="top:1%;">
+    <div style="margin-top: 50px">
         <div class="container">
-            <div id="intentsDiv">
+            <div class="row">
+                <div class="col-xs-6">
+                    <button class='btn btn-default center-block' onclick="showIntentsData()"
+                            title='Show Intents'>
+                        <i class='glyphicon glyphicon-comment'></i>
+                        Intents
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button class='btn btn-default center-block' onclick="showLookupTable()"
+                            title='Show Lookup Table'>
+                        <i class='glyphicon glyphicon-list'></i>
+                        Lookup Table
+                    </button>
+                </div>
+
+            </div>
+            <div class="row" id="intentsDiv">
                 <div class="row">
                     <div class="col-xs-3">
                         <h2><i class="glyphicon glyphicon-comment"></i>Intents</h2>
@@ -48,12 +86,46 @@
                     </table>
                 </div>
             </div>
+            <div class="row" id="lookupDiv" style="display: none;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h2 class="text-center"><i class="glyphicon glyphicon-list"></i>Lookup Tables</h2>
+                    </div>
+                </div>
+                <div class='table-responsive container' style='padding-bottom:50px'>
+                    <table id='lookupTable'>
+                        <tr>
+                            <th align='center' style="max-width: 40px">Column</th>
+                            <th align='center'>Lookup Value</th>
+                        </tr>
+                        {% for name, elements in lookup.items() %}
+                            <tr id="lookupExample{{ name }}">
+                                <td align='center' style="max-width: 40px">
+                                    {{ name }}
+                                </td>
+                                <td align='center'>
+                                    <select title="Lookup Table for {{ name }}" data-toggle="tooltip"
+                                            class="form-control">
+                                        {% for element in elements %}
+                                            <option>
+                                                {{ element }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="inputDiv">
         <div class="col-xs-8 col-xs-offset-2">
             <form id="target">
-                <input class="input" type="text" value="" placeholder="Enter message..." id="input_message"/>
+                <input class="input" type="text" value="" placeholder="Enter message..." id="input_message"
+                onclick="showIntentsData()" />
                 <span class="fa fa-comments  fa-2x icon"></span>
                 <input type="submit" hidden=hidden/>
             </form>
@@ -67,6 +139,18 @@
         var prev_message = '';
         var intentID = 0;
         var parameters_ids = [];
+
+        function showIntentsData() {
+            $('#lookupDiv').hide();
+            $('#intentsDiv').show();
+            $("#btnTrainModel").removeAttr("disabled");
+        }
+
+        function showLookupTable() {
+            $('#intentsDiv').hide();
+            $('#lookupDiv').show();
+            $('#btnTrainModel').attr("disabled", true);
+        }
 
         function show_nlu_parameters(data) {
             $("#waiting").remove();

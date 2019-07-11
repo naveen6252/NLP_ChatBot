@@ -234,6 +234,8 @@ class BusinessLogic:
 		elif len(self.dim_filters.keys()) == 1 or self.dimensions:
 			# Do not filter lowest level dimension
 			less_dim_filters = {k: v for k, v in self.dim_filters.items() if k != list(self.dim_filters.keys())[0]}
+			if not less_dim_filters:
+				less_dim_filters = self.dim_filters
 			all_filtered = helpers.apply_dim_filters(all_filtered, dim_filters=self.dim_filters)
 			less_filtered = helpers.apply_dim_filters(less_filtered, dim_filters=less_dim_filters)
 			all_filtered = helpers.apply_fact_condition(all_filtered, self.dimensions, self.fact_condition)

@@ -32,7 +32,7 @@
             color: white;
         }
     </style>
-    <div class="container-fluid" id="showData"></div>
+    <div class="container-fluid" id="showData" style="margin-top: 50px"></div>
 
     <script type="text/javascript">
 
@@ -83,7 +83,7 @@
         }
 
         function DeleteUser(username) {
-            var r = confirm("Are you sure want to delete user "+username);
+            var r = confirm("Are you sure want to delete user " + username);
             if (r === false) {
                 return;
             }
