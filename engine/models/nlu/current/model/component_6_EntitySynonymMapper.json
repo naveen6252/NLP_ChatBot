@@ -154,6 +154,10 @@
   "yoy": "YOY",
   "y-o-y": "YOY",
   "target achieved": "Target-Achievement",
+  "sales vs target": "Target-Achievement",
+  "sales versus target": "Target-Achievement",
+  "target versus sales": "Target-Achievement",
+  "target vs sales": "Target-Achievement",
   "current year vs previous year": "YOY",
   "current year vs last year": "YOY",
   "prev year vs this year": "YOY",
@@ -256,6 +260,7 @@
   "cust name": "CustomerName",
   "customer name": "CustomerName",
   "customerwise": "CustomerName",
+  "all customer": "CustomerName",
   "employee name": "Name",
   "employeename": "Name",
   "emp wise": "Name",
@@ -266,6 +271,7 @@
   "empwise": "Name",
   "staff": "Name",
   "personnel": "Name",
+  "all employee": "Name",
   "cust region": "CustomerRegion",
   "location": "CustomerRegion",
   "customer location": "CustomerRegion",
@@ -389,5 +395,6 @@
   "pie chart": "pie",
   "circle chart": "pie",
   "donaught": "donut",
-  "dnut": "donut"
+  "dnut": "donut",
+  "target achievement": "Target-Achievement"
 }

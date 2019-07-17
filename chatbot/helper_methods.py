@@ -30,13 +30,13 @@ def safe_groupby(df, groupings, agg):
 # function to format float values to million/billion
 def format_value_to_language(val):
 	if val > 1000000000:
-		return str(round(val / 1000000000, 1)) + 'B'
+		return str(round(val / 1000000000, 2)) + 'Bn'
 	elif val > 1000000:
-		return str(round(val / 1000000, 1)) + 'M'
+		return str(round(val / 1000000, 2)) + 'M'
 	elif val > 1000:
-		return str(round(val / 1000, 1)) + 'K'
+		return str(round(val / 1000, 2)) + 'K'
 	else:
-		return str(val)
+		return str(round(val, 2))
 
 
 def apply_condition(df, col_name, condition, condition_value):
@@ -67,6 +67,8 @@ def apply_date_condition(df, date_conditions):
 
 # Function to get text from date condition
 def get_date_text(date_condition):
+	if not date_condition:
+		return ""
 	date_text = {
 		'lesser_than': 'before ',
 		'greater_than': 'after ',
@@ -74,19 +76,21 @@ def get_date_text(date_condition):
 		'greater_than_equal': 'from ',
 		'equal_to': 'for '
 	}
-	text = ""
+	text = " "
 	for date in date_condition:
 		text += date_text.get(date['conditions']) + datetime.strftime(date['CalendarDate'], '%Y-%m-%d') + ' & '
-	text = text[:-3]
+	text = text[:-2]
 	return text
 
 
 # function to get text for dim filters
 def get_dim_filter_text(dim_filters):
-	dim_filters_text = ""
+	if not dim_filters:
+		return ""
+	dim_filters_text = " "
 	for k, v in dim_filters.items():
 		dim_filters_text += "for " + ", ".join(v) + " " + k + " "
-	dim_filters_text = dim_filters_text[:-1]
+	# dim_filters_text = dim_filters_text[:-1]
 	return dim_filters_text
 
 
@@ -134,7 +138,7 @@ def apply_business_logic(df, logic, entities):
 		if len(table) == 1 and len(table.columns) == 1:
 			facts = table.columns.tolist()
 			dim = list(table.index.names)
-			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+			table = "{0}{1}is {2}".format(str(table.columns[0])+" ", get_dim_filter_text(entities['dim_filters']),
 											format_value_to_language(table.iloc[0, 0]))
 			default_graph = 'text'
 			return table, default_graph, facts, dim
@@ -147,7 +151,7 @@ def apply_business_logic(df, logic, entities):
 		if len(table) == 1 and len(table.columns) == 1:
 			facts = table.columns.tolist()
 			dim = list(table.index.names)
-			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+			table = "{0}{1}is {2}".format(str(table.columns[0])+" ", get_dim_filter_text(entities['dim_filters']),
 											format_value_to_language(table.iloc[0, 0]))
 			default_graph = 'text'
 			return table, default_graph, facts, dim
@@ -159,13 +163,21 @@ def apply_business_logic(df, logic, entities):
 		if len(table) == 1 and len(table.columns) == 1:
 			facts = table.columns.tolist()
 			dim = list(table.index.names)
-			table = "{0} {1} is {2}".format(table.columns[0], get_dim_filter_text(entities['dim_filters']),
+			table = "{0}{1}is {2}".format(str(table.columns[0])+" ", get_dim_filter_text(entities['dim_filters']),
 											format_value_to_language(table.iloc[0, 0]))
 			default_graph = 'text'
 			return table, default_graph, facts, dim
 	elif logic == 'Target-Achievement':
 		table = business_instance.target_achievement(df)
 		default_graph = 'table'
+		if len(table) == 1 and len(table.columns) == 1:
+			facts = table.columns.tolist()
+			dim = list(table.index.names)
+			table = "{0}{1}{2}is {3}".format(str(table.columns[0])+" ", get_dim_filter_text(entities['dim_filters']),
+												get_date_text(entities['date_condition']),
+												format_value_to_language(table.iloc[0, 0]))
+			default_graph = 'text'
+			return table, default_graph, facts, dim
 	elif logic == 'Contribution':
 		table = business_instance.contribution(df)
 		default_graph = 'table'
@@ -187,7 +199,7 @@ def apply_business_logic(df, logic, entities):
 	for selection in entities['select_upto']:
 		select = selection['selection']
 		upto = selection['upto']
-		df = dynamic_selection_upto(table.reset_index(), entities['dim'] + entities['adject'], facts, select, upto)
+		df = dynamic_selection_upto(table, entities['dim'] + entities['adject'], facts, select, upto)
 		final_df = final_df.append(df)
 	return final_df, default_graph, facts, dim
 

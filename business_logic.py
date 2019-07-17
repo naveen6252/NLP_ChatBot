@@ -197,7 +197,7 @@ class BusinessLogic:
 				{'fact_name': 'SalesAmount sum', 'conditions': np.nan, 'fact_value': np.nan}]
 
 		# Apply fact condition
-		df = helpers.apply_fact_condition(df, self.dimensions + list(self.dim_filters.keys()), fact_condition)
+		df = helpers.apply_fact_condition(df, self.dimensions, fact_condition)
 		sale_fact_names = [c['fact_name'] for c in fact_condition['conditions'] if c['fact_name'][0:5] == 'Sales']
 		target_fact_names = [c['fact_name'] for c in fact_condition['conditions'] if c['fact_name'][0:6] == 'Target']
 

@@ -284,7 +284,8 @@ def api_get_entity_parameters(current_user):
 		return jsonify({'message': 'could not find message in request!'}), 400
 	parameters = get_nlu_parameters(user_query)
 	parameters = {'intent': parameters['intent']['name'],
-				  'text': convert_text_md_format(parameters['text'], parameters['entities'])}
+				  'text': convert_text_md_format(parameters['text'], parameters['entities']),
+				  'entities': parameters['entities']}
 	return jsonify(parameters), 200
 
 

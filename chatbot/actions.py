@@ -16,7 +16,7 @@ def action_fact_kpi(df, entities):
 		for agg in v:
 			val = df[k].agg(agg)
 			val = helpers.format_value_to_language(val)
-			text = "The {0} {1} {2} {3} is {4}.".format(agg + ' of', k, date_text, dim_filters_text, val)
+			text = "The {0}{1}{2}{3} is {4}.".format(agg + ' of ', k, date_text, dim_filters_text, val)
 			data.append({'chart': entities['graph'], 'chart_title': 'Message', 'data': text})
 	return data
 
@@ -37,7 +37,7 @@ def action_fact_table_group(df, entities):
 	for graph in entities['graph']:
 		if not entities['select_upto']:
 			if len(df) == 1 and len(df.columns) == 1 and graph == 'text':
-				df = "{0} {1} {2} is {3}".format(df.columns[0], helpers.get_date_text(entities['date_condition']),
+				df = "{0}{1}{2} is {3}".format(df.columns[0], helpers.get_date_text(entities['date_condition']),
 												 helpers.get_dim_filter_text(entities['dim_filters']),
 												 helpers.format_value_to_language(df.iloc[0, 0]))
 				table_data = {'chart': graph, 'chart_title': 'message', 'data': df}

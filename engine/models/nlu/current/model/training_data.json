@@ -2414,6 +2414,18 @@
         "text": "this year sales"
       },
       {
+        "intent": "fact.kpi",
+        "entities": [
+          {
+            "start": 8,
+            "end": 13,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "show me sales"
+      },
+      {
         "intent": "fact.table.group",
         "entities": [
           {
@@ -5505,6 +5517,54 @@
             "end": 15,
             "value": "Target-Achievement",
             "entity": "logic"
+          }
+        ],
+        "text": "sales vs target"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 19,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          }
+        ],
+        "text": "sales versus target"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 19,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          }
+        ],
+        "text": "target versus sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          }
+        ],
+        "text": "target vs sales"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "Target-Achievement",
+            "entity": "logic"
           },
           {
             "start": 23,
@@ -7044,6 +7104,84 @@
           }
         ],
         "text": "qoq sales in table"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "QTD",
+            "entity": "logic"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "SalesQty",
+            "entity": "fact"
+          }
+        ],
+        "text": "qtd salesqty"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "CustomerRegion",
+            "entity": "dim"
+          },
+          {
+            "start": 12,
+            "end": 27,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          }
+        ],
+        "text": "region wise sales vs target"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          },
+          {
+            "start": 20,
+            "end": 32,
+            "value": "Name",
+            "entity": "dim"
+          }
+        ],
+        "text": "sales vs target for all employee"
+      },
+      {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "top",
+            "entity": "selection"
+          },
+          {
+            "start": 6,
+            "end": 14,
+            "value": "Name",
+            "entity": "dim"
+          },
+          {
+            "start": 28,
+            "end": 46,
+            "value": "Target-Achievement",
+            "entity": "logic"
+          }
+        ],
+        "text": "top 3 employee according to target achievement"
       },
       {
         "intent": "agent.acquaintance",
@@ -15697,7 +15835,8 @@
           "cust",
           "cust name",
           "customer name",
-          "CustomerWise"
+          "CustomerWise",
+          "all customer"
         ]
       },
       {
@@ -15716,7 +15855,8 @@
           "employeewise",
           "empwise",
           "staff",
-          "personnel"
+          "personnel",
+          "all employee"
         ]
       },
       {
@@ -15992,6 +16132,10 @@
         "value": "Target-Achievement",
         "synonyms": [
           "target achieved",
+          "sales vs target",
+          "sales versus target",
+          "target versus sales",
+          "target vs sales",
           "acheivement",
           "achieved",
           "achievement",
@@ -16002,7 +16146,8 @@
           "target fulfillment",
           "target is completed",
           "target is fulfilled",
-          "target is fullfilled"
+          "target is fullfilled",
+          "target achievement"
         ]
       },
       {

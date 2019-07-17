@@ -29,7 +29,11 @@ function drawLineChart() {
     var options = {
         'title': chart_title,
         'width': 410,
-        'height': '110%'
+        pointsVisible: true,
+        'height': '110%',
+        'legend': {
+            'position': "none"
+        }
     };
     var chart = new google.visualization.LineChart(document.getElementById("msg" + bot_message_id));
     chart.draw(chart_data, options);

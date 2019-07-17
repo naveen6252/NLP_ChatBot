@@ -77,13 +77,25 @@ def get_json_from_query(query, rls_access_string):
 					data['table'] = data['table'][dimension + data['facts']]
 
 				for fact in data['facts']:
+					value_title = ""
+					format_table = data['table'][dimension + [fact]]
+					if format_table[fact].mean() > 1000000000:
+						format_table[fact] = (format_table[fact] / 1000000000).round(2)
+						value_title = "(Values in Billions)"
+					elif format_table[fact].mean() > 1000000:
+						format_table[fact] = (format_table[fact] / 1000000).round(2)
+						value_title = "(Values in Millions)"
+					elif format_table[fact].mean() > 1000:
+						format_table[fact] = (format_table[fact] / 1000).round(2)
+						value_title = "(Values in Thousands)"
+
 					if not dimension:
-						chart_title = fact.title()
-						table = [[fact]] + [data['table'][fact].tolist()]
+						chart_title = fact.title()+value_title
+						table = [[fact]] + [format_table[fact].tolist()]
 					else:
 						chart_title = " Wise ".join(data['dimensions']) + " Wise " + fact
-						chart_title = chart_title.title()
-						table = data['table'][dimension + [fact]]
+						chart_title = chart_title.title()+value_title
+						table = format_table[dimension + [fact]]
 						table = [table.columns.tolist()] + table.to_numpy().tolist()
 					table_data = {'chart': data['chart'], 'chart_title': chart_title, 'data': table}
 					final_data['response'].append(table_data)

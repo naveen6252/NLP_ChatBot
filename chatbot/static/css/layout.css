@@ -41,6 +41,7 @@ body {
 }
 
 .chat {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     list-style: none;
     background: none;
     margin: 0;

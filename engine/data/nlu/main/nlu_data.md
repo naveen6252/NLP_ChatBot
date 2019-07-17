@@ -112,6 +112,7 @@
 - [sales](fact:SalesAmount) [after](date_condition:greater_than) last month and [until](date_condition:lesser_than) today for [north](CustomerRegion:North) region and [bfsi](CustomerType:BFSI) customer types
 - last quarter [sales](fact:SalesAmount) for [P1](ProductDesc:P1) in [north](CustomerRegion:North)
 - this year [sales](fact:SalesAmount)
+- show me [sales](fact:SalesAmount)
 
 ## intent:fact.table.group
 - [customer](dim:CustomerName) wise [sales](fact:SalesAmount) on [table](graph:table) [for](date_condition:equal_to) last month
@@ -231,6 +232,10 @@
 - [target achieved](logic:Target-Achievement) by each [employee](dim:Name)
 - [target achieved](logic:Target-Achievement) by all [customers](dim:CustomerName) [for](date_condition:equal_to) last to last month
 - [target achieved](logic:Target-Achievement) by all [employees](dim:Name) [for](date_condition:equal_to) last year
+- [sales vs target](logic:Target-Achievement)
+- [sales versus target](logic:Target-Achievement)
+- [target versus sales](logic:Target-Achievement)
+- [target vs sales](logic:Target-Achievement)
 - [target achieved](logic:Target-Achievement) by all [customers](dim:CustomerName) in [north](CustomerRegion:North) region [for](date_condition:equal_to) this year
 - [mtd](logic:MTD) [sales](fact:SalesAmount)
 - [month to date](logic:MTD) [sales quantity](fact:SalesQty)
@@ -303,6 +308,8 @@
 - show me [sales](fact:SalesAmount)
 - [mom](logic:MOM) [sales](fact:SalesAmount)
 - [qoq](logic:QOQ) [sales](fact:SalesAmount) in [table](graph:table)
+- [qtd](logic:QTD) [salesqty](fact:SalesQty)
+- [region](dim:CustomerRegion) wise [sales vs target](logic:Target-Achievement)
 
 ## lookup:agg
 - sum
@@ -950,6 +957,7 @@
 - cust name
 - customer name
 - CustomerWise
+- all customer
 
 ## synonym:Name
 - employee
@@ -966,6 +974,7 @@
 - empwise
 - staff
 - personnel
+- all employee
 
 ## synonym:CustomerRegion
 - region
@@ -1181,6 +1190,10 @@
 
 ## synonym:Target-Achievement
 - target achieved
+- sales vs target
+- sales versus target
+- target versus sales
+- target vs sales
 - acheivement
 - achieved
 - achievement
@@ -1238,3 +1251,9 @@
 ## synonym:donut
 - donaught
 - dnut
+
+## intent:fact.table.logic
+- [sales vs target](logic:Target-Achievement) for [all employee](dim:Name)
+
+## intent:fact.table.logic
+- [top](selection:top) 3 [employee](dim:Name) according to [target achievement](logic:Target-Achievement)
