@@ -1257,3 +1257,6 @@
 
 ## intent:fact.table.logic
 - [top](selection:top) 3 [employee](dim:Name) according to [target achievement](logic:Target-Achievement)
+
+## intent:fact.table.logic
+- [north](CustomerRegion:North) [vs](logic:Contribution) [south](CustomerRegion:South) [sales](fact:SalesAmount)

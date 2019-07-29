@@ -7184,6 +7184,36 @@
         "text": "top 3 employee according to target achievement"
       },
       {
+        "intent": "fact.table.logic",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "North",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 6,
+            "end": 8,
+            "value": "Contribution",
+            "entity": "logic"
+          },
+          {
+            "start": 9,
+            "end": 14,
+            "value": "South",
+            "entity": "CustomerRegion"
+          },
+          {
+            "start": 15,
+            "end": 20,
+            "value": "SalesAmount",
+            "entity": "fact"
+          }
+        ],
+        "text": "north vs south sales"
+      },
+      {
         "intent": "agent.acquaintance",
         "text": "tell me about your personality"
       },
